@@ -1,0 +1,9 @@
+require 'generators/big_cms/big_cms_generator'
+namespace :big_cms do 
+  namespace :generate do
+    desc "generate database migration"
+    task :migration do
+      BigCMSGenerator.new.create_migration_file
+    end
+  end
+end

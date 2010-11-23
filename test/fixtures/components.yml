@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  content: MyText
+  content_type: MyString
+  content_manager_id: 1
+  render_type: MyString
+  status: MyString
+  version: 1
+  new_content: MyText
+
+two:
+  name: MyString
+  content: MyText
+  content_type: MyString
+  content_manager_id: 1
+  render_type: MyString
+  status: MyString
+  version: 1
+  new_content: MyText

@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @page.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @page.content %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%= @page.content_type %>
+</p>
+
+<p>
+  <b>Content manager:</b>
+  <%= @page.content_manager_id %>
+</p>
+
+<p>
+  <b>Navigation:</b>
+  <%= @page.navigation_id %>
+</p>
+
+<p>
+  <b>Render type:</b>
+  <%= @page.render_type %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @page.status %>
+</p>
+
+<p>
+  <b>Version:</b>
+  <%= @page.version %>
+</p>
+
+<p>
+  <b>New content:</b>
+  <%= @page.new_content %>
+</p>
+
+<p>
+  <b>New title:</b>
+  <%= @page.new_title %>
+</p>
+
+
+<%= link_to 'Edit', edit_page_path(@page) %> |
+<%= link_to 'Back', pages_path %>

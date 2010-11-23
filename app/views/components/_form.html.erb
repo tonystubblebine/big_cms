@@ -1,0 +1,49 @@
+<%= form_for(@component) do |f| %>
+  <% if @component.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@component.errors.count, "error") %> prohibited this component from being saved:</h2>
+
+      <ul>
+      <% @component.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :content_type %><br />
+    <%= f.text_field :content_type %>
+  </div>
+  <div class="field">
+    <%= f.label :content_manager_id %><br />
+    <%= f.text_field :content_manager_id %>
+  </div>
+  <div class="field">
+    <%= f.label :render_type %><br />
+    <%= f.text_field :render_type %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :version %><br />
+    <%= f.text_field :version %>
+  </div>
+  <div class="field">
+    <%= f.label :new_content %><br />
+    <%= f.text_area :new_content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

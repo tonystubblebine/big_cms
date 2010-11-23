@@ -1,0 +1,7 @@
+Nothing to see here. In development, content management gem.
+
+prereqs
+
+setup
+
+rake big_cms:generate:migration

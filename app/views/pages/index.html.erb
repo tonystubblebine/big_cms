@@ -1,0 +1,41 @@
+<h1>Listing pages</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Content type</th>
+    <th>Content manager</th>
+    <th>Navigation</th>
+    <th>Render type</th>
+    <th>Status</th>
+    <th>Version</th>
+    <th>New content</th>
+    <th>New title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pages.each do |page| %>
+  <tr>
+    <td><%= page.title %></td>
+    <td><%= page.content %></td>
+    <td><%= page.content_type %></td>
+    <td><%= page.content_manager_id %></td>
+    <td><%= page.navigation_id %></td>
+    <td><%= page.render_type %></td>
+    <td><%= page.status %></td>
+    <td><%= page.version %></td>
+    <td><%= page.new_content %></td>
+    <td><%= page.new_title %></td>
+    <td><%= link_to 'Show', page %></td>
+    <td><%= link_to 'Edit', edit_page_path(page) %></td>
+    <td><%= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Page', new_page_path %>

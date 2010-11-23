@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  navigationable_type: MyString
+  navigationable_id: 1
+  position: 1
+  title: MyString
+  url: MyString
+
+two:
+  navigationable_type: MyString
+  navigationable_id: 1
+  position: 1
+  title: MyString
+  url: MyString
