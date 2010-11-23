@@ -1,4 +1,5 @@
 class ContentManagersController < ApplicationController
+  unloadable
   # GET /content_managers
   # GET /content_managers.xml
   def index
@@ -13,7 +14,11 @@ class ContentManagersController < ApplicationController
   # GET /content_managers/1
   # GET /content_managers/1.xml
   def show
-    @content_manager = ContentManager.find(params[:id])
+    if params[:id].eql?("current")
+      @content_manager = current_cms
+    else
+      @content_manager = ContentManager.find(params[:id])
+    end
 
     respond_to do |format|
       format.html # show.html.erb

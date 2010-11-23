@@ -1,4 +1,5 @@
 class NavigationsController < ApplicationController
+  unloadable
   # GET /navigations
   # GET /navigations.xml
   def index

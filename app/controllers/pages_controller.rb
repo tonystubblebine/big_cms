@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  unloadable
   # GET /pages
   # GET /pages.xml
   def index

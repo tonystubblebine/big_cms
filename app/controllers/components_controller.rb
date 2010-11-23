@@ -1,4 +1,5 @@
 class ComponentsController < ApplicationController
+  unloadable
   # GET /components
   # GET /components.xml
   def index

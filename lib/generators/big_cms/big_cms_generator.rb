@@ -26,5 +26,7 @@ class BigCMSGenerator < Rails::Generators::Base
     migration_template 'create_navigations_migration.rb', 'db/migrate/create_navigations.rb'
     sleep(2)
     migration_template 'create_components_migration.rb', 'db/migrate/create_components.rb'
+    sleep(2)
+    migration_template 'create_cms_files_migration.rb', 'db/migrate/create_cms_files.rb'
   end
 end
