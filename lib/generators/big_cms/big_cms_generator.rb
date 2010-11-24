@@ -29,4 +29,8 @@ class BigCMSGenerator < Rails::Generators::Base
     sleep(2)
     migration_template 'create_cms_files_migration.rb', 'db/migrate/create_cms_files.rb'
   end
+
+  def copy_assets
+    copy_file 'assets/stylesheets/big_cms_admin.css',  'public/stylesheets/big_cms_admin.css'
+  end
 end

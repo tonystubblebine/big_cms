@@ -5,5 +5,10 @@ namespace :big_cms do
     task :migration do
       BigCMSGenerator.new.create_migration_file
     end
+
+    desc "copy assets"
+    task :copy_assets do
+      BigCMSGenerator.new.copy_assets
+    end
   end
 end
