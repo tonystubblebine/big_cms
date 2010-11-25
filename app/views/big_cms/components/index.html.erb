@@ -1,0 +1,33 @@
+<h1>Listing components</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Content</th>
+    <th>Content type</th>
+    <th>Content manager</th>
+    <th>Render type</th>
+    <th>Status</th>
+    <th>Version</th>
+    <th>New content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @components.each do |component| %>
+  <tr>
+    <td><%= component.name %></td>
+    <td><%= component.content %></td>
+    <td><%= component.content_type %></td>
+    <td><%= component.content_manager_id %></td>
+    <td><%= component.render_type %></td>
+    <td><%= component.status %></td>
+    <td><%= component.version %></td>
+    <td><%= component.new_content %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

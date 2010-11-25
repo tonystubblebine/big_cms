@@ -1,7 +1,7 @@
 require 'test_helper'
-
 class CmsFilesControllerTest < ActionController::TestCase
   setup do
+    @controller = BigCms::CmsFilesController.new
     @cms_file = cms_files(:one)
   end
 
@@ -17,11 +17,11 @@ class CmsFilesControllerTest < ActionController::TestCase
   end
 
   test "should create cms_file" do
-    assert_difference('CmsFile.count') do
+    assert_difference('BigCms::CmsFile.count') do
       post :create, :cms_file => @cms_file.attributes
     end
 
-    assert_redirected_to cms_file_path(assigns(:cms_file))
+    assert_redirected_to big_cms_cms_file_path(assigns(:cms_file))
   end
 
   test "should show cms_file" do
@@ -36,14 +36,14 @@ class CmsFilesControllerTest < ActionController::TestCase
 
   test "should update cms_file" do
     put :update, :id => @cms_file.to_param, :cms_file => @cms_file.attributes
-    assert_redirected_to cms_file_path(assigns(:cms_file))
+    assert_redirected_to big_cms_cms_file_path(assigns(:cms_file))
   end
 
   test "should destroy cms_file" do
-    assert_difference('CmsFile.count', -1) do
+    assert_difference('BigCms::CmsFile.count', -1) do
       delete :destroy, :id => @cms_file.to_param
     end
 
-    assert_redirected_to cms_files_path
+    assert_redirected_to big_cms_cms_files_path
   end
 end

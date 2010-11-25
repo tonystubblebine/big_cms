@@ -1,15 +1,18 @@
 Rails::Application.routes.draw do
-  resources :cms_files
+  namespace :big_cms do
+    resources :cms_files
 
-  resources :components
+    resources :components
 
-  resources :navigations
+    resources :navigations
 
-  resources :pages
+    resources :pages
 
-  resources :content_managers
+    resources :content_managers
   
-  match "content_manager" => 'content_managers#show', :id => "current", :as => :content_manager
+  end
+  match "content_manager" => 'big_cms/content_managers#show', :id => "current", :as => :content_manager
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

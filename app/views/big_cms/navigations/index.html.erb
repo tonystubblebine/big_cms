@@ -1,0 +1,27 @@
+<h1>Listing navigations</h1>
+
+<table>
+  <tr>
+    <th>Navigationable type</th>
+    <th>Navigationable</th>
+    <th>Position</th>
+    <th>Title</th>
+    <th>Url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @navigations.each do |navigation| %>
+  <tr>
+    <td><%= navigation.navigationable_type %></td>
+    <td><%= navigation.navigationable_id %></td>
+    <td><%= navigation.position %></td>
+    <td><%= navigation.title %></td>
+    <td><%= navigation.url %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

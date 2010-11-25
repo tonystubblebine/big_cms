@@ -2,6 +2,7 @@ require 'test_helper'
 
 class PagesControllerTest < ActionController::TestCase
   setup do
+    @controller = BigCms::PagesController.new
     @page = pages(:one)
   end
 
@@ -17,11 +18,11 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test "should create page" do
-    assert_difference('Page.count') do
+    assert_difference('BigCms::Page.count') do
       post :create, :page => @page.attributes
     end
 
-    assert_redirected_to page_path(assigns(:page))
+    assert_redirected_to big_cms_page_path(assigns(:page))
   end
 
   test "should show page" do
@@ -36,14 +37,14 @@ class PagesControllerTest < ActionController::TestCase
 
   test "should update page" do
     put :update, :id => @page.to_param, :page => @page.attributes
-    assert_redirected_to page_path(assigns(:page))
+    assert_redirected_to big_cms_page_path(assigns(:page))
   end
 
   test "should destroy page" do
-    assert_difference('Page.count', -1) do
+    assert_difference('BigCms::Page.count', -1) do
       delete :destroy, :id => @page.to_param
     end
 
-    assert_redirected_to pages_path
+    assert_redirected_to big_cms_pages_path
   end
 end

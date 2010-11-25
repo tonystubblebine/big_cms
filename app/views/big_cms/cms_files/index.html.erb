@@ -1,0 +1,27 @@
+<h1>Listing cms_files</h1>
+
+<table>
+  <tr>
+    <th>File file name</th>
+    <th>File content type</th>
+    <th>File file size</th>
+    <th>File updated at</th>
+    <th>Content manager</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cms_files.each do |cms_file| %>
+  <tr>
+    <td><%= cms_file.file_file_name %></td>
+    <td><%= cms_file.file_content_type %></td>
+    <td><%= cms_file.file_file_size %></td>
+    <td><%= cms_file.file_updated_at %></td>
+    <td><%= cms_file.content_manager_id %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

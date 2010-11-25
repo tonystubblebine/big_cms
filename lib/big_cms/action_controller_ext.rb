@@ -3,6 +3,6 @@ ActionController::Base.class_eval do
 
   protected
   def current_cms
-    @current_cms ||= ContentManager.first
+    @current_cms ||= BigCms::ContentManager.first
   end
 end

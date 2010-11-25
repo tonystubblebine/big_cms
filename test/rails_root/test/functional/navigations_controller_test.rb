@@ -2,6 +2,7 @@ require 'test_helper'
 
 class NavigationsControllerTest < ActionController::TestCase
   setup do
+    @controller = BigCms::NavigationsController.new
     @navigation = navigations(:one)
   end
 
@@ -17,11 +18,11 @@ class NavigationsControllerTest < ActionController::TestCase
   end
 
   test "should create navigation" do
-    assert_difference('Navigation.count') do
+    assert_difference('BigCms::Navigation.count') do
       post :create, :navigation => @navigation.attributes
     end
 
-    assert_redirected_to navigation_path(assigns(:navigation))
+    assert_redirected_to big_cms_navigation_path(assigns(:navigation))
   end
 
   test "should show navigation" do
@@ -36,14 +37,14 @@ class NavigationsControllerTest < ActionController::TestCase
 
   test "should update navigation" do
     put :update, :id => @navigation.to_param, :navigation => @navigation.attributes
-    assert_redirected_to navigation_path(assigns(:navigation))
+    assert_redirected_to big_cms_navigation_path(assigns(:navigation))
   end
 
   test "should destroy navigation" do
-    assert_difference('Navigation.count', -1) do
+    assert_difference('BigCms::Navigation.count', -1) do
       delete :destroy, :id => @navigation.to_param
     end
 
-    assert_redirected_to navigations_path
+    assert_redirected_to big_cms_navigations_path
   end
 end
