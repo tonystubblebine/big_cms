@@ -1,14 +1,4 @@
-BigCms::Application.routes.draw do
-  resources :cms_files
-
-  resources :components
-
-  resources :navigations
-
-  resources :pages
-
-  resources :content_managers
-
+RailsRoot::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
