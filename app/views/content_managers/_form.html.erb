@@ -1,7 +1,7 @@
 <%= form_for(@content_manager) do |f| %>
   <% if @content_manager.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@content_manager.errors.count, "error") %> prohibited the content permissions from being saved:</h2>
+      <h2><%= pluralize(@content_manager.errors.count, "error") %> prohibited this content_manager from being saved:</h2>
 
       <ul>
       <% @content_manager.errors.full_messages.each do |msg| %>
@@ -12,14 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :private_pages, "Private pages: must be logged in to view content" %><br />
-    <%= f.radio_button :private_pages, true %> Yes <%= f.radio_button :private_pages, false %> No
+    <%= f.label :private_pages %><br />
+    <%= f.check_box :private_pages %>
   </div>
   <div class="field">
-    <%= f.label :user_editable, "User editable: any logged in user can edit content pages" %><br />
-    <%= f.radio_button :user_editable, true %> Yes <%= f.radio_button :user_editable, false %> No
+    <%= f.label :user_editable %><br />
+    <%= f.check_box :user_editable %>
   </div>
   <div class="actions">
-    <%= f.submit "Save" %>
+    <%= f.submit %>
   </div>
 <% end %>
