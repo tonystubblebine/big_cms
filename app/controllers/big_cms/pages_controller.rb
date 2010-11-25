@@ -1,6 +1,7 @@
 module BigCms
 class PagesController < ApplicationController
   unloadable
+  layout "big_cms", :except => :show
   # GET /big_cms/pages
   # GET /big_cms/pages.xml
   def index

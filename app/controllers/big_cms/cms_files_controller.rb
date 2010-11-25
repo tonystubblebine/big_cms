@@ -1,6 +1,7 @@
 module BigCms
 class CmsFilesController < ApplicationController
   unloadable
+  layout "big_cms"
   # GET /big_cms/cms_files
   # GET /big_cms/cms_files.xml
   def index

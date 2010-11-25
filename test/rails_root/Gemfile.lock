@@ -35,6 +35,8 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    acts_as_versioned (0.6.0)
+      activerecord (~> 3.0.0.beta4)
     arel (2.0.4)
     builder (2.1.2)
     columnize (0.3.2)
@@ -88,6 +90,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_versioned
   big_cms!
   rails (= 3.0.3)
   ruby-debug

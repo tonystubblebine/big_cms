@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101125054354) do
+ActiveRecord::Schema.define(:version => 20101125195738) do
 
   create_table "cms_files", :force => true do |t|
     t.string   "file_file_name"
@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(:version => 20101125054354) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "component_versions", :force => true do |t|
+    t.integer  "component_id"
+    t.integer  "version"
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "clone_of"
+  end
+
+  add_index "component_versions", ["component_id"], :name => "index_component_versions_on_component_id"
 
   create_table "components", :force => true do |t|
     t.integer  "content_manager_id"
@@ -56,6 +69,19 @@ ActiveRecord::Schema.define(:version => 20101125054354) do
 
   add_index "navigations", ["navigationable_id"], :name => "index_navigations_on_navigationable_id"
   add_index "navigations", ["navigationable_type"], :name => "index_navigations_on_navigationable_type"
+
+  create_table "page_versions", :force => true do |t|
+    t.integer  "page_id"
+    t.integer  "version"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "clone_of"
+  end
+
+  add_index "page_versions", ["page_id"], :name => "index_page_versions_on_page_id"
 
   create_table "pages", :force => true do |t|
     t.integer  "content_manager_id"

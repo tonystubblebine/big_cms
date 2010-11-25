@@ -1,6 +1,7 @@
 module BigCms
 class NavigationsController < ApplicationController
   unloadable
+  layout "big_cms"
   # GET /big_cms/navigations
   # GET /big_cms/navigations.xml
   def index

@@ -1,6 +1,7 @@
-require "big_cms"
 require "rails"
 require 'action_controller'
+#require 'acts_as_versioned'
+require "big_cms"
 require 'big_cms/action_controller_ext'
 module BigCms
  class Engine < Rails::Engine

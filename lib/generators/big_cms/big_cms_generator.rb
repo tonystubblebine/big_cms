@@ -19,15 +19,14 @@ class BigCMSGenerator < Rails::Generators::Base
   end
   
   def create_migration_file
-    migration_template 'create_content_managers_migration.rb', 'db/migrate/create_content_managers.rb'
-    sleep(2) # cheap hack to make sure migration numbers end up being different
-    migration_template 'create_pages_migration.rb', 'db/migrate/create_pages.rb'
-    sleep(2)
-    migration_template 'create_navigations_migration.rb', 'db/migrate/create_navigations.rb'
-    sleep(2)
-    migration_template 'create_components_migration.rb', 'db/migrate/create_components.rb'
-    sleep(2)
-    migration_template 'create_cms_files_migration.rb', 'db/migrate/create_cms_files.rb'
+    %w{create_content_managers create_pages create_navigations create_components create_cms_files add_versioning_to_pages add_versioning_to_components}.each do |migration|
+      begin
+        migration_template "#{migration}_migration.rb", "db/migrate/#{migration}.rb"
+        sleep(2) # cheap hack to make sure migration numbers end up being different
+      rescue
+        puts $!
+      end
+    end
   end
 
   def copy_assets

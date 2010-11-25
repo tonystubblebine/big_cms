@@ -6,7 +6,7 @@ class CreateContentManagers < ActiveRecord::Migration
 
       t.timestamps
     end
-    ContentManager.create()
+    BigCms::ContentManager.create()
   end
 
   def self.down
