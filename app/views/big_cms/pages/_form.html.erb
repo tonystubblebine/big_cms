@@ -20,7 +20,10 @@
     <%= f.text_area :content %>
   </div>
 
-  <%= link_to "show advanced options", :advanced_options => true %>
+  <div id="version_history" <%= "style='display:none'" unless params[:version_history] %>>
+    <%= render "big_cms/page_versions/history", :page => @page %>
+  </div><!-- #version_history -->
+
   <div id="advanced_options" <%= "style='display:none'" unless params[:advanced_options] %>>
     <div class="field">
       <%= f.label :content_type %><br />

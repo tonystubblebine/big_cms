@@ -5,3 +5,14 @@ prereqs
 setup
 
 rake big_cms:generate:migration
+
+
+HOWTO
+
+How to set page title as <TITLE>
+<% if @page %>
+  <title><%= @page.title %></title>
+<% else %>
+
+How to manage your site layout through big_cms
+

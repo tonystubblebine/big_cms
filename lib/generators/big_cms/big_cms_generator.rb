@@ -32,4 +32,8 @@ class BigCMSGenerator < Rails::Generators::Base
   def copy_assets
     copy_file 'assets/stylesheets/big_cms_admin.css',  'public/stylesheets/big_cms_admin.css'
   end
+
+  def copy_initializers
+    copy_file 'big_cms_initializer.rb',  'config/initializers/big_cms.rb'
+  end
 end

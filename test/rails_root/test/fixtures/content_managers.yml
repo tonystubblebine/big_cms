@@ -1,9 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   private_pages: false
   user_editable: false
 
 two:
+  id: 2
   private_pages: false
   user_editable: false

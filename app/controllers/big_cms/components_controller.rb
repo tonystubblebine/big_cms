@@ -1,5 +1,4 @@
-module BigCms
-class ComponentsController < ApplicationController
+class BigCms::ComponentsController < ApplicationController
   unloadable
   layout "big_cms", :except => :show
   # GET /big_cms/components
@@ -43,7 +42,7 @@ class ComponentsController < ApplicationController
   # POST /big_cms/components
   # POST /big_cms/components.xml
   def create
-    @component = BigCms::Component.new(params[:component])
+    @component = BigCms::Component.new(params[:big_cms_component])
 
     respond_to do |format|
       if @component.save
@@ -62,7 +61,7 @@ class ComponentsController < ApplicationController
     @component = BigCms::Component.find(params[:id])
 
     respond_to do |format|
-      if @component.update_attributes(params[:component])
+      if @component.update_attributes(params[:big_cms_component])
         format.html { redirect_to(@component, :notice => 'Component was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -83,5 +82,4 @@ class ComponentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-end
 end

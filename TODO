@@ -1,3 +1,4 @@
 - add a rake :setup task that does all the generating
 - add javascript toggles for #advanced_options sections
 - add access controls to all actions
+- diffs in the versioning history

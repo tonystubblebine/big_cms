@@ -1,0 +1,2 @@
+module BigCms::PageVersionsHelper
+end

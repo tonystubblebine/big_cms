@@ -1,4 +1,5 @@
 Rails::Application.routes.draw do
+
   namespace :big_cms do
     resources :cms_files
 
@@ -10,6 +11,9 @@ Rails::Application.routes.draw do
 
     resources :content_managers
   
+    resources :pages do
+      resources :versions, :controller => :page_versions
+    end
   end
   match "content_manager" => 'big_cms/content_managers#show', :id => "current", :as => :content_manager
 

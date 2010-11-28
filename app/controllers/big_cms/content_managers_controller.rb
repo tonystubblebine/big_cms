@@ -1,5 +1,4 @@
-module BigCms
-class ContentManagersController < ApplicationController
+class BigCms::ContentManagersController < ApplicationController
   unloadable
   layout "big_cms"
 
@@ -48,7 +47,7 @@ class ContentManagersController < ApplicationController
   # POST /big_cms/content_managers
   # POST /big_cms/content_managers.xml
   def create
-    @content_manager = BigCms::ContentManager.new(params[:content_manager])
+    @content_manager = BigCms::ContentManager.new(params[:big_cms_content_manager])
 
     respond_to do |format|
       if @content_manager.save
@@ -67,7 +66,7 @@ class ContentManagersController < ApplicationController
     @content_manager = BigCms::ContentManager.find(params[:id])
 
     respond_to do |format|
-      if @content_manager.update_attributes(params[:content_manager])
+      if @content_manager.update_attributes(params[:big_cms_content_manager])
         format.html { redirect_to(@content_manager, :notice => 'Content manager was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -88,5 +87,4 @@ class ContentManagersController < ApplicationController
       format.xml  { head :ok }
     end
   end
-end
 end

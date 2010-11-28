@@ -19,7 +19,7 @@ class PagesControllerTest < ActionController::TestCase
 
   test "should create page" do
     assert_difference('BigCms::Page.count') do
-      post :create, :page => @page.attributes
+      post :create, :big_cms_page => @page.attributes
     end
 
     assert_redirected_to big_cms_page_path(assigns(:page))
@@ -36,7 +36,7 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test "should update page" do
-    put :update, :id => @page.to_param, :page => @page.attributes
+    put :update, :id => @page.to_param, :big_cms_page => @page.attributes
     assert_redirected_to big_cms_page_path(assigns(:page))
   end
 

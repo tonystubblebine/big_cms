@@ -10,5 +10,10 @@ namespace :big_cms do
     task :copy_assets do
       BigCMSGenerator.new.copy_assets
     end
+
+    desc "copy initializers"
+    task :copy_initializers do
+      BigCMSGenerator.new.copy_initializers
+    end
   end
 end

@@ -1,6 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  id: 1
   navigationable_type: MyString
   navigationable_id: 1
   position: 1
@@ -8,6 +9,7 @@ one:
   url: MyString
 
 two:
+  id: 2
   navigationable_type: MyString
   navigationable_id: 1
   position: 1

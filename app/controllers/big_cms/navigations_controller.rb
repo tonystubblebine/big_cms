@@ -1,5 +1,4 @@
-module BigCms
-class NavigationsController < ApplicationController
+class BigCms::NavigationsController < ApplicationController
   unloadable
   layout "big_cms"
   # GET /big_cms/navigations
@@ -43,7 +42,7 @@ class NavigationsController < ApplicationController
   # POST /big_cms/navigations
   # POST /big_cms/navigations.xml
   def create
-    @navigation = BigCms::Navigation.new(params[:navigation])
+    @navigation = BigCms::Navigation.new(params[:big_cms_navigation])
 
     respond_to do |format|
       if @navigation.save
@@ -62,7 +61,7 @@ class NavigationsController < ApplicationController
     @navigation = BigCms::Navigation.find(params[:id])
 
     respond_to do |format|
-      if @navigation.update_attributes(params[:navigation])
+      if @navigation.update_attributes(params[:big_cms_navigation])
         format.html { redirect_to(@navigation, :notice => 'Navigation was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -83,5 +82,4 @@ class NavigationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-end
 end

@@ -12,4 +12,16 @@ class PageTest < ActiveSupport::TestCase
       page.update_attributes(:title => "New Title")
     end
   end
+
+  test "reverting a page changes the page and creates a new version" do
+    page = BigCms::Page.create(pages(:one).attributes)
+    original_title = page.title
+    original_number_of_revisions = page.versions.size
+
+    page.update_attributes(:title => "new title")
+
+    page.revert!(page.versions.first)
+    assert_equal original_title, page.title
+    assert original_number_of_revisions, page.versions.last.version
+  end 
 end

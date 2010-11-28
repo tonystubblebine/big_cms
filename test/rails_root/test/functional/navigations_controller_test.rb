@@ -19,7 +19,7 @@ class NavigationsControllerTest < ActionController::TestCase
 
   test "should create navigation" do
     assert_difference('BigCms::Navigation.count') do
-      post :create, :navigation => @navigation.attributes
+      post :create, :big_cms_navigation => @navigation.attributes
     end
 
     assert_redirected_to big_cms_navigation_path(assigns(:navigation))
@@ -36,7 +36,7 @@ class NavigationsControllerTest < ActionController::TestCase
   end
 
   test "should update navigation" do
-    put :update, :id => @navigation.to_param, :navigation => @navigation.attributes
+    put :update, :id => @navigation.to_param, :big_cms_navigation => @navigation.attributes
     assert_redirected_to big_cms_navigation_path(assigns(:navigation))
   end
 

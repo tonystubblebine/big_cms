@@ -18,7 +18,7 @@ class CmsFilesControllerTest < ActionController::TestCase
 
   test "should create cms_file" do
     assert_difference('BigCms::CmsFile.count') do
-      post :create, :cms_file => @cms_file.attributes
+      post :create, :big_cms_cms_file => @cms_file.attributes
     end
 
     assert_redirected_to big_cms_cms_file_path(assigns(:cms_file))
@@ -35,7 +35,7 @@ class CmsFilesControllerTest < ActionController::TestCase
   end
 
   test "should update cms_file" do
-    put :update, :id => @cms_file.to_param, :cms_file => @cms_file.attributes
+    put :update, :id => @cms_file.to_param, :big_cms_cms_file => @cms_file.attributes
     assert_redirected_to big_cms_cms_file_path(assigns(:cms_file))
   end
 

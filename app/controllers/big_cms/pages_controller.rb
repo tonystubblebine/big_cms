@@ -1,11 +1,12 @@
-module BigCms
-class PagesController < ApplicationController
+class BigCms::PagesController < BigCmsController
   unloadable
   layout "big_cms", :except => :show
+  before_filter :set_content_manager
+
   # GET /big_cms/pages
   # GET /big_cms/pages.xml
   def index
-    @pages = BigCms::Page.all
+    @pages = @content_manager.pages.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,10 +17,10 @@ class PagesController < ApplicationController
   # GET /big_cms/pages/1
   # GET /big_cms/pages/1.xml
   def show
-    @page = BigCms::Page.find(params[:id])
+    @page = @content_manager.pages.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {render(:layout => BigCms.service_configs[:layouts].pages_show) }
       format.xml  { render :xml => @page }
     end
   end
@@ -27,7 +28,7 @@ class PagesController < ApplicationController
   # GET /big_cms/pages/new
   # GET /big_cms/pages/new.xml
   def new
-    @page = BigCms::Page.new
+    @page = @content_manager.pages.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,14 +38,13 @@ class PagesController < ApplicationController
 
   # GET /big_cms/pages/1/edit
   def edit
-    @page = BigCms::Page.find(params[:id])
+    @page = @content_manager.pages.find(params[:id])
   end
 
   # POST /big_cms/pages
   # POST /big_cms/pages.xml
   def create
-    @page = BigCms::Page.new(params[:page])
-
+    @page = @content_manager.pages.new(params[:big_cms_page])
     respond_to do |format|
       if @page.save
         format.html { redirect_to(@page, :notice => 'Page was successfully created.') }
@@ -59,10 +59,10 @@ class PagesController < ApplicationController
   # PUT /big_cms/pages/1
   # PUT /big_cms/pages/1.xml
   def update
-    @page = BigCms::Page.find(params[:id])
+    @page = @content_manager.pages.find(params[:id])
 
     respond_to do |format|
-      if @page.update_attributes(params[:page])
+      if @page.update_attributes(params[:big_cms_page])
         format.html { redirect_to(@page, :notice => 'Page was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -75,7 +75,7 @@ class PagesController < ApplicationController
   # DELETE /big_cms/pages/1
   # DELETE /big_cms/pages/1.xml
   def destroy
-    @page = BigCms::Page.find(params[:id])
+    @page = @content_manager.pages.find(params[:id])
     @page.destroy
 
     respond_to do |format|
@@ -83,5 +83,5 @@ class PagesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-end
+
 end

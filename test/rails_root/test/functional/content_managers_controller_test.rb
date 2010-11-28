@@ -26,7 +26,7 @@ class ContentManagersControllerTest < ActionController::TestCase
 
   test "should create content_manager" do
     assert_difference('BigCms::ContentManager.count') do
-      post :create, :content_manager => @content_manager.attributes
+      post :create, :big_cms_content_manager => @content_manager.attributes
     end
 
     assert_redirected_to big_cms_content_manager_path(assigns(:content_manager))
@@ -43,7 +43,7 @@ class ContentManagersControllerTest < ActionController::TestCase
   end
 
   test "should update content_manager" do
-    put :update, :id => @content_manager.to_param, :content_manager => @content_manager.attributes
+    put :update, :id => @content_manager.to_param, :big_cms_content_manager => @content_manager.attributes
     assert_redirected_to big_cms_content_manager_path(assigns(:content_manager))
   end
 

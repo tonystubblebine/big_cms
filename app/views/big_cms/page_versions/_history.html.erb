@@ -1,0 +1,27 @@
+<% if page.versions.size > 0 %>
+<table id="page_history">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Actions</th>
+  </tr>
+
+  <% page.versions.all(:order => "version desc").each do |version| %>
+    <tr>
+      <td><%= version.version %></td>
+      <td><%= version.title %></td>
+      <td><%= version.created_at.to_formatted_s(:long) %></td>
+      <td><%# version.user.name if version.user %></td>
+      <td>
+        <%= link_to "Show", big_cms_page_version_path(:page_id => page, :id => version.version) %>
+        <% unless page.current_version?(version) %>
+          <%= link_to "Revert", big_cms_page_versions_path(:page_id => page, :revert_to => version.version), :method => :post, :confirm => "Are you sure?" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<% end %>
+

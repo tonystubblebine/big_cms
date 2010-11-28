@@ -1,5 +1,4 @@
-module BigCms
-class CmsFilesController < ApplicationController
+class BigCms::CmsFilesController < ApplicationController
   unloadable
   layout "big_cms"
   # GET /big_cms/cms_files
@@ -43,7 +42,7 @@ class CmsFilesController < ApplicationController
   # POST /big_cms/cms_files
   # POST /big_cms/cms_files.xml
   def create
-    @cms_file = BigCms::CmsFile.new(params[:cms_file])
+    @cms_file = BigCms::CmsFile.new(params[:big_cms_cms_file])
 
     respond_to do |format|
       if @cms_file.save
@@ -62,7 +61,7 @@ class CmsFilesController < ApplicationController
     @cms_file = BigCms::CmsFile.find(params[:id])
 
     respond_to do |format|
-      if @cms_file.update_attributes(params[:cms_file])
+      if @cms_file.update_attributes(params[:big_cms_cms_file])
         format.html { redirect_to(@cms_file, :notice => 'File was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -83,5 +82,4 @@ class CmsFilesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-end
 end
