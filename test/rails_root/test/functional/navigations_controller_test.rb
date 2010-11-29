@@ -1,9 +1,11 @@
 require 'test_helper'
 
 class NavigationsControllerTest < ActionController::TestCase
+  include BigAuth::TestHelper
   setup do
     @controller = BigCms::NavigationsController.new
     @navigation = navigations(:one)
+    login_as(:one)
   end
 
   test "should get index" do

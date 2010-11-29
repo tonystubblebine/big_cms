@@ -1,7 +1,9 @@
 class BigCms::PagesController < BigCmsController
   unloadable
   layout "big_cms", :except => :show
+
   before_filter :set_content_manager
+  before_filter :require_user, :except => :show
 
   # GET /big_cms/pages
   # GET /big_cms/pages.xml
@@ -18,6 +20,8 @@ class BigCms::PagesController < BigCmsController
   # GET /big_cms/pages/1.xml
   def show
     @page = @content_manager.pages.find(params[:id])
+
+    render(:status => 403, :text => "Not allowed.") unless current_user or @page.allow_public_views?
 
     respond_to do |format|
       format.html {render(:layout => BigCms.service_configs[:layouts].pages_show) }

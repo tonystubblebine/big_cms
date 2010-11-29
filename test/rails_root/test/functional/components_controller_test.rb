@@ -1,9 +1,11 @@
 require 'test_helper'
 
 class ComponentsControllerTest < ActionController::TestCase
+  include BigAuth::TestHelper
   setup do
     @controller = BigCms::ComponentsController.new
     @component = components(:one)
+    login_as(:one)
   end
 
   test "should get index" do

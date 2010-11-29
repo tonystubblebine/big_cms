@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101125195738) do
+ActiveRecord::Schema.define(:version => 20101128230245) do
 
   create_table "cms_files", :force => true do |t|
     t.string   "file_file_name"
@@ -57,6 +57,20 @@ ActiveRecord::Schema.define(:version => 20101125195738) do
     t.datetime "updated_at"
   end
 
+  create_table "login_accounts", :force => true do |t|
+    t.string   "type"
+    t.integer  "user_id"
+    t.string   "remote_account_id"
+    t.string   "name"
+    t.string   "login"
+    t.string   "picture_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "login_accounts", ["type"], :name => "index_login_accounts_on_type"
+  add_index "login_accounts", ["user_id"], :name => "index_login_accounts_on_user_id"
+
   create_table "navigations", :force => true do |t|
     t.integer  "navigationable_id"
     t.string   "navigationable_type"
@@ -100,5 +114,11 @@ ActiveRecord::Schema.define(:version => 20101125195738) do
 
   add_index "pages", ["content_manager_id"], :name => "index_pages_on_content_manager_id"
   add_index "pages", ["navigation_id"], :name => "index_pages_on_navigation_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "remember_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

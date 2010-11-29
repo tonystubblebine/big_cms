@@ -1,9 +1,11 @@
 require 'test_helper'
 
 class PagesControllerTest < ActionController::TestCase
+  include BigAuth::TestHelper
   setup do
     @controller = BigCms::PagesController.new
     @page = pages(:one)
+    login_as(:one)
   end
 
   test "should get index" do

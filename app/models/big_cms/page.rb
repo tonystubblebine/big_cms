@@ -8,15 +8,19 @@ module BigCms
 
     validates_presence_of :content, :title, :content_manager_id
 
+    def allow_public_views?
+      !self.content_manager.private_pages?
+    end
+
+    def current_version?(version)
+      self.version == version.version
+    end
+
     def revert!(version)
       self.content = version.content
       self.title = version.title
       self.save
       self.versions.last.update_attributes({:clone_of => version.version})
-    end
-
-    def current_version?(version)
-      self.version == version.version
     end
   end
 end

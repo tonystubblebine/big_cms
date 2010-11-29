@@ -3,6 +3,8 @@ class BigCms::PageVersionsController < BigCmsController
   layout "big_cms", :except => :show
   before_filter :set_content_manager
   before_filter :set_page
+  before_filter :require_user
+  before_filter :unimplemented_error, :except => :create
 
   # GET /big_cms/pages/1/versions
   # GET /big_cms/pages/1/versions.xml

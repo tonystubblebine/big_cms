@@ -16,3 +16,4 @@ How to set page title as <TITLE>
 
 How to manage your site layout through big_cms
 
+How to override access permissions for editing/creating content

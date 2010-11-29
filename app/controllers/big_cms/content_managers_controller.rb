@@ -1,6 +1,9 @@
-class BigCms::ContentManagersController < ApplicationController
+class BigCms::ContentManagersController < BigCmsController
   unloadable
   layout "big_cms"
+
+  before_filter :require_user
+  before_filter :unimplemented_error, :except => [:show, :edit, :update]
 
   # GET /big_cms/content_managers
   # GET /big_cms/content_managers.xml

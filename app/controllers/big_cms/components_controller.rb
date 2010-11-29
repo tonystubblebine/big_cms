@@ -1,6 +1,10 @@
-class BigCms::ComponentsController < ApplicationController
+class BigCms::ComponentsController < BigCmsController
   unloadable
   layout "big_cms", :except => :show
+
+  before_filter :require_user
+  before_filter :unimplemented_error
+
   # GET /big_cms/components
   # GET /big_cms/components.xml
   def index

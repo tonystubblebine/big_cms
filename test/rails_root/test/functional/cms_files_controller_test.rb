@@ -1,8 +1,10 @@
 require 'test_helper'
 class CmsFilesControllerTest < ActionController::TestCase
+  include BigAuth::TestHelper
   setup do
     @controller = BigCms::CmsFilesController.new
     @cms_file = cms_files(:one)
+    login_as(:one)
   end
 
   test "should get index" do

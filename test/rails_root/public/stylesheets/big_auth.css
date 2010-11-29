@@ -1,0 +1,17 @@
+a.bigauth-button {
+  width: 150px;
+  float: left;
+  margin: 20px;
+}
+a.bigauth-button.twitter {
+  background: url(/images/big_auth/signin_twitter.png) center center no-repeat;
+}
+a.bigauth-button span {
+  margin-left: -9999px;
+  font-size: 0px;
+}
+
+a.bigauth-button.facebook {
+  background: url(/images/big_auth/signin_facebook.png) center center no-repeat;
+}
+

@@ -24,4 +24,16 @@ class PageTest < ActiveSupport::TestCase
     assert_equal original_title, page.title
     assert original_number_of_revisions, page.versions.last.version
   end 
+
+  test "allow_public_views?" do
+    page = pages(:one)
+    content_manager = page.content_manager
+ 
+    content_manager.update_attributes(:private_pages => true)
+    assert_equal false, page.allow_public_views?
+
+    
+    content_manager.update_attributes(:private_pages => false)
+    assert_equal true, page.allow_public_views?
+  end
 end

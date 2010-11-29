@@ -2,3 +2,4 @@
 - add javascript toggles for #advanced_options sections
 - add access controls to all actions
 - diffs in the versioning history
+- allow overriding of editing permission (for example for an admin? role)

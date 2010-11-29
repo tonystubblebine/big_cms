@@ -1,6 +1,10 @@
-class BigCms::NavigationsController < ApplicationController
+class BigCms::NavigationsController < BigCmsController
   unloadable
   layout "big_cms"
+
+  before_filter :require_user
+  before_filter :unimplemented_error
+
   # GET /big_cms/navigations
   # GET /big_cms/navigations.xml
   def index

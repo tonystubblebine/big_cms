@@ -1,6 +1,10 @@
-class BigCms::CmsFilesController < ApplicationController
+class BigCms::CmsFilesController < BigCmsController
   unloadable
   layout "big_cms"
+
+  before_filter :require_user
+  before_filter :unimplemented_error
+  
   # GET /big_cms/cms_files
   # GET /big_cms/cms_files.xml
   def index

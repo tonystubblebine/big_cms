@@ -1,9 +1,11 @@
 require 'test_helper'
 
 class ContentManagersControllerTest < ActionController::TestCase
+  include BigAuth::TestHelper
   setup do
     @controller = BigCms::ContentManagersController.new
     @content_manager = content_managers(:one)
+    login_as(:one)
   end
 
   test "should get index" do

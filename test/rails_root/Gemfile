@@ -6,6 +6,8 @@ gem 'rails', '3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
+gem "big_auth", :require => "big_auth", :path => "/home/tony/projects/big_auth"
+gem "big_library", :require => "big_library", :path => "/home/tony/projects/big_library"
 gem 'big_cms', :path => "../.."
 gem 'ruby-debug'
 gem 'acts_as_versioned'

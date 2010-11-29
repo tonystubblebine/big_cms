@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class BigCms::PageVersionsControllerTest < ActionController::TestCase
+  include BigAuth::TestHelper
   setup do
     @page = BigCms::Page.create(pages(:one).attributes) # first version isn't getting created when fixtures are loaded
+    login_as(:one)
   end
 
   test "should get index" do
