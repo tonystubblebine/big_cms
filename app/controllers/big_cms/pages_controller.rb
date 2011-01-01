@@ -19,7 +19,11 @@ class BigCms::PagesController < BigCmsController
   # GET /big_cms/pages/1
   # GET /big_cms/pages/1.xml
   def show
-    @page = @content_manager.pages.find(params[:id])
+    if params[:id] == "_home" and @content_manager.navigations
+      @page = @content_manager.navigations.first.pages.first
+    else
+      @page = @content_manager.pages.find(params[:id])
+    end
 
     render(:status => 403, :text => "Not allowed.") unless current_user or @page.allow_public_views?
 

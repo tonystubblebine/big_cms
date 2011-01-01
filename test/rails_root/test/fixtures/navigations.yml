@@ -2,7 +2,7 @@
 
 one:
   id: 1
-  navigationable_type: MyString
+  navigationable_type: BigCms::ContentManager 
   navigationable_id: 1
   position: 1
   title: MyString
@@ -10,7 +10,7 @@ one:
 
 two:
   id: 2
-  navigationable_type: MyString
+  navigationable_type: BigCms::ContentManager
   navigationable_id: 1
   position: 1
   title: MyString

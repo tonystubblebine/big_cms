@@ -32,6 +32,13 @@ class PagesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show home page" do
+    get :show, :id => "_home"
+
+    assert_response :success
+    assert_equal content_managers(:one).navigations.first.pages.first, assigns(:page)
+  end
+
   test "should get edit" do
     get :edit, :id => @page.to_param
     assert_response :success
