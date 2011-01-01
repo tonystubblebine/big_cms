@@ -21,6 +21,8 @@ class BigCms::PagesController < BigCmsController
   def show
     if params[:id] == "_home" and @content_manager.navigations
       @page = @content_manager.navigations.first.pages.first
+    elsif @content_manager.pages
+      @page = @content_manager.pages.first
     else
       @page = @content_manager.pages.find(params[:id])
     end
