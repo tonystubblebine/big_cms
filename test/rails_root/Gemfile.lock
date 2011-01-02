@@ -2,7 +2,9 @@ PATH
   remote: ../..
   specs:
     big_cms (0.0.1)
+      acts_as_versioned
       jeweler
+      paperclip
       rails (> 3.0.0)
 
 PATH
@@ -89,6 +91,9 @@ GEM
     oauth2 (0.1.0)
       faraday (~> 0.5.0)
       multi_json (~> 0.0.4)
+    paperclip (2.3.8)
+      activerecord
+      activesupport
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)

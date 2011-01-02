@@ -40,12 +40,20 @@
         <li class="navigations">
           <h3>Navigation</h3>
           <ul>
-            <li class="index"><%= link_to "Components", big_cms_navigations_path() %></li>
+            <li class="index"><%= link_to "Navigation", big_cms_navigations_path() %></li>
             <li class="new"><%= link_to "Add New", new_big_cms_navigation_path() %></li>
           </ul>
         </li>
+        <li class="cms_files">
+          <h3>Files</h3>
+          <ul>
+            <li class="index"><%= link_to "Files", big_cms_cms_files_path() %></li>
+            <li class="new"><%= link_to "Upload", new_big_cms_cms_file_path() %></li>
+          </ul>
+        </li>
+
         <li class="content_managers">
-          <h3>Content Components</h3>
+          <h3>Configuration</h3>
           <ul>
             <li class="edit"><%= link_to "Permissions", edit_big_cms_content_manager_path(current_cms) %></li>
           </ul>

@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <% if @cms_file.image? %>
+    <%= image_tag @cms_file.file.url %><br />
+  <% end %>
   <b>File file name:</b>
   <%= @cms_file.file_file_name %>
 </p>
@@ -18,10 +21,5 @@
 <p>
   <b>File updated at:</b>
   <%= @cms_file.file_updated_at %>
-</p>
-
-<p>
-  <b>Content manager:</b>
-  <%= @cms_file.content_manager_id %>
 </p>
 

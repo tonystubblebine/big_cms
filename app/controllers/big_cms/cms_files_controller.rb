@@ -1,14 +1,15 @@
 class BigCms::CmsFilesController < BigCmsController
   unloadable
   layout "big_cms"
-
-  before_filter :require_user
-  before_filter :unimplemented_error
   
+  before_filter :unimplemented_error, :except => [:new, :create, :show, :index, :destroy]
+  before_filter :set_content_manager
+  before_filter :require_user, :except => :show
+
   # GET /big_cms/cms_files
   # GET /big_cms/cms_files.xml
   def index
-    @cms_files = BigCms::CmsFile.all
+    @cms_files = @content_manager.files.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +20,7 @@ class BigCms::CmsFilesController < BigCmsController
   # GET /big_cms/cms_files/1
   # GET /big_cms/cms_files/1.xml
   def show
-    @cms_file = BigCms::CmsFile.find(params[:id])
+    @cms_file = @content_manager.files.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -30,8 +31,7 @@ class BigCms::CmsFilesController < BigCmsController
   # GET /big_cms/cms_files/new
   # GET /big_cms/cms_files/new.xml
   def new
-    @cms_file = BigCms::CmsFile.new
-
+    @cms_file = @content_manager.files.new
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @cms_file }
@@ -40,13 +40,13 @@ class BigCms::CmsFilesController < BigCmsController
 
   # GET /big_cms/cms_files/1/edit
   def edit
-    @cms_file = BigCms::CmsFile.find(params[:id])
+    @cms_file = @content_manager.files.find(params[:id])
   end
 
   # POST /big_cms/cms_files
   # POST /big_cms/cms_files.xml
   def create
-    @cms_file = BigCms::CmsFile.new(params[:big_cms_cms_file])
+    @cms_file = @content_manager.files.new(params[:big_cms_cms_file])
 
     respond_to do |format|
       if @cms_file.save
@@ -62,7 +62,7 @@ class BigCms::CmsFilesController < BigCmsController
   # PUT /big_cms/cms_files/1
   # PUT /big_cms/cms_files/1.xml
   def update
-    @cms_file = BigCms::CmsFile.find(params[:id])
+    @cms_file = @content_manager.files.find(params[:id])
 
     respond_to do |format|
       if @cms_file.update_attributes(params[:big_cms_cms_file])
@@ -78,7 +78,7 @@ class BigCms::CmsFilesController < BigCmsController
   # DELETE /big_cms/cms_files/1
   # DELETE /big_cms/cms_files/1.xml
   def destroy
-    @cms_file = BigCms::CmsFile.find(params[:id])
+    @cms_file = @content_manager.files.find(params[:id])
     @cms_file.destroy
 
     respond_to do |format|

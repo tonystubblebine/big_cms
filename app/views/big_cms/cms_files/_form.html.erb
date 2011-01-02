@@ -1,7 +1,7 @@
-<%= form_for(@cms_file) do |f| %>
+<%= form_for(@cms_file, :html => {:multipart => true}) do |f| %>
   <% if @cms_file.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@cms_file.errors.count, "error") %> prohibited this cms_file from being saved:</h2>
+      <h2><%= pluralize(@cms_file.errors.count, "error") %> prohibited this file from being saved:</h2>
 
       <ul>
       <% @cms_file.errors.full_messages.each do |msg| %>
@@ -13,25 +13,9 @@
 
   <div class="field">
     <%= f.label :file_file_name %><br />
-    <%= f.text_field :file_file_name %>
-  </div>
-  <div class="field">
-    <%= f.label :file_content_type %><br />
-    <%= f.text_field :file_content_type %>
-  </div>
-  <div class="field">
-    <%= f.label :file_file_size %><br />
-    <%= f.text_field :file_file_size %>
-  </div>
-  <div class="field">
-    <%= f.label :file_updated_at %><br />
-    <%= f.datetime_select :file_updated_at %>
-  </div>
-  <div class="field">
-    <%= f.label :content_manager_id %><br />
-    <%= f.text_field :content_manager_id %>
+    <%= f.file_field :file %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "upload" %>
   </div>
 <% end %>
