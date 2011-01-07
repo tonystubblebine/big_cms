@@ -11,9 +11,9 @@ namespace :big_cms do
       BigCMSGenerator.new.copy_assets
     end
 
-    desc "copy initializers"
-    task :copy_initializers do
-      BigCMSGenerator.new.copy_initializers
+    desc "copy config files"
+    task :copy_config_files do
+      BigCMSGenerator.new.copy_config_files
     end
   end
 end
