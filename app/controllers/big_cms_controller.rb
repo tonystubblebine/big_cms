@@ -14,4 +14,9 @@ class BigCmsController < ApplicationController
       render(:status => 404, :text => "This page does not exist.")
     end
   end
+
+  def liquid_render(page)
+    @template = Liquid::Template.parse(page.content)
+    @template.render( 'page' => 'page', 'current_site' => current_site, 'current_user' => current_user) 
+  end
 end

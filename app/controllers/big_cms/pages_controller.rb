@@ -30,7 +30,7 @@ class BigCms::PagesController < BigCmsController
     render(:status => 403, :text => "Not allowed.") unless current_user or @page.allow_public_views?
 
     respond_to do |format|
-      format.html {render(:layout => BigCms.service_configs[:layouts].pages_show) }
+      format.html { render(:layout => BigCms.service_configs[:layouts].pages_show) }
       format.xml  { render :xml => @page }
     end
   end
