@@ -2,6 +2,7 @@ BigCms.setup do |config|
   # ==> Layouts
   # Layout to use when rendering pages#show
   config.layouts :pages_show => "application"
+  config.liquid :filters => [ApplicationHelper, BigCmsHelper]
 
   # TODO: 2011-01-01 <tony@crowdvine.com> -- There seems to be a bug in paperclip for rails 3 that requires manually calling for the Paperclip init.rb to be run. Here's where I got the solution:
   # http://patshaughnessy.net/2010/5/23/how-to-install-paperclip-in-a-rails-3-app

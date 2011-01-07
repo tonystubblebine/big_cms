@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  title: MyString
-  content: MyText
-  content_type: MyString
+  title: One Title
+  content: One Text
+  content_type: text
   content_manager_id: 1
   navigation_id: 1
   render_type: MyString
@@ -13,8 +13,8 @@ one:
   new_title: MyString
 
 two:
-  title: MyString
-  content: MyText
+  title: Two Title
+  content: Two Content
   content_type: MyString
   content_manager_id: 1
   navigation_id: 1

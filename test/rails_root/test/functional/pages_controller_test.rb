@@ -39,6 +39,14 @@ class PagesControllerTest < ActionController::TestCase
     assert_equal content_managers(:one).navigations.first.pages.first, assigns(:page)
   end
 
+  test "should show page rendered from liquid template" do
+    @page.update_attributes(:content => "<h1>{{ 'a' | foo }}</h1>")
+    get :show, :id => @page.to_param
+
+    assert_response :success
+    assert_select "h1", "foobar" 
+  end
+
   test "should get edit" do
     get :edit, :id => @page.to_param
     assert_response :success

@@ -3,7 +3,14 @@ BigCms.setup do |config|
   # Layout to use when rendering pages#show
   config.layouts :pages_show => "application"
 
-  # TODO: 2011-01-01 <tony@crowdvine.com> -- There seems to be a bug in paperclip for rails 3 that requires manually calling for the Paperclip init.rb to be run. Here's where I got the solution:
+  # ==> Liquid Templates
+  # Define modules to use as filters in the context of liquid templates.
+  # These will be available in templates as {{ "arg1" | filter: arg2 }}
+  config.liquid :filters => [ApplicationHelper, BigCmsHelper]
+
+  # TODO: 2011-01-01 <tony+bigcms@tonystubblebine.com> -- There seems to be a
+  # bug in paperclip for rails 3 that requires manually calling for the
+  # Paperclip init.rb to be run. Here's where I got the solution:
   # http://patshaughnessy.net/2010/5/23/how-to-install-paperclip-in-a-rails-3-app
   require 'paperclip'
   Paperclip::Railtie.insert

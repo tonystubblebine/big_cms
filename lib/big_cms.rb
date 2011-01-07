@@ -13,5 +13,9 @@ module BigCms
     @@service_configs[:layouts] = BigCms::ServiceConfig.new(opts)
   end
 
+  def self.liquid(opts)
+    @@service_configs[:liquid] = BigCms::ServiceConfig.new(opts)
+  end
+
   require 'big_cms/engine' if defined?(Rails) && Rails::VERSION::MAJOR >= 3
 end
