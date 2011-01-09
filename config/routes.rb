@@ -2,13 +2,10 @@ Rails::Application.routes.draw do
 
   namespace :big_cms do
     resources :cms_files
-
+    resources :layouts
     resources :components
-
     resources :navigations
-
     resources :pages
-
     resources :content_managers
   
     resources :pages do

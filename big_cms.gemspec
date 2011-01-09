@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-01-06}
+  s.date = %q{2011-01-08}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -20,10 +20,12 @@ Gem::Specification.new do |s|
     "app/controllers/big_cms/cms_files_controller.rb",
     "app/controllers/big_cms/components_controller.rb",
     "app/controllers/big_cms/content_managers_controller.rb",
+    "app/controllers/big_cms/layouts_controller.rb",
     "app/controllers/big_cms/navigations_controller.rb",
     "app/controllers/big_cms/page_versions_controller.rb",
     "app/controllers/big_cms/pages_controller.rb",
     "app/controllers/big_cms_controller.rb",
+    "app/helpers/big_cms/layouts_helper.rb",
     "app/helpers/big_cms/page_versions_helper.rb",
     "app/helpers/big_cms_helper.rb",
     "app/helpers/cms_files_helper.rb",
@@ -34,6 +36,7 @@ Gem::Specification.new do |s|
     "app/models/big_cms/cms_file.rb",
     "app/models/big_cms/component.rb",
     "app/models/big_cms/content_manager.rb",
+    "app/models/big_cms/layout.rb",
     "app/models/big_cms/navigation.rb",
     "app/models/big_cms/page.rb",
     "app/views/big_cms/cms_files/_form.html.erb",
@@ -51,6 +54,11 @@ Gem::Specification.new do |s|
     "app/views/big_cms/content_managers/index.html.erb",
     "app/views/big_cms/content_managers/new.html.erb",
     "app/views/big_cms/content_managers/show.html.erb",
+    "app/views/big_cms/layouts/_form.html.erb",
+    "app/views/big_cms/layouts/edit.html.erb",
+    "app/views/big_cms/layouts/index.html.erb",
+    "app/views/big_cms/layouts/new.html.erb",
+    "app/views/big_cms/layouts/show.html.erb",
     "app/views/big_cms/navigations/_form.html.erb",
     "app/views/big_cms/navigations/edit.html.erb",
     "app/views/big_cms/navigations/index.html.erb",
@@ -95,8 +103,10 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/create_cms_files_migration.rb",
     "lib/generators/big_cms/templates/create_components_migration.rb",
     "lib/generators/big_cms/templates/create_content_managers_migration.rb",
+    "lib/generators/big_cms/templates/create_layouts_migration.rb",
     "lib/generators/big_cms/templates/create_navigations_migration.rb",
-    "lib/generators/big_cms/templates/create_pages_migration.rb"
+    "lib/generators/big_cms/templates/create_pages_migration.rb",
+    "lib/generators/big_cms/templates/s3.yml"
   ]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
@@ -127,19 +137,23 @@ Gem::Specification.new do |s|
     "test/rails_root/db/migrate/20101125195736_add_versioning_to_pages.rb",
     "test/rails_root/db/migrate/20101125195738_add_versioning_to_components.rb",
     "test/rails_root/db/migrate/20101128230245_create_big_auth_tables.rb",
+    "test/rails_root/db/migrate/20110109055322_create_layouts.rb",
     "test/rails_root/db/schema.rb",
     "test/rails_root/db/seeds.rb",
     "test/rails_root/test/functional/cms_files_controller_test.rb",
     "test/rails_root/test/functional/components_controller_test.rb",
     "test/rails_root/test/functional/content_managers_controller_test.rb",
+    "test/rails_root/test/functional/layouts_controller_test.rb",
     "test/rails_root/test/functional/navigations_controller_test.rb",
     "test/rails_root/test/functional/page_versions_controller_test.rb",
     "test/rails_root/test/functional/pages_controller_test.rb",
     "test/rails_root/test/performance/browsing_test.rb",
     "test/rails_root/test/test_helper.rb",
+    "test/rails_root/test/unit/big_cms/layout_test.rb",
     "test/rails_root/test/unit/cms_file_test.rb",
     "test/rails_root/test/unit/component_test.rb",
     "test/rails_root/test/unit/content_manager_test.rb",
+    "test/rails_root/test/unit/helpers/big_cms/layouts_helper_test.rb",
     "test/rails_root/test/unit/helpers/big_cms/page_versions_helper_test.rb",
     "test/rails_root/test/unit/helpers/cms_files_helper_test.rb",
     "test/rails_root/test/unit/helpers/components_helper_test.rb",

@@ -13,6 +13,7 @@ class ActiveSupport::TestCase
   set_fixture_class :pages            => "BigCms::Page"
   set_fixture_class :content_managers => "BigCms::ContentManager"
   set_fixture_class :navigations      => "BigCms::Navigation"
+  set_fixture_class :layouts          => "BigCms::Layout"
 
   # Add more helper methods to be used by all tests here...
 end

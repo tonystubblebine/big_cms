@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101128230245) do
+ActiveRecord::Schema.define(:version => 20110109055322) do
 
   create_table "cms_files", :force => true do |t|
     t.string   "file_file_name"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(:version => 20101128230245) do
   create_table "content_managers", :force => true do |t|
     t.boolean  "private_pages", :default => false
     t.boolean  "user_editable", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "layouts", :force => true do |t|
+    t.integer  "content_manager_id"
+    t.string   "name"
+    t.text     "head"
+    t.text     "pre_content"
+    t.text     "post_content"
+    t.string   "format"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

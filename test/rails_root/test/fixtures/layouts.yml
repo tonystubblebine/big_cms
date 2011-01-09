@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  content_manager_id: 1
+  name: MyString
+  head: MyText
+  pre_content: MyText
+  post_content: MyText
+  format: MyString
+
+two:
+  content_manager_id: 1
+  name: MyString
+  head: MyText
+  pre_content: MyText
+  post_content: MyText
+  format: MyString

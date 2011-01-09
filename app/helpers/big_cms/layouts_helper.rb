@@ -1,0 +1,2 @@
+module BigCms::LayoutsHelper
+end

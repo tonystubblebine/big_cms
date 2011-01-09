@@ -1,0 +1,41 @@
+<%= form_for(@layout) do |f| %>
+  <% if @layout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@layout.errors.count, "error") %> prohibited this layout from being saved:</h2>
+
+      <ul>
+      <% @layout.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content_manager_id %><br />
+    <%= f.text_field :content_manager_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :head %><br />
+    <%= f.text_area :head %>
+  </div>
+  <div class="field">
+    <%= f.label :pre_content %><br />
+    <%= f.text_area :pre_content %>
+  </div>
+  <div class="field">
+    <%= f.label :post_content %><br />
+    <%= f.text_area :post_content %>
+  </div>
+  <div class="field">
+    <%= f.label :format %><br />
+    <%= f.text_field :format %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

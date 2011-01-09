@@ -5,5 +5,6 @@ module BigCms
     has_many :components
     has_many :navigations, :as => :navigationable
     has_many :files, :class_name => "CmsFile"
+    has_many :layouts
   end
 end

@@ -19,7 +19,7 @@ class BigCMSGenerator < Rails::Generators::Base
   end
   
   def create_migration_file
-    %w{create_content_managers create_pages create_navigations create_components create_cms_files add_versioning_to_pages add_versioning_to_components}.each do |migration|
+    %w{create_content_managers create_pages create_navigations create_components create_cms_files add_versioning_to_pages add_versioning_to_components create_layouts}.each do |migration|
       begin
         migration_template "#{migration}_migration.rb", "db/migrate/#{migration}.rb"
         sleep(2) # cheap hack to make sure migration numbers end up being different
