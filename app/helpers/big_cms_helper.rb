@@ -9,7 +9,7 @@ module BigCmsHelper
     opts["current_user"] = current_user if defined?(current_user)
 
     template = Liquid::Template.parse(page.content)
-    template.render(opts, :filters => BigCms.service_configs[:liquid].filters).html_safe
+    template.render(opts, :filters => BigCms.service_configs[:liquid].filters, :registers => {"controller" => @controller}).html_safe
   end
 end
 

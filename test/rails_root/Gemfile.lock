@@ -14,6 +14,7 @@ PATH
   specs:
     big_auth (0.0.1)
       bcrypt-ruby
+      big_library
       oa-core
       oa-oauth
       rails (> 3.0.0)
