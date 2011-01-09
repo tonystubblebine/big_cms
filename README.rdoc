@@ -22,3 +22,8 @@ How to override access permissions for editing/creating content
 How to have CMS server your root page
 root :to => "big_cms/pages#show", :id => "_home"
 Loads first page of first navigation element
+
+How to handle layouts
+<%= render_liquid(current_layout.post_content) if current_layout %>
+
+? How to set different layouts depending on context
