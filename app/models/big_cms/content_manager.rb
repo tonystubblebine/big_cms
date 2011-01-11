@@ -6,5 +6,9 @@ module BigCms
     has_many :navigations, :as => :navigationable
     has_many :files, :class_name => "CmsFile"
     has_many :layouts
+
+    def all_navigations
+      BigCms::Navigation.tree_to_a(self)
+    end
   end
 end

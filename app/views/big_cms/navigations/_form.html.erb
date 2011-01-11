@@ -11,14 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :navigationable_type %><br />
-    <%= f.text_field :navigationable_type %>
+  <div class="field"
+    <%= f.label :navigationable %>
+    <%= select_tag "navigationable", options_for_select(BigCms::Navigation.list_for_select(current_cms), 
+                                                        (BigCms::Navigation.to_select_value(@navigation.navigationable) if @navigation.navigationable) ) %>
   </div>
-  <div class="field">
-    <%= f.label :navigationable_id %><br />
-    <%= f.text_field :navigationable_id %>
-  </div>
+
   <div class="field">
     <%= f.label :position %><br />
     <%= f.text_field :position %>

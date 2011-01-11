@@ -2,7 +2,7 @@ module BigCmsHelper
   def foo(a="b")
     "foobar"
   end
-
+  
   def snippit(name, *args)
     component = @context.registers["controller"].current_cms.components.find_by_name(name)
     opts = {"component" => component} 

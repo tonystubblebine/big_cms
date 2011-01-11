@@ -8,7 +8,7 @@ class BigCms::NavigationsController < BigCmsController
   # GET /big_cms/navigations
   # GET /big_cms/navigations.xml
   def index
-    @navigations = BigCms::Navigation.all
+    @navigations = current_cms.navigations 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +19,7 @@ class BigCms::NavigationsController < BigCmsController
   # GET /big_cms/navigations/1
   # GET /big_cms/navigations/1.xml
   def show
-    @navigation = BigCms::Navigation.find(params[:id])
+    @navigation = current_cms.all_navigations.find{|a| a == BigCms::Navigation.find(params[:id])}
 
     respond_to do |format|
       format.html # show.html.erb
@@ -30,7 +30,7 @@ class BigCms::NavigationsController < BigCmsController
   # GET /big_cms/navigations/new
   # GET /big_cms/navigations/new.xml
   def new
-    @navigation = BigCms::Navigation.new
+    @navigation = current_cms.navigations.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,13 +40,14 @@ class BigCms::NavigationsController < BigCmsController
 
   # GET /big_cms/navigations/1/edit
   def edit
-    @navigation = BigCms::Navigation.find(params[:id])
+    @navigation = current_cms.all_navigations.find{|a| a == BigCms::Navigation.find(params[:id])}
   end
 
   # POST /big_cms/navigations
   # POST /big_cms/navigations.xml
   def create
     @navigation = BigCms::Navigation.new(params[:big_cms_navigation])
+    @navigation.navigationable = find_navigationable_from_select_value(params[:navigationable])
 
     respond_to do |format|
       if @navigation.save
@@ -63,6 +64,7 @@ class BigCms::NavigationsController < BigCmsController
   # PUT /big_cms/navigations/1.xml
   def update
     @navigation = BigCms::Navigation.find(params[:id])
+    @navigation.navigationable = find_navigationable_from_select_value(params[:navigationable])
 
     respond_to do |format|
       if @navigation.update_attributes(params[:big_cms_navigation])
@@ -78,12 +80,22 @@ class BigCms::NavigationsController < BigCmsController
   # DELETE /big_cms/navigations/1
   # DELETE /big_cms/navigations/1.xml
   def destroy
-    @navigation = BigCms::Navigation.find(params[:id])
+    @navigation = current_cms.all_navigations.find{|a| a == BigCms::Navigation.find(params[:id])}
     @navigation.destroy
 
     respond_to do |format|
       format.html { redirect_to(big_cms_navigations_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  protected 
+  
+  def find_navigationable_from_select_value(value)
+    if md = value.match(/BigCms::ContentManager::(\d+)/)
+      @content_manager.navigations.find_by_id(md[1])
+    elsif md = value.match(/BigCms::Navigation::(\d+)/)
+      current_cms.all_navigations.find{|a| a.id == md[1].to_i}
     end
   end
 end
