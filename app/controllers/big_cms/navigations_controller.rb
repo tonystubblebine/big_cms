@@ -30,7 +30,7 @@ class BigCms::NavigationsController < BigCmsController
   # GET /big_cms/navigations/new
   # GET /big_cms/navigations/new.xml
   def new
-    @navigation = current_cms.navigations.new
+    @navigation = current_cms.navigations.new(:position => current_cms.navigations.size + 1)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,6 +48,7 @@ class BigCms::NavigationsController < BigCmsController
   def create
     @navigation = BigCms::Navigation.new(params[:big_cms_navigation])
     @navigation.navigationable = find_navigationable_from_select_value(params[:navigationable])
+    @navigation.position = @navigation.navigationable.navigations.size + 1 unless @navigation.position > 0
 
     respond_to do |format|
       if @navigation.save

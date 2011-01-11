@@ -2,7 +2,7 @@ module BigCms
   class Navigation < ActiveRecord::Base
     unloadable
     belongs_to :navigationable, :polymorphic => true
-    has_many :navigations, :as => :navigationable
+    has_many :navigations, :as => :navigationable, :order => "position ASC"
     has_many :pages
 
     validates_presence_of :title, :url, :navigationable_id, :navigationable_type
