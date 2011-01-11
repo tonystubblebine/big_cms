@@ -8,7 +8,7 @@ module BigCms
     has_many :layouts
 
     def all_navigations
-      BigCms::Navigation.tree_to_a(self)
+      BigCms::Navigation.tree_to_a(self).reject{|a| a == self}
     end
   end
 end

@@ -7,6 +7,40 @@ module BigCms
 
     validates_presence_of :title, :url, :navigationable_id, :navigationable_type
 
+    liquid_methods :slug, :title, :url, :navigations
+
+    def ancestors_and_self(result = [])
+      if navigationable and navigationable.respond_to?(:ancestors_and_self)
+        return navigationable.ancestors_and_self(result << self)
+      else
+        return result
+      end
+    end
+      
+    def slug
+      # Perform transliteration to replace non-ascii characters with an ascii
+      # character
+      value = self.title.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n, '').to_s
+    
+      # Remove single quotes from input
+      value.gsub!(/[']+/, '')
+
+      # Replace any non-word character (\W) with a space
+      value.gsub!(/\W+/, ' ')
+    
+      # Remove any whitespace before and after the string
+      value.strip!
+    
+      # All characters should be downcased
+      value.downcase!
+    
+      # Replace spaces with dashes
+      value.gsub!(' ', '-')
+    
+      # Return the resulting slug, prefixed by id
+      "#{id.to_s}-#{value}"
+    end
+
     def self.list_for_select(root, prefix = "")
       return if root.nil?
       result = [["#{prefix}/", to_select_value(root)]]

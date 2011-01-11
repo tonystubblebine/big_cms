@@ -8,7 +8,7 @@ class BigCms::NavigationsController < BigCmsController
   # GET /big_cms/navigations
   # GET /big_cms/navigations.xml
   def index
-    @navigations = current_cms.navigations 
+    @navigations = current_cms.all_navigations 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -93,9 +93,9 @@ class BigCms::NavigationsController < BigCmsController
   
   def find_navigationable_from_select_value(value)
     if md = value.match(/BigCms::ContentManager::(\d+)/)
-      @content_manager.navigations.find_by_id(md[1])
+      current_cms
     elsif md = value.match(/BigCms::Navigation::(\d+)/)
-      current_cms.all_navigations.find{|a| a.id == md[1].to_i}
+      current_cms.all_navigations.find{|a| a.id == BigCms::Navigation.find(md[1])}
     end
   end
 end

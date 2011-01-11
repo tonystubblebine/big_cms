@@ -5,3 +5,4 @@
 - allow overriding of editing permission (for example for an admin? role)
 - allow configuration of storage options for cms_files
 - in-page ajax-y sorting of files on files#index
+- subnavigation
