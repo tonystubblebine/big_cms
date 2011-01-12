@@ -23,6 +23,9 @@ class BigCms::PagesController < BigCmsController
       @page = @content_manager.navigations.first.pages.first
     elsif params[:id] == "_home" and @content_manager.pages
       @page = @content_manager.pages.first
+    elsif params[:id].match(/\D/)
+      # TODO: 2011-01-11 <tony+bigcs@tonystubblebine.com> -- this hacked finder implies that I should be storing slug.
+      @page = @content_manager.pages.to_a.find{|a| a.slug == params[:id]}
     else
       @page = @content_manager.pages.find(params[:id])
     end
