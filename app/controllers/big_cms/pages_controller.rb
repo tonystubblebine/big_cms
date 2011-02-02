@@ -35,6 +35,7 @@ class BigCms::PagesController < BigCmsController
     respond_to do |format|
       format.html { render(:layout => BigCms.service_configs[:layouts].pages_show) }
       format.xml  { render :xml => @page }
+      format.css { render :layout => false }
     end
   end
 
