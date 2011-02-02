@@ -3,10 +3,10 @@ module BigCmsHelper
     "foobar"
   end
  
-  def snippit(name, *args)
+  def snippet(name, *args)
     controller = @context.registers["controller"]
     component = controller.current_cms.components.find_by_name(name)
-    opts = {"component" => component} 
+    opts = {"snippet" => component} 
     opts["current_site"] = controller.current_site if controller.current_site
     opts["current_layout"] = controller.current_layout if controller.current_layout
     opts["current_user"] = controller.current_user if controller.current_user
