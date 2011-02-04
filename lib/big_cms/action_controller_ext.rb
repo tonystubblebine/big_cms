@@ -1,5 +1,5 @@
 ActionController::Base.class_eval do
-  helper_method :current_cms, :current_layout, :snippit, :navigation_selected, :render_liquid
+  helper_method :current_cms, :current_layout, :snippet, :navigation_selected, :render_liquid
 
   def current_cms
     # TODO: 2011-01-11 <tony+bigcms@tonystubblebine.com> -- This is a cheap
