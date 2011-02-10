@@ -1,29 +1,44 @@
-Nothing to see here. In development, content management gem.
+= big_cms
 
-prereqs
+<em>Pre-alpha non-functional version.</em>
 
-setup
+Rails 3 engine for simple content management. The goal is to be narrow but deep, meaning that we're only handling simple content like pages, layouts, content snippets, files--but we're going to try to handle those few things exceptionally well. 
 
-rake big_cms:generate:migration
+== Installation
 
+1. Add big_cms to your Gemfile: <code>gem "big_cms", :require => "big_cms", :git => "git://github.com/tonystubblebine/big_cms.git"</code>
 
-HOWTO
+2. Make sure the gem is installed by running: <code>bundle install</code>
 
-How to set page title as <TITLE>
-<% if @page %>
-  <title><%= @page.title %></title>
-<% else %>
+3. Copy over migrations and css files: <code>rails generate big_cms</code>
 
-How to manage your site layout through big_cms
+4. Run <code>rake db:migrate</code>.
 
-How to override access permissions for editing/creating content
+5. Install/build authentication dependencies. Requires current_user and require_user. Both of these are defined by common authentication plugins like Authlogic or Omnisocial.
 
+== Features for 0.1
 
-How to have CMS server your root page
-root :to => "big_cms/pages#show", :id => "_home"
-Loads first page of first navigation element
+1. Admin interface for managing pages, snippets, files, layouts, and navigation.
+2. Web based html, css, and javascript editing (based on Ace: http://ace.ajax.org/).
+3. Version history for edits.
+4. Liquid templating.
+5. RESTful interface.
+6. Multi-file upload.
+7. Multiple formats: html, xml, json, css, javascript.
+8. Caching.
 
-How to handle layouts
-<%= render_liquid(current_layout.post_content) if current_layout %>
+== Howto
 
-? How to set different layouts depending on context
+How to set page title as <TITLE>?
+
+<code>\<title>\<%= @page.title %>\</title></code>
+
+How to have CMS serve your root page?
+
+<code>root :to => "big_cms/pages#show", :id => "_home"</code>
+This will load the first page of first navigation element or your first page.
+
+How to use layouts?
+How to set different layouts depending on context?
+How to manage your site layout through big_cms?
+How to override access permissions for editing/creating content?
