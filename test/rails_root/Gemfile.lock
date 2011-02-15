@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    big_cms (0.0.1)
+    big_cms (0.0.4)
       acts_as_versioned
       aws-s3
       jeweler
@@ -133,7 +133,7 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
-    xml-simple (1.0.12)
+    xml-simple (1.0.14)
 
 PLATFORMS
   ruby

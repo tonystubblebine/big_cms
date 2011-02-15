@@ -3,15 +3,12 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Format</th>
-    <th></th>
     <th></th>
   </tr>
 
 <% @layouts.each do |layout| %>
   <tr>
     <td><%= layout.name %></td>
-    <td><%= layout.format %></td>
     <td><%= link_to 'Edit', edit_big_cms_layout_path(layout) %></td>
     <td><%= link_to 'Destroy', layout, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

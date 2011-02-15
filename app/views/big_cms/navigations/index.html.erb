@@ -2,8 +2,6 @@
 
 <table>
   <tr>
-    <th>Navigationable type</th>
-    <th>Navigationable</th>
     <th>Position</th>
     <th>Title</th>
     <th>Url</th>
@@ -14,11 +12,15 @@
 
 <% @navigations.each do |navigation| %>
   <tr>
-    <td><%= navigation.navigationable_type %></td>
-    <td><%= navigation.navigationable_id %></td>
     <td><%= navigation.position %></td>
     <td><%= navigation.title %></td>
     <td><%= navigation.url %></td>
+    <td class="actions">
+      <%= link_to "show", big_cms_navigation_path(navigation) %>
+      <%= link_to "edit", edit_big_cms_navigation_path(navigation) %>
+      <%= link_to 'delete', big_cms_navigation_path(navigation), :confirm => 'Are you sure?', :method => :delete %>
+    </td>
+
   </tr>
 <% end %>
 </table>

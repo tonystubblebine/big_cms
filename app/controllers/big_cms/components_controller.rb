@@ -8,7 +8,7 @@ class BigCms::ComponentsController < BigCmsController
   # GET /big_cms/components
   # GET /big_cms/components.xml
   def index
-    @components = BigCms::Component.all
+    @components = current_cms.components.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +19,7 @@ class BigCms::ComponentsController < BigCmsController
   # GET /big_cms/components/1
   # GET /big_cms/components/1.xml
   def show
-    @component = BigCms::Component.find(params[:id])
+    @component = current_cms.components.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -30,7 +30,7 @@ class BigCms::ComponentsController < BigCmsController
   # GET /big_cms/components/new
   # GET /big_cms/components/new.xml
   def new
-    @component = BigCms::Component.new
+    @component = current_cms.components.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,13 +40,13 @@ class BigCms::ComponentsController < BigCmsController
 
   # GET /big_cms/components/1/edit
   def edit
-    @component = BigCms::Component.find(params[:id])
+    @component = current_cms.components.find(params[:id])
   end
 
   # POST /big_cms/components
   # POST /big_cms/components.xml
   def create
-    @component = BigCms::Component.new(params[:big_cms_component])
+    @component = current_cms.components.new(params[:big_cms_component])
 
     respond_to do |format|
       if @component.save
@@ -62,7 +62,7 @@ class BigCms::ComponentsController < BigCmsController
   # PUT /big_cms/components/1
   # PUT /big_cms/components/1.xml
   def update
-    @component = BigCms::Component.find(params[:id])
+    @component = current_cms.components.find(params[:id])
 
     respond_to do |format|
       if @component.update_attributes(params[:big_cms_component])
@@ -78,7 +78,7 @@ class BigCms::ComponentsController < BigCmsController
   # DELETE /big_cms/components/1
   # DELETE /big_cms/components/1.xml
   def destroy
-    @component = BigCms::Component.find(params[:id])
+    @component = current_cms.components.find(params[:id])
     @component.destroy
 
     respond_to do |format|

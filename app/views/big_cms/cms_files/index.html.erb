@@ -7,8 +7,6 @@
     <th>File file size</th>
     <th>File updated at</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @cms_files.each do |cms_file| %>
@@ -17,6 +15,11 @@
     <td><%= cms_file.file_content_type %></td>
     <td><%= cms_file.file_file_size %></td>
     <td><%= cms_file.file_updated_at %></td>
+    <td class="actions">
+      <%= link_to "show", big_cms_cms_file_path(cms_file) %>
+      <%= link_to "edit", edit_big_cms_cms_file_path(cms_file) %>
+      <%= link_to 'delete', big_cms_cms_file_path(cms_file), :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

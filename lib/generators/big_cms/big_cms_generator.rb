@@ -1,8 +1,9 @@
 require 'rails/generators'
 require 'rails/generators/migration'
-
+require 'big_library/generators'
 class BigCMSGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
+  include BigLibrary::Generators
 
   def self.source_root
     File.join(File.dirname(__FILE__), 'templates')
@@ -30,6 +31,7 @@ class BigCMSGenerator < Rails::Generators::Base
   end
 
   def copy_assets
+    copy_javascript
     copy_file 'assets/stylesheets/big_cms_admin.css',  'public/stylesheets/big_cms_admin.css'
   end
 

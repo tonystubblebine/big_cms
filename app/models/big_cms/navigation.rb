@@ -16,7 +16,15 @@ module BigCms
         return result
       end
     end
-      
+
+    def next_available_position
+      if self.navigationable
+        self.navigationable.navigations.size + 1 
+      else 
+        0
+      end
+    end      
+
     def slug
       # Perform transliteration to replace non-ascii characters with an ascii
       # character

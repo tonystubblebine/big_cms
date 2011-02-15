@@ -48,7 +48,7 @@ class BigCms::NavigationsController < BigCmsController
   def create
     @navigation = BigCms::Navigation.new(params[:big_cms_navigation])
     @navigation.navigationable = find_navigationable_from_select_value(params[:navigationable])
-    @navigation.position = @navigation.navigationable.navigations.size + 1 unless @navigation.position > 0
+    @navigation.position = @navigation.next_available_position unless (@navigation.position and @navigation.position > 0)
 
     respond_to do |format|
       if @navigation.save
