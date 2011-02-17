@@ -1,10 +1,6 @@
 class BigCmsController < ApplicationController
   protected
 
-  def set_content_manager
-    @content_manager = params[:content_manager_id] ? ContentManager.find(params[:content_manager_id]) : current_cms
-  end
-
   # TODO: 2011-01-01 <tony@crowdvine.com> -- Two things here. One, isn't that
   # check supposed to be == "test." Two, can this be moved into a shared library
   # that all the big_* engines use?

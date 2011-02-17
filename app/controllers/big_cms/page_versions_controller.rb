@@ -1,7 +1,6 @@
 class BigCms::PageVersionsController < BigCmsController
   unloadable
   layout "big_cms", :except => :show
-  before_filter :set_content_manager
   before_filter :set_page
   before_filter :require_user
   before_filter :unimplemented_error, :except => :create
@@ -91,6 +90,6 @@ class BigCms::PageVersionsController < BigCmsController
   protected
   
   def set_page
-    @page = @content_manager.pages.find(params[:page_id])
+    @page = current_cms.pages.find(params[:page_id])
   end
 end

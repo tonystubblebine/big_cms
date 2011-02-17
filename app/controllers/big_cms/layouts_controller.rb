@@ -1,6 +1,5 @@
 class BigCms::LayoutsController < BigCmsController
   unloadable
-  before_filter :set_content_manager
   before_filter :require_user
   before_filter :unimplemented_error, :except => [:index, :new, :create]
 
@@ -8,7 +7,7 @@ class BigCms::LayoutsController < BigCmsController
   # GET /big_cms/layouts
   # GET /big_cms/layouts.xml
   def index
-    @layouts = @content_manager.layouts
+    @layouts = current_cms.layouts
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +18,7 @@ class BigCms::LayoutsController < BigCmsController
   # GET /big_cms/layouts/1
   # GET /big_cms/layouts/1.xml
   def show
-    @layout = @content_manager.layouts.find(params[:id])
+    @layout = current_cms.layouts.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -30,7 +29,7 @@ class BigCms::LayoutsController < BigCmsController
   # GET /big_cms/layouts/new
   # GET /big_cms/layouts/new.xml
   def new
-    @layout = @content_manager.layouts.new
+    @layout = current_cms.layouts.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,13 +39,13 @@ class BigCms::LayoutsController < BigCmsController
 
   # GET /big_cms/layouts/1/edit
   def edit
-    @layout = @content_manager.layouts.find(params[:id])
+    @layout = current_cms.layouts.find(params[:id])
   end
 
   # POST /big_cms/layouts
   # POST /big_cms/layouts.xml
   def create
-    @layout = @content_manager.layouts.new(params[:big_cms_layout])
+    @layout = current_cms.layouts.new(params[:big_cms_layout])
 
     respond_to do |format|
       if @layout.save
@@ -62,7 +61,7 @@ class BigCms::LayoutsController < BigCmsController
   # PUT /big_cms/layouts/1
   # PUT /big_cms/layouts/1.xml
   def update
-    @layout = @content_manager.layouts.find(params[:id])
+    @layout = current_cms.layouts.find(params[:id])
 
     respond_to do |format|
       if @layout.update_attributes(params[:big_cms_layout])
@@ -78,7 +77,7 @@ class BigCms::LayoutsController < BigCmsController
   # DELETE /big_cms/layouts/1
   # DELETE /big_cms/layouts/1.xml
   def destroy
-    @layout = @content_manager.layouts.find(params[:id])
+    @layout = current_cms.layouts.find(params[:id])
     @layout.destroy
 
     respond_to do |format|

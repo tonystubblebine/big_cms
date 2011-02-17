@@ -2,13 +2,12 @@ class BigCms::PagesController < BigCmsController
   unloadable
   layout "big_cms", :except => :show
 
-  before_filter :set_content_manager
   before_filter :require_user, :except => :show
 
   # GET /big_cms/pages
   # GET /big_cms/pages.xml
   def index
-    @pages = @content_manager.pages.all
+    @pages = current_cms.pages.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,15 +18,15 @@ class BigCms::PagesController < BigCmsController
   # GET /big_cms/pages/1
   # GET /big_cms/pages/1.xml
   def show
-    if params[:id] == "_home" and @content_manager.navigations
-      @page = @content_manager.navigations.first.pages.first
-    elsif params[:id] == "_home" and @content_manager.pages
-      @page = @content_manager.pages.first
+    if params[:id] == "_home" and !current_cms.navigations.empty?
+      @page = current_cms.navigations.first.pages.first
+    elsif params[:id] == "_home" and current_cms.pages
+      @page = current_cms.pages.first
     elsif params[:id].match(/\D/)
       # TODO: 2011-01-11 <tony+bigcms@tonystubblebine.com> -- this hacked finder implies that I should be storing slug.
-      @page = @content_manager.pages.to_a.find{|a| a.slug == params[:id]}
+      @page = current_cms.pages.to_a.find{|a| a.slug == params[:id]}
     else
-      @page = @content_manager.pages.find(params[:id])
+      @page = current_cms.pages.find(params[:id])
     end
 
     render(:status => 403, :text => "Not allowed.") unless current_user or @page.allow_public_views?
@@ -42,7 +41,7 @@ class BigCms::PagesController < BigCmsController
   # GET /big_cms/pages/new
   # GET /big_cms/pages/new.xml
   def new
-    @page = @content_manager.pages.new
+    @page = current_cms.pages.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,13 +51,13 @@ class BigCms::PagesController < BigCmsController
 
   # GET /big_cms/pages/1/edit
   def edit
-    @page = @content_manager.pages.find(params[:id])
+    @page = current_cms.pages.find(params[:id])
   end
 
   # POST /big_cms/pages
   # POST /big_cms/pages.xml
   def create
-    @page = @content_manager.pages.new(params[:big_cms_page])
+    @page = current_cms.pages.new(params[:big_cms_page])
     respond_to do |format|
       if @page.save
         format.html { redirect_to(@page, :notice => 'Page was successfully created.') }
@@ -73,7 +72,7 @@ class BigCms::PagesController < BigCmsController
   # PUT /big_cms/pages/1
   # PUT /big_cms/pages/1.xml
   def update
-    @page = @content_manager.pages.find(params[:id])
+    @page = current_cms.pages.find(params[:id])
 
     respond_to do |format|
       if @page.update_attributes(params[:big_cms_page])
@@ -89,7 +88,7 @@ class BigCms::PagesController < BigCmsController
   # DELETE /big_cms/pages/1
   # DELETE /big_cms/pages/1.xml
   def destroy
-    @page = @content_manager.pages.find(params[:id])
+    @page = current_cms.pages.find(params[:id])
     @page.destroy
 
     respond_to do |format|
