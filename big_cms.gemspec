@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-02-04}
+  s.date = %q{2011-02-18}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -99,6 +99,7 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/big_cms_generator.rb",
     "lib/generators/big_cms/templates/add_versioning_to_components_migration.rb",
     "lib/generators/big_cms/templates/add_versioning_to_pages_migration.rb",
+    "lib/generators/big_cms/templates/assets/javascripts/rails.js",
     "lib/generators/big_cms/templates/assets/stylesheets/big_cms_admin.css",
     "lib/generators/big_cms/templates/big_cms_initializer.rb",
     "lib/generators/big_cms/templates/create_cms_files_migration.rb",
@@ -177,6 +178,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<paperclip>, [">= 0"])
       s.add_runtime_dependency(%q<liquid>, [">= 0"])
       s.add_runtime_dependency(%q<aws-s3>, [">= 0"])
+      s.add_runtime_dependency(%q<big_library>, [">= 0"])
     else
       s.add_dependency(%q<rails>, ["> 3.0.0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
@@ -184,6 +186,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<paperclip>, [">= 0"])
       s.add_dependency(%q<liquid>, [">= 0"])
       s.add_dependency(%q<aws-s3>, [">= 0"])
+      s.add_dependency(%q<big_library>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, ["> 3.0.0"])
@@ -192,6 +195,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<paperclip>, [">= 0"])
     s.add_dependency(%q<liquid>, [">= 0"])
     s.add_dependency(%q<aws-s3>, [">= 0"])
+    s.add_dependency(%q<big_library>, [">= 0"])
   end
 end
 
