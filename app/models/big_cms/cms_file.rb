@@ -7,7 +7,7 @@ module BigCms
     has_attached_file :file, 
                       :styles => { :thumb => "100x100" },
                       :storage => :s3,
-                      :s3_credentials => "#{RAILS_ROOT}/config/s3.yml", 
+                      :s3_credentials => "#{::Rails.root.to_s}/config/s3.yml", 
                       :path => "/system/:class/:id_partition/:style/:filename"
     validates_presence_of :file_file_name, :content_manager_id
 

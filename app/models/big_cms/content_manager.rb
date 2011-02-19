@@ -10,5 +10,21 @@ module BigCms
     def all_navigations
       BigCms::Navigation.tree_to_a(self).reject{|a| a == self}
     end
+
+    def copy(content_manager)
+      # layouts
+      content_manager.layouts.each do |layout|
+        self.layouts << layout.clone
+      end
+      # pages
+      content_manager.pages.each do |page|
+        self.pages << page.clone
+      end
+      # components
+      content_manager.components.each do |component|
+        self.components << component.clone
+      end
+      self
+    end
   end
 end
