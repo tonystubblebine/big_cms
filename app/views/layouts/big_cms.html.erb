@@ -68,13 +68,14 @@
             <li class="new"><%= link_to "Upload", new_big_cms_cms_file_path() %></li>
           </ul>
         </li>
-        <li class="layouts">
-          <h3>Layouts</h3>
-          <ul>
-            <li class="index"><%= link_to "Layouts", big_cms_layouts_path() %></li>
-            <li class="new"><%= link_to "Add New", new_big_cms_layout_path() %></li>
-          </ul>
-        </li>
+        <% if !(current_cms.layouts.nil? OR current_cms.layouts.empty?) %>
+          <li class="layouts">
+            <h3>Layout</h3>
+            <ul>
+              <li class="new"><%= link_to "Web Layout", edit_big_cms_layout_path(current_cms.layouts.first) %></li>
+            </ul>
+          </li>
+        <% end %>
         <li class="content_managers">
           <h3>Configuration</h3>
           <ul>
