@@ -68,7 +68,7 @@
             <li class="new"><%= link_to "Upload", new_big_cms_cms_file_path() %></li>
           </ul>
         </li>
-        <% if !(current_cms.layouts.nil? OR current_cms.layouts.empty?) %>
+        <% if !(current_cms.layouts.nil? or current_cms.layouts.empty?) %>
           <li class="layouts">
             <h3>Layout</h3>
             <ul>
