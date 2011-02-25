@@ -13,8 +13,7 @@ ActionController::Base.class_eval do
   end
 
     
-  def render_liquid(content)
-    opts = {} 
+  def render_liquid(content, opts = {})
     opts["page"] = @page if defined?(@page)
     opts["current_site"] = current_site if defined?(current_site)
     opts["current_layout"] = current_layout if defined?(current_layout)
@@ -24,5 +23,14 @@ ActionController::Base.class_eval do
     template = Liquid::Template.parse(content)
     template.render(opts, :filters => BigCms.service_configs[:liquid].filters, :registers => {"controller" => self}).html_safe
   end
+
+  #def liquid_render(content, opts = {})
+  #  @template = Liquid::Template.parse(content)
+  #  # TODO: 2011-02-24 <tony+bigcms@tonystubblebine.com> -- give a way for users of the library to add in extra liquid context
+  #  opts.merge!(liquid_context) if defined?(liquid_context)
+  #  opts["current_site"] = current_site if defined?(current_site) 
+  #  opts["current_user"] = current_user if defined?(current_user)
+  #  @template.render(opts) 
+  #end
 
 end

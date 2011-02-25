@@ -3,15 +3,11 @@
 one:
   content_manager_id: 1
   name: First Name
-  head: <html><head><title>title</title></head>
-  pre_content: <body>
-  post_content: </body></html>
+  content: <html><head><title>title</title></head><body>{{ content_for_layout }}</body></html>
   format: MyString
 
 two:
   content_manager_id: 1
   name: Second Name
-  head: <html><head><title>title</title></head>
-  pre_content: <body>
-  post_content: </body></html>
+  content: <html><head><title>title</title></head><body>{{ content_for_layout }}</body></html>
   format: MyString

@@ -1,7 +1,7 @@
 PATH
-  remote: /home/tony/projects/big_library
+  remote: ../big_library
   specs:
-    big_library (0.0.1)
+    big_library (0.0.2)
 
 GEM
   remote: http://rubygems.org/
@@ -96,6 +96,3 @@ DEPENDENCIES
   liquid
   paperclip
   rails (> 3.0.0)
-
-METADATA
-  version: 1.0.6

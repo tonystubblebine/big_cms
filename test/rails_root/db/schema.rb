@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110109055322) do
+ActiveRecord::Schema.define(:version => 20110225021931) do
 
   create_table "cms_files", :force => true do |t|
     t.string   "file_file_name"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20110109055322) do
     t.string   "format"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "content"
   end
 
   create_table "login_accounts", :force => true do |t|

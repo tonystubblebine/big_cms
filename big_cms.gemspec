@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.7"
+  s.version = "0.0.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
@@ -75,7 +75,6 @@ Gem::Specification.new do |s|
     "app/views/big_cms/pages/index.html.erb",
     "app/views/big_cms/pages/new.html.erb",
     "app/views/big_cms/pages/show.css.erb",
-    "app/views/big_cms/pages/show.html.erb",
     "app/views/layouts/big_cms.html.erb",
     "config/application.rb",
     "config/boot.rb",
@@ -101,6 +100,7 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/assets/javascripts/rails.js",
     "lib/generators/big_cms/templates/assets/stylesheets/big_cms_admin.css",
     "lib/generators/big_cms/templates/big_cms_initializer.rb",
+    "lib/generators/big_cms/templates/condense_to_single_content_field_migration.rb",
     "lib/generators/big_cms/templates/create_cms_files_migration.rb",
     "lib/generators/big_cms/templates/create_components_migration.rb",
     "lib/generators/big_cms/templates/create_content_managers_migration.rb",
@@ -139,6 +139,7 @@ Gem::Specification.new do |s|
     "test/rails_root/db/migrate/20101125195738_add_versioning_to_components.rb",
     "test/rails_root/db/migrate/20101128230245_create_big_auth_tables.rb",
     "test/rails_root/db/migrate/20110109055322_create_layouts.rb",
+    "test/rails_root/db/migrate/20110225021931_condense_to_single_content_field.rb",
     "test/rails_root/db/schema.rb",
     "test/rails_root/db/seeds.rb",
     "test/rails_root/test/functional/cms_files_controller_test.rb",

@@ -1,9 +1,10 @@
 PATH
   remote: ../..
   specs:
-    big_cms (0.0.4)
+    big_cms (0.0.7)
       acts_as_versioned
       aws-s3
+      big_library
       jeweler
       liquid
       paperclip
@@ -22,7 +23,7 @@ PATH
 PATH
   remote: /home/tony/projects/big_library
   specs:
-    big_library (0.0.1)
+    big_library (0.0.2)
 
 GEM
   remote: http://rubygems.org/
@@ -146,6 +147,3 @@ DEPENDENCIES
   rails (= 3.0.3)
   ruby-debug
   sqlite3-ruby
-
-METADATA
-  version: 1.0.6
