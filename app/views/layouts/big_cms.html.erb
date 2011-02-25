@@ -4,7 +4,44 @@
   <title>Yak</title>
   <%= stylesheet_link_tag "big_cms_admin" %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" %>
-  <%= javascript_include_tag 'big_lib_rails'%>
+  <%= javascript_include_tag 'big_lib_rails' %>
+  <%= javascript_include_tag 'ace/ace' %>
+  <%= javascript_include_tag 'ace/mode-html' %>
+ <script>
+// This is based on the ACE bookmarklet.
+function inject() { 
+  var baseUrl="/javascripts/ace/"; 
+  function load(path, module, callback) { 
+    path = baseUrl + path; 
+    if (!load.scripts[path]) { 
+      load.scripts[path] = { loaded: false, callbacks: [ callback ] }; 
+      var head = document.getElementsByTagName('head')[0]; 
+      var s = document.createElement('script'); 
+      function c() { 
+        if (window.__ace_shadowed__ && window.__ace_shadowed__.define.modules[module]) { 
+          load.scripts[path].loaded = true; 
+          load.scripts[path].callbacks.forEach(function(callback) { callback(); }); 
+        } else { setTimeout(c, 50); } 
+      }; 
+      s.src = path; 
+      head.appendChild(s); 
+      c(); 
+    } else if (load.scripts[path].loaded) { 
+      callback(); 
+    } else { 
+      load.scripts[path].callbacks.push(callback); 
+    } 
+  }; 
+  load.scripts = {}; 
+  window.__ace_shadowed_load__ = load; 
+  if ((area = document.getElementById("big_cms_page_content")) || (area = document.getElementById("big_cms_layout_content")) || (area = document.getElementById("big_cms_component_content"))) {
+    var ace = window.__ace_shadowed__; 
+    var result = ace.transformTextarea(area); 
+    result.setOption("mode", "html");
+    result.setOption("gutter", true);
+  }
+};
+</script> 
   <%= csrf_meta_tag %>
   <style>
     #body table {
@@ -90,6 +127,8 @@
     </div>
     <div class="clear" />
   </div><!-- #body -->
-
+<script>
+inject();
+</script>
 </body>
 </html>

@@ -32,6 +32,9 @@ class BigCMSGenerator < Rails::Generators::Base
 
   def copy_assets
     copy_javascript
+    %w{ ace.js cockpit-uncompressed.js mode-css.js mode-javascript.js mode-ruby.js theme-clouds_midnight.js theme-eclipse.js theme-mono_industrial.js theme-twilight.js ace-uncompressed.js keybinding-emacs.js      mode-c_cpp.js mode-html.js mode-php.js mode-xml.js theme-cobalt.js theme-idle_fingers.js theme-monokai.js worker-javascript.js cockpit.js keybinding-vim.js mode-coffee.js mode-java.js mode-python.js theme-clouds.js  theme-dawn.js theme-kr_theme.js theme-pastel_on_dark.js }.each do |js|
+      copy_file "assets/javascripts/ace/#{js}", "public/javascripts/ace/#{js}"
+    end
     copy_file 'assets/stylesheets/big_cms_admin.css',  'public/stylesheets/big_cms_admin.css'
   end
 
