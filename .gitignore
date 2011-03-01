@@ -7,3 +7,4 @@ config.old
 Gemfile.lock
 test/rails_root/Gemfile.lock
 doc/
+*~
