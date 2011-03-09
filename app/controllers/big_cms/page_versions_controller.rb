@@ -1,6 +1,5 @@
 class BigCms::PageVersionsController < BigCmsController
   unloadable
-  layout "big_cms", :except => :show
   before_filter :set_page
   before_filter :require_user
   before_filter :unimplemented_error, :except => :create

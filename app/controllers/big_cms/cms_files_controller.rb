@@ -1,6 +1,5 @@
 class BigCms::CmsFilesController < BigCmsController
   unloadable
-  layout "big_cms"
   
   before_filter :unimplemented_error, :except => [:new, :create, :show, :index, :destroy]
   before_filter :require_user, :except => :show

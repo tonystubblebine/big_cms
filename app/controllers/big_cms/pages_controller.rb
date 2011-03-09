@@ -1,6 +1,5 @@
 class BigCms::PagesController < BigCmsController
   unloadable
-  layout "big_cms", :except => :show
 
   before_filter :require_user, :except => :show
 

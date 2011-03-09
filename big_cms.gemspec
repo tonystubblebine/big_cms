@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.10"
+  s.version = "0.0.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-02-28}
+  s.date = %q{2011-03-09}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -75,8 +75,7 @@ Gem::Specification.new do |s|
     "app/views/big_cms/pages/index.html.erb",
     "app/views/big_cms/pages/new.html.erb",
     "app/views/big_cms/pages/show.css.erb",
-    "app/views/big_cms/pages/show.html.erb",
-    "app/views/layouts/big_cms.html.erb",
+    "app/views/layouts/_big_cms.html.erb",
     "config/application.rb",
     "config/boot.rb",
     "config/environment.rb",
@@ -194,7 +193,8 @@ Gem::Specification.new do |s|
     "test/rails_root/test/unit/helpers/navigations_helper_test.rb",
     "test/rails_root/test/unit/helpers/pages_helper_test.rb",
     "test/rails_root/test/unit/navigation_test.rb",
-    "test/rails_root/test/unit/page_test.rb"
+    "test/rails_root/test/unit/page_test.rb",
+    "test/test_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
