@@ -1,0 +1,13 @@
+
+one:
+  id: 1
+  name: One Site
+  sub_domain: www
+  domain: example.com
+
+two:
+  id: 2 
+  name: Two Site
+  sub_domain: second
+  domain: foo.com
+

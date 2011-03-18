@@ -1,4 +1,5 @@
-  <%= stylesheet_link_tag "big_cms_admin" %>
+<%= stylesheet_link_tag "big_cms_admin" %>
+<% if !controller.class.to_s.match(/^BigCms::CmsFile/) %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" %>
   <%= javascript_include_tag 'big_lib_rails' %>
   <%= javascript_include_tag 'ace/ace' %>
@@ -38,7 +39,7 @@ function inject() {
   }
 };
 </script> 
-  <%= csrf_meta_tag %>
+<% end %>
   <style>
     #body table {
       width: 100%;

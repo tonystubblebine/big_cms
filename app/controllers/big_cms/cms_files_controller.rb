@@ -2,7 +2,11 @@ class BigCms::CmsFilesController < BigCmsController
   unloadable
   
   before_filter :unimplemented_error, :except => [:new, :create, :show, :index, :destroy]
-  before_filter :require_user, :except => :show
+  #before_filter :require_user, :except => :show
+
+  # TODO: 2011-03-18 <tony+bigcms@tonsytubblebine.com> -- Trying to fix plupload weirdness. This should go away ASAP.
+#  protect_from_forgery :except => [:create] 
+  skip_before_filter :verify_authenticity_token, :only => [:create]
 
   # GET /big_cms/cms_files
   # GET /big_cms/cms_files.xml
@@ -44,7 +48,12 @@ class BigCms::CmsFilesController < BigCmsController
   # POST /big_cms/cms_files
   # POST /big_cms/cms_files.xml
   def create
-    @cms_file = current_cms.files.new(params[:big_cms_cms_file])
+    if params[:big_cms_cms_file]
+      @cms_file = current_cms.files.new(params[:big_cms_cms_file]) 
+    else
+      @cms_file = current_cms.files.new()
+      @cms_file.file = params[:file]
+    end
 
     respond_to do |format|
       if @cms_file.save

@@ -27,9 +27,18 @@ class BigCMSGenerator < Rails::Generators::Base
 
   def copy_assets
     copy_javascript
-    %w{ ace.js cockpit-uncompressed.js mode-css.js mode-javascript.js mode-ruby.js theme-clouds_midnight.js theme-eclipse.js theme-mono_industrial.js theme-twilight.js ace-uncompressed.js keybinding-emacs.js      mode-c_cpp.js mode-html.js mode-php.js mode-xml.js theme-cobalt.js theme-idle_fingers.js theme-monokai.js worker-javascript.js cockpit.js keybinding-vim.js mode-coffee.js mode-java.js mode-python.js theme-clouds.js  theme-dawn.js theme-kr_theme.js theme-pastel_on_dark.js }.each do |js|
+
+    # ACE files
+    %w{ ace.js cockpit-uncompressed.js mode-css.js mode-javascript.js mode-ruby.js theme-clouds_midnight.js theme-eclipse.js theme-mono_industrial.js theme-twilight.js ace-uncompressed.js keybinding-emacs.js mode-c_cpp.js mode-html.js mode-php.js mode-xml.js theme-cobalt.js theme-idle_fingers.js theme-monokai.js worker-javascript.js cockpit.js keybinding-vim.js mode-coffee.js mode-java.js mode-python.js theme-clouds.js  theme-dawn.js theme-kr_theme.js theme-pastel_on_dark.js }.each do |js|
       copy_file "assets/javascripts/ace/#{js}", "public/javascripts/ace/#{js}"
     end
+  
+    # plupload files
+    %w{ gears_init.js jquery.ui.plupload.min.js plupload.flash.min.js plupload.full.min.js plupload.html4.min.js plupload.min.js plupload.silverlight.xap jquery.plupload.queue.min.js plupload.browserplus.min.js plupload.flash.swf plupload.gears.min.js plupload.html5.min.js plupload.silverlight.min.js }.each do |js|
+      copy_file "assets/javascripts/plupload/#{js}", "public/javascripts/plupload/#{js}"
+    end
+    copy_file 'assets/stylesheets/jquery.ui.plupload.css',  'public/stylesheets/jquery.ui.plupload.css'
+  
     copy_file 'assets/stylesheets/big_cms_admin.css',  'public/stylesheets/big_cms_admin.css'
   end
 

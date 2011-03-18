@@ -1,4 +1,73 @@
+<% content_for :big_cms_head do %>
+<!-- Load Queue widget CSS and jQuery -->
+<%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" %> 
+<%= stylesheet_link_tag "jquery.ui.plupload.css" %> 
+
+<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" %>
+<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" %>
+
+<!-- Thirdparty intialization scripts, needed for the Google Gears and BrowserPlus runtimes -->
+<%= javascript_include_tag "plupload/gears_init.js" %>
+<%= javascript_include_tag "http://bp.yahooapis.com/2.4.21/browserplus-min.js" %>
+
+<%= javascript_include_tag "plupload/plupload.full.min.js" %>
+<%= javascript_include_tag "plupload/jquery.ui.plupload.min.js" %>
+<!--<script type="text/javascript" src="http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js"></script>-->
+
+<script type="text/javascript">
+
+// Convert divs to queue widgets when the DOM is ready
+
+$(function() {
+
+    $("#uploader").plupload({
+        // General settings
+        runtimes : 'html5,flash,browserplus,silverlight,gears,html4',
+        max_file_size : '10mb',  
+        url : "/big_cms/cms_files",  
+        flash_swf_url: "/javascripts/plupload/plupload.flash.swf",  
+        silverlight_xap_url: "/javascripts/plupload/plupload.silverlight.xap",  
+        multipart: true,  
+        multipart_params: {  
+          "authenticity_token" : '<%= form_authenticity_token %>'  
+        },
+        max_file_count: 20, // user can add no more then 20 files at a time
+        // Rename files by clicking on their titles
+        rename: true,
+        // Sort files
+        sortable: true
+    });
+
+
+    // Client side form validation
+    $('form').submit(function(e) {
+        var uploader = $('#uploader').plupload('getUploader');
+        // Validate number of uploaded files
+        if (uploader.total.uploaded == 0) {
+            // Files in queue upload them first
+            if (uploader.files.length > 0) {
+                // When all files are uploaded submit form
+                uploader.bind('UploadProgress', function() {
+                    if (uploader.total.uploaded == uploader.files.length)
+                        $('form').submit();
+                });
+                uploader.start();
+            } else
+                alert('You must at least upload one file.');
+            e.preventDefault();
+        }
+    });
+});
+
+</script>
+<% end %>
+
 <h1>Upload File</h1>
 
-<%= render 'form' %>
+<%# render "form" %>
 
+<form>
+<div id="uploader">
+  <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+</div>
+</form>

@@ -1,5 +1,6 @@
-PATH
-  remote: ../big_library
+GIT
+  remote: git://github.com/tonystubblebine/big_library.git
+  revision: 3af14d7a5d0d6dbfd94065c7a431c2ad0589ee31
   specs:
     big_library (0.0.3)
 
@@ -45,12 +46,24 @@ GEM
       activesupport (~> 3.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    excon (0.5.6)
+    fog (0.6.0)
+      builder
+      excon (>= 0.5.5)
+      formatador (>= 0.0.16)
+      json
+      mime-types
+      net-ssh (>= 2.0.23)
+      nokogiri (>= 1.4.4)
+      ruby-hmac
+    formatador (0.1.1)
     git (1.2.5)
     i18n (0.4.2)
     jeweler (1.5.1)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
       rake
+    json (1.5.1)
     liquid (2.2.2)
     mail (2.2.10)
       activesupport (>= 2.3.6)
@@ -60,6 +73,8 @@ GEM
     mime-types (1.16)
     mini_magick (3.2)
       subexec (~> 0.0.4)
+    net-ssh (2.1.3)
+    nokogiri (1.4.4)
     paperclip (2.3.8)
       activerecord
       activesupport
@@ -83,6 +98,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
+    ruby-hmac (0.4.0)
     subexec (0.0.4)
     thor (0.14.6)
     treetop (1.4.9)
@@ -98,8 +114,12 @@ DEPENDENCIES
   aws-s3
   big_library!
   carrierwave
+  fog
   jeweler
   liquid
   mini_magick
   paperclip
   rails (> 3.0.0)
+
+METADATA
+  version: 1.0.6
