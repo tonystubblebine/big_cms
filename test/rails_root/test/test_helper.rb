@@ -14,6 +14,7 @@ class ActiveSupport::TestCase
   set_fixture_class :content_managers => "BigCms::ContentManager"
   set_fixture_class :navigations      => "BigCms::Navigation"
   set_fixture_class :layouts          => "BigCms::Layout"
+  set_fixture_class :accounts         => "BigAuth::Account"
 
   # Add more helper methods to be used by all tests here...
 end

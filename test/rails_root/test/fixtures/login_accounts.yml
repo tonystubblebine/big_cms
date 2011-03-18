@@ -1,0 +1,15 @@
+one:
+  account_id: 1
+  remote_account_id: 445544
+  name: Nancy Name
+  login: tonystubblebine
+  picture_url: http://picture-url
+
+
+two:
+  account_id: 2
+  remote_account_id: 445544
+  name: Tony Stubblebine
+  login: tonystubblebine
+  picture_url: http://picture-url
+

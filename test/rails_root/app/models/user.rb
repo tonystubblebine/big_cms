@@ -1,3 +1,4 @@
 class User < BigAuth::User
-  # Make any customisations here
+  # Uncomment this if you're using with big_site
+  # belongs_to :site, :class_name => "BigSite::Site"
 end

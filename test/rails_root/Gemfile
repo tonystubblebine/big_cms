@@ -6,11 +6,20 @@ gem 'rails', '3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem "big_auth", :require => "big_auth", :path => "/home/tony/projects/big_auth"
-gem "big_library", :require => "big_library", :path => "/home/tony/projects/big_library"
 gem 'big_cms', :path => "../.."
 gem 'ruby-debug'
 gem 'acts_as_versioned'
+gem 'carrierwave'
+gem 'fog'
+
+
+if ENV['MY_BUNDLE_ENV'] == "dev"
+  gem "big_library", :require => "big_library", :path => "../../../big_library"
+  gem "big_auth", :require => "big_auth", :path => "../../../big_auth"
+else
+  gem "big_library", :require => "big_library", :git => "git://github.com/tonystubblebine/big_library.git"
+  gem "big_auth", :require => "big_auth", :git => "git://github.com/tonystubblebine/big_auth.git"
+end
 # Use unicorn as the web server
 # gem 'unicorn'
 

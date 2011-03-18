@@ -1,5 +1,6 @@
 BigAuth.setup do |config|
-  
+  # config.default_role = "pending"
+
   # ==> Twitter
   # config.twitter 'APP_KEY', 'APP_SECRET'
   

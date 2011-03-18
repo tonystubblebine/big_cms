@@ -1,18 +1,22 @@
 module BigCms
   class CmsFile < ActiveRecord::Base
     unloadable
-
+    mount_uploader :file, CmsFileUploader, :mount_on => :file_file_name
     belongs_to :content_manager
-    # TODO: 2011-01-01 <tony@crowdvine.com> -- Make Paperclip options configurable
-    has_attached_file :file, 
-                      :styles => { :thumb => "100x100" },
-                      :storage => :s3,
-                      :s3_credentials => "#{::Rails.root.to_s}/config/s3.yml", 
-                      :path => "/system/:class/:id_partition/:style/:filename"
-    validates_presence_of :file_file_name, :content_manager_id
+    after_destroy :handle_destroy
+    #has_attached_file :file, 
+    #                  :styles => { :thumb => "100x100" },
+    #                  :storage => :s3,
+    #                  :s3_credentials => "#{::Rails.root.to_s}/config/s3.yml", 
+    #                  :path => "/system/:class/:id_partition/:style/:filename"
+    validates_presence_of :content_manager_id
+
+    def handle_destroy
+      file.remove_file!
+    end
 
     def image?
-      self.file.content_type.match(/^image/) ? true : false
+      self.file.path.match(/\.(?:jpg|jpeg|png|bmp|gif)/i) ? true : false
     end
   end
 end

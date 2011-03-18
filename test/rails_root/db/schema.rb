@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225021931) do
+ActiveRecord::Schema.define(:version => 20110312052232) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "remember_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "cms_files", :force => true do |t|
     t.string   "file_file_name"
@@ -71,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20110225021931) do
 
   create_table "login_accounts", :force => true do |t|
     t.string   "type"
-    t.integer  "user_id"
+    t.integer  "account_id"
     t.string   "remote_account_id"
     t.string   "name"
     t.string   "login"
@@ -80,8 +86,8 @@ ActiveRecord::Schema.define(:version => 20110225021931) do
     t.datetime "updated_at"
   end
 
+  add_index "login_accounts", ["account_id"], :name => "index_login_accounts_on_account_id"
   add_index "login_accounts", ["type"], :name => "index_login_accounts_on_type"
-  add_index "login_accounts", ["user_id"], :name => "index_login_accounts_on_user_id"
 
   create_table "navigations", :force => true do |t|
     t.integer  "navigationable_id"
@@ -127,10 +133,31 @@ ActiveRecord::Schema.define(:version => 20110225021931) do
   add_index "pages", ["content_manager_id"], :name => "index_pages_on_content_manager_id"
   add_index "pages", ["navigation_id"], :name => "index_pages_on_navigation_id"
 
-  create_table "users", :force => true do |t|
-    t.string   "remember_token"
+  create_table "roles", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "roles_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "site_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["account_id"], :name => "index_users_on_account_id"
 
 end

@@ -5,6 +5,9 @@ gem 'acts_as_versioned'
 gem 'paperclip'
 gem 'liquid'
 gem 'aws-s3'
+gem 'mini_magick'
+gem 'carrierwave'
+gem 'fog'
 
 # Work around for using different paths to a gem based on environment. This work around requires that you set an environment variable in your .bash_profile
 # export RUBYOPT=rubygems

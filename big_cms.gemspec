@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-03-09}
+  s.date = %q{2011-03-11}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
     "app/models/big_cms/layout.rb",
     "app/models/big_cms/navigation.rb",
     "app/models/big_cms/page.rb",
+    "app/uploaders/cms_file_uploader.rb",
     "app/views/big_cms/cms_files/_form.html.erb",
     "app/views/big_cms/cms_files/edit.html.erb",
     "app/views/big_cms/cms_files/index.html.erb",
@@ -207,6 +208,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<paperclip>, [">= 0"])
       s.add_runtime_dependency(%q<liquid>, [">= 0"])
       s.add_runtime_dependency(%q<aws-s3>, [">= 0"])
+      s.add_runtime_dependency(%q<mini_magick>, [">= 0"])
+      s.add_runtime_dependency(%q<carrierwave>, [">= 0"])
+      s.add_runtime_dependency(%q<fog>, [">= 0"])
       s.add_runtime_dependency(%q<big_library>, [">= 0"])
     else
       s.add_dependency(%q<rails>, ["> 3.0.0"])
@@ -215,6 +219,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<paperclip>, [">= 0"])
       s.add_dependency(%q<liquid>, [">= 0"])
       s.add_dependency(%q<aws-s3>, [">= 0"])
+      s.add_dependency(%q<mini_magick>, [">= 0"])
+      s.add_dependency(%q<carrierwave>, [">= 0"])
+      s.add_dependency(%q<fog>, [">= 0"])
       s.add_dependency(%q<big_library>, [">= 0"])
     end
   else
@@ -224,6 +231,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<paperclip>, [">= 0"])
     s.add_dependency(%q<liquid>, [">= 0"])
     s.add_dependency(%q<aws-s3>, [">= 0"])
+    s.add_dependency(%q<mini_magick>, [">= 0"])
+    s.add_dependency(%q<carrierwave>, [">= 0"])
+    s.add_dependency(%q<fog>, [">= 0"])
     s.add_dependency(%q<big_library>, [">= 0"])
   end
 end
