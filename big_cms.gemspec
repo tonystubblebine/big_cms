@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.11"
+  s.version = "0.0.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-03-11}
+  s.date = %q{2011-03-18}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -76,9 +76,11 @@ Gem::Specification.new do |s|
     "app/views/big_cms/pages/index.html.erb",
     "app/views/big_cms/pages/new.html.erb",
     "app/views/big_cms/pages/show.css.erb",
+    "app/views/big_cms/pages/show.html.erb",
     "app/views/layouts/_big_cms.html.erb",
     "config/application.rb",
     "config/boot.rb",
+    "config/database.yml",
     "config/environment.rb",
     "config/environments/development.rb",
     "config/environments/production.rb",
@@ -128,8 +130,22 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-pastel_on_dark.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-twilight.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/worker-javascript.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/gears_init.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/jquery.plupload.queue.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/jquery.ui.plupload.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.browserplus.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.flash.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.flash.swf",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.full.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.gears.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.html4.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.html5.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.silverlight.min.js",
+    "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.silverlight.xap",
     "lib/generators/big_cms/templates/assets/javascripts/rails.js",
     "lib/generators/big_cms/templates/assets/stylesheets/big_cms_admin.css",
+    "lib/generators/big_cms/templates/assets/stylesheets/jquery.ui.plupload.css",
     "lib/generators/big_cms/templates/big_cms_initializer.rb",
     "lib/generators/big_cms/templates/condense_to_single_content_field_migration.rb",
     "lib/generators/big_cms/templates/create_cms_files_migration.rb",
@@ -141,7 +157,7 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/s3.yml"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Rails engine for handling content management.}
   s.test_files = [
     "test/rails_root/app/controllers/application_controller.rb",
@@ -171,6 +187,9 @@ Gem::Specification.new do |s|
     "test/rails_root/db/migrate/20101128230245_create_big_auth_tables.rb",
     "test/rails_root/db/migrate/20110109055322_create_layouts.rb",
     "test/rails_root/db/migrate/20110225021931_condense_to_single_content_field.rb",
+    "test/rails_root/db/migrate/20110312050718_create_roles.rb",
+    "test/rails_root/db/migrate/20110312050720_create_roles_users.rb",
+    "test/rails_root/db/migrate/20110312052232_create_big_auth_tables.rb",
     "test/rails_root/db/schema.rb",
     "test/rails_root/db/seeds.rb",
     "test/rails_root/test/functional/cms_files_controller_test.rb",
@@ -195,10 +214,12 @@ Gem::Specification.new do |s|
     "test/rails_root/test/unit/helpers/pages_helper_test.rb",
     "test/rails_root/test/unit/navigation_test.rb",
     "test/rails_root/test/unit/page_test.rb",
+    "test/rails_root/test/unit/site_test.rb",
     "test/test_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
