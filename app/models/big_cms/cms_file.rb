@@ -12,7 +12,7 @@ module BigCms
     validates_presence_of :content_manager_id
 
     def handle_destroy
-      file.remove_file!
+      file.remove_file! if file
     end
 
     def image?
