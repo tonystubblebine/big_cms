@@ -72,39 +72,40 @@ function inject() {
     <div id="nav">
       <h2>Content Management</h2>
       <ul id="main_nav">
-        <li class="pages">
-          <h3>Pages</h3>
-          <ul>
-            <li class="index"><%= link_to "Pages", big_cms_pages_path() %></li>
-            <li class="new"><%= link_to "Add New", new_big_cms_page_path() %></li>
-          </ul>
-        </li>
-        <li class="components">
-          <h3>Snippets</h3>
-          <ul>
-            <li class="index"><%= link_to "Snippets", big_cms_components_path() %></li>
-            <li class="new"><%= link_to "Add New", new_big_cms_component_path() %></li>
-          </ul>
-        </li>
-        <li class="cms_files">
-          <h3>Files</h3>
-          <ul>
-            <li class="index"><%= link_to "Files", big_cms_cms_files_path() %></li>
-            <li class="new"><%= link_to "Upload", new_big_cms_cms_file_path() %></li>
-          </ul>
-        </li>
         <% if !(current_cms.layouts.nil? or current_cms.layouts.empty?) %>
           <li class="layouts">
-            <h3>Layout</h3>
+            <strong>Layouts</strong>
             <ul>
-              <li class="new"><%= link_to "Web Layout", edit_big_cms_layout_path(current_cms.layouts.first) %></li>
+              <li class="new"><%= link_to "Web", edit_big_cms_layout_path(current_cms.layouts.first) %></li>
             </ul>
           </li>
         <% end %>
-        <li class="content_managers">
-          <h3>Configuration</h3>
+
+        <li class="pages">
+          <strong><%= link_to "Pages", big_cms_pages_path() %></strong>
           <ul>
-            <li class="edit"><%= link_to "Permissions", edit_big_cms_content_manager_path(current_cms) %></li>
+            <li class="new"><%= link_to "+ Add New", new_big_cms_page_path() %></li>
+            <% current_cms.pages.each do |page| %>
+              <li class="edit"><%= link_to page.title, edit_big_cms_page_path(page) %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="components">
+          <strong><%= link_to "Snippets", big_cms_components_path() %></strong>
+          <ul>
+            <li class="new"><%= link_to "+ Add New", new_big_cms_component_path() %></li>
+            <% current_cms.components.each do |component| %>
+              <li class="edit"><%= link_to component.name, edit_big_cms_component_path(component) %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="cms_files">
+          <strong><%= link_to "Files", big_cms_cms_files_path() %></strong>
+          <ul>
+            <li class="new"><%= link_to "+ Upload", new_big_cms_cms_file_path() %></li>
+            <% current_cms.files.each do |file| %>
+              <li class="insert"><%= link_to file.file_file_name, file.file.url %></li>
+            <% end %>
           </ul>
         </li>
       </ul>
