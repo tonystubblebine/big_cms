@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "big_cms_admin" %>
-<% if !controller.class.to_s.match(/^BigCms::CmsFile/) %>
+<% if !(controller.controller_name == "cms_files" and controller.action_name == "new") %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" %>
   <%= javascript_include_tag 'big_lib_rails' %>
   <%= javascript_include_tag 'ace/ace' %>
