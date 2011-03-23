@@ -1,4 +1,7 @@
 <%= form_for(@component) do |f| %>
+  <div class="actions">
+    <%= f.submit "Save"%>
+  </div>
   <% if @component.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@component.errors.count, "error") %> prohibited this component from being saved:</h2>
@@ -16,10 +19,6 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :content %><br />
     <%= f.text_area :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Save"%>
   </div>
 <% end %>

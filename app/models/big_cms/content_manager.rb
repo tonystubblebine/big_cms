@@ -1,7 +1,7 @@
 module BigCms
   class ContentManager < ActiveRecord::Base
     unloadable
-    has_many :pages, :order => "created_at"
+    has_many :pages
     has_many :components
     has_many :navigations, :as => :navigationable, :order => "position ASC"
     has_many :files, :class_name => "CmsFile"

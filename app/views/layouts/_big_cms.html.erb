@@ -1,74 +1,62 @@
 <%= stylesheet_link_tag "big_cms_admin" %>
+<script>
+// embarassingly taken from about.com: http://javascript.about.com/library/blscreen2.htm
+function pageHeight() {
+ return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;} 
+
+function setSizes() {
+  $('#nav_listing').height(pageHeight() - $('#nav_listing').position().top - 20);
+  if ($('#editor').size > 0) {
+    $('#editor').height(pageHeight() - $('#editor').position().top - 20)
+    $('#editor').width($('body').innerWidth() - $('#editor').position().left - 20)
+  }
+}
+</script> 
 <% if !(controller.controller_name == "cms_files" and controller.action_name == "new") %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" %>
   <%= javascript_include_tag 'big_lib_rails' %>
   <%= javascript_include_tag 'ace/ace' %>
   <%= javascript_include_tag 'ace/mode-html' %>
 <script>
-function inject() {
-    var baseUrl = "/javascripts/ace/";
-    function load(path, module, callback) {
-        path = baseUrl + path;
-        if (!load.scripts[path]) {
-            load.scripts[path] = {
-                loaded: false,
-                callbacks: [ callback ]
-            };
+window.onload = function() {
+  var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
+  if (textarea.size() > 0) {
+    textarea.after('<div id="editor" style="display:none; border: 1px solid #ccc; height: 100%; width: 100%"></div>');
+    var editor = $('#editor');
+    textarea.hide();
+    editor.append(textarea.html());
+    editor.show();
 
-            var head = document.getElementsByTagName('head')[0];
-            var s = document.createElement('script');
+    var ace_editor = ace.edit("editor");
+    ace_editor.gotoLine(1);
+    var HTMLMode = require("ace/mode/html").Mode;
+    ace_editor.getSession().setMode(new HTMLMode());
+    ace_editor.renderer.setShowPrintMargin(false);
+    setSizes()
+    window.editor = ace_editor
+  }
 
-            function c() {
-                if (window.__ace_shadowed__ && window.__ace_shadowed__.define.modules[module]) {
-                    load.scripts[path].loaded = true;
-                    load.scripts[path].callbacks.forEach(function(callback) {
-                        callback();
-                    });
-                } else {
-                    setTimeout(c, 50);
-                }
-            };
-            s.src = path;
-            head.appendChild(s);
+  $('form.edit_big_cms_layout, form.edit_big_cms_page, form.edit_big_cms_component, form.new_big_cms_layout, form.new_big_cms_page, form.new_big_cms_component').submit(function() { 
+    var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
+    textarea.empty().append(window.editor.getSession().getValue());
+  });
+};
 
-            c();
-        } else if (load.scripts[path].loaded) {
-            callback();
-        } else {
-            load.scripts[path].callbacks.push(callback);
-        }
-    };
+$(window).resize(function() {
+  setSizes();
+});
 
-    load.scripts = {};
-    window.__ace_shadowed_load__ = load;
+</script>
+<% else %>
+<script>
 
-    load('ace.js', 'text!ace/css/editor.css', function() {
-    });
-}
-
-// Call the inject function to load the ace files.
-inject();
-
-var textAce;
-function initAce() {
-    var ace = window.__ace_shadowed__;
-    // Check if the ace.js file was loaded already, otherwise check back later.
-    if (ace && ace.transformTextarea) {
-        var t; //D = document.querySelector("#big_cms_page_content");
-        if ((t = document.getElementById("big_cms_page_content")) || (t = document.getElementById("big_cms_layout_content")) || (t = document.getElementById("big_cms_component_content"))) {
-          textAce = ace.transformTextarea(t);
-          textAce.setOption("mode", "html");
-          textAce.setOption("gutter", "true");
-        }
-    } else {
-alert("bar");
-        setTimeout(initAce, 100);
-    }
-}
-
-// Transform the textarea on the page into an ace editor.
-setTimeout(initAce, 1);
-</script> 
+window.onload = function() {
+  setSizes();
+};
+$(window).resize(function() {
+  setSizes();
+});
+</script>
 <% end %>
   <style>
     #body table {
@@ -84,7 +72,12 @@ setTimeout(initAce, 1);
     #nav {
       float: left;
       width: 260px;
-      padding-right: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    #nav_listing {
+      overflow-y: scroll;
+      width: 260px;
     }
     #content {
       padding-left: 20px;
@@ -100,7 +93,7 @@ setTimeout(initAce, 1);
   </style>
   <div id="body">
     <div id="nav">
-      <h2>Content Management</h2>
+    <div id="nav_listing">
       <ul id="main_nav">
         <% if !(current_cms.layouts.nil? or current_cms.layouts.empty?) %>
           <li class="layouts">
@@ -115,7 +108,7 @@ setTimeout(initAce, 1);
           <strong><%= link_to "Pages", big_cms_pages_path() %></strong>
           <ul>
             <li class="new"><%= link_to "+ Add New", new_big_cms_page_path() %></li>
-            <% current_cms.pages.each do |page| %>
+            <% current_cms.pages.order(:title).each do |page| %>
               <li class="edit"><%= link_to page.title, edit_big_cms_page_path(page) %></li>
             <% end %>
           </ul>
@@ -124,7 +117,7 @@ setTimeout(initAce, 1);
           <strong><%= link_to "Snippets", big_cms_components_path() %></strong>
           <ul>
             <li class="new"><%= link_to "+ Add New", new_big_cms_component_path() %></li>
-            <% current_cms.components.each do |component| %>
+            <% current_cms.components.order(:name).each do |component| %>
               <li class="edit"><%= link_to component.name, edit_big_cms_component_path(component) %></li>
             <% end %>
           </ul>
@@ -133,12 +126,13 @@ setTimeout(initAce, 1);
           <strong><%= link_to "Files", big_cms_cms_files_path() %></strong>
           <ul>
             <li class="new"><%= link_to "+ Upload", new_big_cms_cms_file_path() %></li>
-            <% current_cms.files.each do |file| %>
+            <% current_cms.files.order(:file_file_name).each do |file| %>
               <li class="insert"><%= link_to file.file_file_name, file.file.url %></li>
             <% end %>
           </ul>
         </li>
       </ul>
+    </div><!-- #nav_listing -->
     </div><!-- #nav -->
 
     <div id="content">
@@ -146,6 +140,3 @@ setTimeout(initAce, 1);
     </div>
     <div class="clear" />
   </div><!-- #body -->
-<script>
-inject();
-</script>

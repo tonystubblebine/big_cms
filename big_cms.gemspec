@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.15"
+  s.version = "0.0.16"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-03-22}
+  s.date = %q{2011-03-23}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -109,6 +109,7 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/assets/javascripts/ace/keybinding-vim.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-c_cpp.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-coffee.js",
+    "lib/generators/big_cms/templates/assets/javascripts/ace/mode-csharp.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-css.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-html.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-java.js",
@@ -117,6 +118,7 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-php.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-python.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-ruby.js",
+    "lib/generators/big_cms/templates/assets/javascripts/ace/mode-svg.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/mode-xml.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-clouds.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-clouds_midnight.js",
@@ -125,10 +127,13 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-eclipse.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-idle_fingers.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-kr_theme.js",
+    "lib/generators/big_cms/templates/assets/javascripts/ace/theme-merbivore.js",
+    "lib/generators/big_cms/templates/assets/javascripts/ace/theme-merbivore_soft.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-mono_industrial.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-monokai.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-pastel_on_dark.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-twilight.js",
+    "lib/generators/big_cms/templates/assets/javascripts/ace/theme-vibrant_ink.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/worker-javascript.js",
     "lib/generators/big_cms/templates/assets/javascripts/plupload/gears_init.js",
     "lib/generators/big_cms/templates/assets/javascripts/plupload/jquery.plupload.queue.min.js",

@@ -18,9 +18,6 @@ body{min-width:960px}.container_12,.container_16{margin-left:auto;margin-right:a
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  #nav {
-    border-right: 1px solid #ccc;
-  }
   #main_nav li {
     list-style: none;
   }

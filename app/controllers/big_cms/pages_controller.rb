@@ -18,9 +18,9 @@ class BigCms::PagesController < BigCmsController
   # GET /big_cms/pages/1.xml
   def show
     if params[:id] == "_home" and !current_cms.navigations.empty?
-      @page = current_cms.navigations.first.pages.first
+      @page = current_cms.navigations.first.pages.order(:created_at).first
     elsif params[:id] == "_home" and current_cms.pages
-      @page = current_cms.pages.first
+      @page = current_cms.pages.order(:created_at).first
     elsif params[:id].match(/\D/)
       # TODO: 2011-01-11 <tony+bigcms@tonystubblebine.com> -- this hacked finder implies that I should be storing slug.
       @page = current_cms.pages.to_a.find{|a| a.slug == params[:id]}
