@@ -4,40 +4,70 @@
   <%= javascript_include_tag 'big_lib_rails' %>
   <%= javascript_include_tag 'ace/ace' %>
   <%= javascript_include_tag 'ace/mode-html' %>
- <script>
-// This is based on the ACE bookmarklet.
-function inject() { 
-  var baseUrl="/javascripts/ace/"; 
-  function load(path, module, callback) { 
-    path = baseUrl + path; 
-    if (!load.scripts[path]) { 
-      load.scripts[path] = { loaded: false, callbacks: [ callback ] }; 
-      var head = document.getElementsByTagName('head')[0]; 
-      var s = document.createElement('script'); 
-      function c() { 
-        if (window.__ace_shadowed__ && window.__ace_shadowed__.define.modules[module]) { 
-          load.scripts[path].loaded = true; 
-          load.scripts[path].callbacks.forEach(function(callback) { callback(); }); 
-        } else { setTimeout(c, 50); } 
-      }; 
-      s.src = path; 
-      head.appendChild(s); 
-      c(); 
-    } else if (load.scripts[path].loaded) { 
-      callback(); 
-    } else { 
-      load.scripts[path].callbacks.push(callback); 
-    } 
-  }; 
-  load.scripts = {}; 
-  window.__ace_shadowed_load__ = load; 
-  if ((area = document.getElementById("big_cms_page_content")) || (area = document.getElementById("big_cms_layout_content")) || (area = document.getElementById("big_cms_component_content"))) {
-    var ace = window.__ace_shadowed__; 
-    var result = ace.transformTextarea(area); 
-    result.setOption("mode", "html");
-    result.setOption("gutter", true);
-  }
-};
+<script>
+function inject() {
+    var baseUrl = "/javascripts/ace/";
+    function load(path, module, callback) {
+        path = baseUrl + path;
+        if (!load.scripts[path]) {
+            load.scripts[path] = {
+                loaded: false,
+                callbacks: [ callback ]
+            };
+
+            var head = document.getElementsByTagName('head')[0];
+            var s = document.createElement('script');
+
+            function c() {
+                if (window.__ace_shadowed__ && window.__ace_shadowed__.define.modules[module]) {
+                    load.scripts[path].loaded = true;
+                    load.scripts[path].callbacks.forEach(function(callback) {
+                        callback();
+                    });
+                } else {
+                    setTimeout(c, 50);
+                }
+            };
+            s.src = path;
+            head.appendChild(s);
+
+            c();
+        } else if (load.scripts[path].loaded) {
+            callback();
+        } else {
+            load.scripts[path].callbacks.push(callback);
+        }
+    };
+
+    load.scripts = {};
+    window.__ace_shadowed_load__ = load;
+
+    load('ace.js', 'text!ace/css/editor.css', function() {
+    });
+}
+
+// Call the inject function to load the ace files.
+inject();
+
+var textAce;
+function initAce() {
+    var ace = window.__ace_shadowed__;
+    // Check if the ace.js file was loaded already, otherwise check back later.
+    if (ace && ace.transformTextarea) {
+        var t; //D = document.querySelector("#big_cms_page_content");
+        if ((t = document.getElementById("big_cms_page_content")) || (t = document.getElementById("big_cms_layout_content")) || (t = document.getElementById("big_cms_component_content"))) {
+          textAce = ace.transformTextarea(t);
+          textAce.setOption("mode", "html");
+          textAce.setOption("gutter", "true");
+        }
+    } else {
+alert("bar");
+        setTimeout(initAce, 100);
+    }
+}
+
+// Transform the textarea on the page into an ace editor.
+setTimeout(initAce, 1);
 </script> 
 <% end %>
   <style>
