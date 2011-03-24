@@ -6,7 +6,7 @@ function pageHeight() {
 
 function setSizes() {
   $('#nav_listing').height(pageHeight() - $('#nav_listing').position().top - 20);
-  if ($('#editor').size > 0) {
+  if ($('#editor').size() > 0) {
     $('#editor').height(pageHeight() - $('#editor').position().top - 20)
     $('#editor').width($('body').innerWidth() - $('#editor').position().left - 20)
   }
