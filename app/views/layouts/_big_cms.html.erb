@@ -40,11 +40,53 @@ window.onload = function() {
     var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
     textarea.empty().append(window.editor.getSession().getValue());
   });
+
+  $('li.pages ul li.edit a').each(function () {
+    var page_id;
+    if (page_id = $(this).attr("href").match(/pages\/(.+?)\/edit/) ) {
+      var name = $(this).html();
+      var insert = $('<a href="#">&gt;&gt;</a>')
+      insert.click(function() {insertPage(page_id[1], name)})
+      $(this).after(insert);
+    };
+  });
+
+  $('li.components ul li.edit a').each(function () {
+    var name = $(this).html();
+    var insert = $('<a href="#">&gt;&gt;</a>')
+    insert.click(function() {insertSnippet(name)})
+    $(this).after(insert);
+  });
+
+$('li.cms_files ul li.insert a').each(function () {
+    var href = $(this).attr("href");
+    var name = $(this).html();
+    var insert = $('<a href="#">&gt;&gt;</a>')
+    insert.click(function() {insertFile(href, name)})
+    $(this).after(insert);
+  });
+
 };
 
 $(window).resize(function() {
   setSizes();
 });
+
+function insertSnippet(name) {
+  window.editor.insert("{{ " + name + " }}");
+}
+
+function insertFile(url, name) {
+  if (url.match(/\.(jpg|jpeg|gif|png)$/i)) {
+    window.editor.insert("<img src='" + url +"' " + "alt='" + name + "' />");
+  } else {
+    window.editor.insert("<a href='" + url +"'>" + name + "</a>");
+  }
+}
+
+function insertPage(id, name) {
+  window.editor.insert("<a href='/pages/" + id +"'>" + name + "</a>");
+}
 
 </script>
 <% else %>
@@ -109,7 +151,7 @@ $(window).resize(function() {
           <ul>
             <li class="new"><%= link_to "+ Add New", new_big_cms_page_path() %></li>
             <% current_cms.pages.order(:title).each do |page| %>
-              <li class="edit"><%= link_to page.title, edit_big_cms_page_path(page) %></li>
+              <li class="edit"><%= link_to page.title, edit_big_cms_page_path(:id => page.slug) %></li>
             <% end %>
           </ul>
         </li>

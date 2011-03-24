@@ -52,7 +52,12 @@ class BigCms::PagesController < BigCmsController
 
   # GET /big_cms/pages/1/edit
   def edit
-    @page = current_cms.pages.find(params[:id])
+    if params[:id].match(/\D/)
+      # TODO: 2011-01-11 <tony+bigcms@tonystubblebine.com> -- this hacked finder implies that I should be storing slug.
+      @page = current_cms.pages.to_a.find{|a| a.slug == params[:id]}
+    else
+      @page = current_cms.pages.find(params[:id])
+    end
   end
 
   # POST /big_cms/pages
