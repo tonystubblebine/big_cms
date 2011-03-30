@@ -32,8 +32,10 @@ window.onload = function() {
     var HTMLMode = require("ace/mode/html").Mode;
     ace_editor.getSession().setMode(new HTMLMode());
     ace_editor.renderer.setShowPrintMargin(false);
-    setSizes()
-    window.editor = ace_editor
+    setSizes();
+    $('#editor').height(pageHeight() - $('#editor').position().top - 20);
+	$('#editor').width($('body').innerWidth() - $('#editor').position().left - 20);
+	window.editor = ace_editor
   }
 
   $('form.edit_big_cms_layout, form.edit_big_cms_page, form.edit_big_cms_component, form.new_big_cms_layout, form.new_big_cms_page, form.new_big_cms_component').submit(function() { 
@@ -66,11 +68,19 @@ $('li.cms_files ul li.insert a').each(function () {
     $(this).after(insert);
   });
 
+$("#main_nav li .show_hide").click(function(){
+	$(this).parent().parent().find('.sub-contents').toggle();
+});
+
 };
 
+
 $(window).resize(function() {
-  setSizes();
+  	setSizes();
+	$('#editor').height(pageHeight() - $('#editor').position().top - 20);
+	$('#editor').width($('body').innerWidth() - $('#editor').position().left - 20);
 });
+
 
 function insertSnippet(name) {
   window.editor.insert("{{ " + name + " }}");
@@ -109,7 +119,7 @@ $(window).resize(function() {
       vertical-align: middle;
     }
     #body tr.odd {
-      background-color: #ccc;
+      background-color: #eee;
     }
     #nav {
       float: left;
@@ -133,6 +143,13 @@ $(window).resize(function() {
       width: 300px;
     }
   </style>
+
+<%
+	def link_to_with_highlight(name, options = {}, html_options = {})
+	  html_options.merge!({ :class => 'active' }) if current_page?(options)
+	  link_to(name, options, html_options)
+	end
+%>
   <div id="body">
     <div id="nav">
     <div id="nav_listing">
@@ -140,15 +157,15 @@ $(window).resize(function() {
         <% if !(current_cms.layouts.nil? or current_cms.layouts.empty?) %>
           <li class="layouts">
             <strong>Layouts</strong>
-            <ul>
+            <ul class="sub-contents">
               <li class="new"><%= link_to "Web", edit_big_cms_layout_path(current_cms.layouts.first) %></li>
             </ul>
           </li>
         <% end %>
 
         <li class="pages">
-          <strong><%= link_to "Pages", big_cms_pages_path() %></strong>
-          <ul>
+          <strong><%= link_to "Pages", big_cms_pages_path() %> <a class="show_hide" href="#"> Show/hide</a></strong>
+          <ul class="sub-contents">
             <li class="new"><%= link_to "+ Add New", new_big_cms_page_path() %></li>
             <% current_cms.pages.order(:title).each do |page| %>
               <li class="edit"><%= link_to page.title, edit_big_cms_page_path(:id => page.slug) %></li>
@@ -156,8 +173,8 @@ $(window).resize(function() {
           </ul>
         </li>
         <li class="components">
-          <strong><%= link_to "Snippets", big_cms_components_path() %></strong>
-          <ul>
+          <strong><%= link_to "Snippets", big_cms_components_path() %> <a class="show_hide" href="#"> Show/hide</a></strong>
+          <ul class="sub-contents">
             <li class="new"><%= link_to "+ Add New", new_big_cms_component_path() %></li>
             <% current_cms.components.order(:name).each do |component| %>
               <li class="edit"><%= link_to component.name, edit_big_cms_component_path(component) %></li>
@@ -165,8 +182,8 @@ $(window).resize(function() {
           </ul>
         </li>
         <li class="cms_files">
-          <strong><%= link_to "Files", big_cms_cms_files_path() %></strong>
-          <ul>
+          <strong><%= link_to "Files", big_cms_cms_files_path() %> <a class="show_hide" href="#"> Show/hide</a></strong>
+          <ul class="sub-contents">
             <li class="new"><%= link_to "+ Upload", new_big_cms_cms_file_path() %></li>
             <% current_cms.files.order(:file_file_name).each do |file| %>
               <li class="insert"><%= link_to file.file_file_name, file.file.url %></li>
@@ -175,10 +192,12 @@ $(window).resize(function() {
         </li>
       </ul>
     </div><!-- #nav_listing -->
-    </div><!-- #nav -->
+	</div><!-- #nav -->
 
     <div id="content">
       <%= yield %>
     </div>
     <div class="clear" />
   </div><!-- #body -->
+
+<!-- need to insert a footer -->
