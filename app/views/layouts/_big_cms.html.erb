@@ -24,14 +24,13 @@ window.onload = function() {
     textarea.hide();
     editor.append(textarea.html());
     editor.show();
-
+	setSizes();
     var ace_editor = ace.edit("editor");
     ace_editor.gotoLine(1);
     var HTMLMode = require("ace/mode/html").Mode;
     ace_editor.getSession().setMode(new HTMLMode());
     ace_editor.renderer.setShowPrintMargin(false);
-    setSizes();
-	window.editor = ace_editor
+	window.editor = ace_editor;
   }
 
   $('form.edit_big_cms_layout, form.edit_big_cms_page, form.edit_big_cms_component, form.new_big_cms_layout, form.new_big_cms_page, form.new_big_cms_component').submit(function() { 
