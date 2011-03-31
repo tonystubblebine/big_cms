@@ -5,11 +5,9 @@ function pageHeight() {
  return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;} 
 
 function setSizes() {
-  $('#nav_listing').height(pageHeight() - $('#nav_listing').position().top - 20);
-  if ($('#editor').size() > 0) {
+	$('#nav_listing').height(pageHeight() - $('#nav_listing').position().top - 20);
     $('#editor').height(pageHeight() - $('#editor').position().top - 20);
     $('#editor').width($('body').innerWidth() - $('#editor').position().left - 20);
-  }
 }
 </script> 
 <% if !(controller.controller_name == "cms_files" and controller.action_name == "new") %>
@@ -66,8 +64,13 @@ $('li.cms_files ul li.insert a').each(function () {
     $(this).after(insert);
   });
 
+
 $("#main_nav li .show_hide").click(function(){
 	$(this).parent().parent().find('.sub-contents').toggle();
+	if ($(this).text() == " [-]")
+		$(this).text(" [+]");
+	else
+		$(this).text(" [-]");
 });
 
 };
@@ -160,7 +163,7 @@ $(window).resize(function() {
         <% end %>
 
         <li class="pages">
-          <strong><%= link_to "Pages", big_cms_pages_path() %> <a class="show_hide" href="#"> Show/hide</a></strong>
+          <strong><%= link_to "Pages", big_cms_pages_path() %> <a class="show_hide" href="#"> [-]</a></strong>
           <ul class="sub-contents">
             <li class="new"><%= link_to "+ Add New", new_big_cms_page_path() %></li>
             <% current_cms.pages.order(:title).each do |page| %>
@@ -169,7 +172,7 @@ $(window).resize(function() {
           </ul>
         </li>
         <li class="components">
-          <strong><%= link_to "Snippets", big_cms_components_path() %> <a class="show_hide" href="#"> Show/hide</a></strong>
+          <strong><%= link_to "Snippets", big_cms_components_path() %> <a class="show_hide" href="#"> [-]</a></strong>
           <ul class="sub-contents">
             <li class="new"><%= link_to "+ Add New", new_big_cms_component_path() %></li>
             <% current_cms.components.order(:name).each do |component| %>
@@ -178,7 +181,7 @@ $(window).resize(function() {
           </ul>
         </li>
         <li class="cms_files">
-          <strong><%= link_to "Files", big_cms_cms_files_path() %> <a class="show_hide" href="#"> Show/hide</a></strong>
+          <strong><%= link_to "Files", big_cms_cms_files_path() %> <a class="show_hide" href="#"> [-]</a></strong>
           <ul class="sub-contents">
             <li class="new"><%= link_to "+ Upload", new_big_cms_cms_file_path() %></li>
             <% current_cms.files.order(:file_file_name).each do |file| %>
