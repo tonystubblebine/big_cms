@@ -1,0 +1,10 @@
+<li class="cms_files">
+  <%= link_to "Files", big_cms_cms_files_path() %> <a class="show_hide" href="#"> [-]</a>
+  <ul class="sub-contents">
+    <li class="new"><%= link_to "+ Upload", new_big_cms_cms_file_path() %></li>
+    <% current_cms.files.order(:file_file_name).each do |file| %>
+      <li class="insert"><%= link_to file.file_file_name, file.file.url %></li>
+    <% end %>
+  </ul>
+</li>
+

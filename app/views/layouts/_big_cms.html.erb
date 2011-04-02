@@ -153,55 +153,7 @@ function insertPage(id, name) {
 %>
   <div id="body">
     <div id="nav">
-    <div id="nav_listing">
-		<img src="/images/logo.png" id="logo" alt="Yak.ms Logo" title="Yak.ms Logo"/>
-		<ul id="view-signout">
-			<li class="first-view">
-				<%= link_to "View Site", "#" %>
-			</li>
-			<li>
-				<%= link_to "Sign Out", logout_url %>
-			</li>
-		</ul>
-      <ul id="main_nav">
-        <% if !(current_cms.layouts.nil? or current_cms.layouts.empty?) %>
-          <li class="layouts">
-            <strong>Layouts</strong>
-            <ul class="sub-contents">
-              <li class="new"><%= link_to "Web", edit_big_cms_layout_path(current_cms.layouts.first) %></li>
-            </ul>
-          </li>
-        <% end %>
-
-        <li class="pages">
-          <%= link_to "Pages", big_cms_pages_path() %> <a class="show_hide" href="#"> [-]</a>
-          <ul class="sub-contents">
-            <li class="new"><%= link_to "+ Add New", new_big_cms_page_path() %></li>
-            <% current_cms.pages.order(:title).each do |page| %>
-              <li class="edit"><%= link_to page.title, edit_big_cms_page_path(:id => page.slug) %></li>
-            <% end %>
-          </ul>
-        </li>
-        <li class="components">
-          <%= link_to "Snippets", big_cms_components_path() %> <a class="show_hide" href="#"> [-]</a>
-          <ul class="sub-contents">
-            <li class="new"><%= link_to "+ Add New", new_big_cms_component_path() %></li>
-            <% current_cms.components.order(:name).each do |component| %>
-              <li class="edit"><%= link_to component.name, edit_big_cms_component_path(component) %></li>
-            <% end %>
-          </ul>
-        </li>
-        <li class="cms_files">
-          <%= link_to "Files", big_cms_cms_files_path() %> <a class="show_hide" href="#"> [-]</a>
-          <ul class="sub-contents">
-            <li class="new"><%= link_to "+ Upload", new_big_cms_cms_file_path() %></li>
-            <% current_cms.files.order(:file_file_name).each do |file| %>
-              <li class="insert"><%= link_to file.file_file_name, file.file.url %></li>
-            <% end %>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- #nav_listing -->
+      <%= render "layouts/big_admin_nav_listing" %>
 	</div><!-- #nav -->
 
     <div id="content">

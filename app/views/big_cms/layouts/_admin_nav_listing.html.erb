@@ -1,0 +1,10 @@
+<% if !(current_cms.layouts.nil? or current_cms.layouts.empty?) %>
+  <li class="layouts">
+    <strong>Layouts</strong>
+    <ul class="sub-contents">
+      <li class="new"><%= link_to "Web", edit_big_cms_layout_path(current_cms.layouts.first) %></li>
+    </ul>
+  </li>
+<% end %>
+
+

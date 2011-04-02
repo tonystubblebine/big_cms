@@ -1,0 +1,10 @@
+<li class="components">
+  <%= link_to "Snippets", big_cms_components_path() %> <a class="show_hide" href="#"> [-]</a>
+  <ul class="sub-contents">
+    <li class="new"><%= link_to "+ Add New", new_big_cms_component_path() %></li>
+    <% current_cms.components.order(:name).each do |component| %>
+      <li class="edit"><%= link_to component.name, edit_big_cms_component_path(component) %></li>
+    <% end %>
+  </ul>
+</li>
+

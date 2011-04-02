@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.17"
+  s.version = "0.0.21"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-03-24}
+  s.date = %q{2011-04-02}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -40,11 +40,13 @@ Gem::Specification.new do |s|
     "app/models/big_cms/navigation.rb",
     "app/models/big_cms/page.rb",
     "app/uploaders/cms_file_uploader.rb",
+    "app/views/big_cms/cms_files/_admin_nav_listing.html.erb",
     "app/views/big_cms/cms_files/_form.html.erb",
     "app/views/big_cms/cms_files/edit.html.erb",
     "app/views/big_cms/cms_files/index.html.erb",
     "app/views/big_cms/cms_files/new.html.erb",
     "app/views/big_cms/cms_files/show.html.erb",
+    "app/views/big_cms/components/_admin_nav_listing.html.erb",
     "app/views/big_cms/components/_form.html.erb",
     "app/views/big_cms/components/edit.html.erb",
     "app/views/big_cms/components/index.html.erb",
@@ -55,6 +57,7 @@ Gem::Specification.new do |s|
     "app/views/big_cms/content_managers/index.html.erb",
     "app/views/big_cms/content_managers/new.html.erb",
     "app/views/big_cms/content_managers/show.html.erb",
+    "app/views/big_cms/layouts/_admin_nav_listing.html.erb",
     "app/views/big_cms/layouts/_form.html.erb",
     "app/views/big_cms/layouts/edit.html.erb",
     "app/views/big_cms/layouts/index.html.erb",
@@ -71,12 +74,14 @@ Gem::Specification.new do |s|
     "app/views/big_cms/page_versions/index.html.erb",
     "app/views/big_cms/page_versions/new.html.erb",
     "app/views/big_cms/page_versions/show.html.erb",
+    "app/views/big_cms/pages/_admin_nav_listing.html.erb",
     "app/views/big_cms/pages/_form.html.erb",
     "app/views/big_cms/pages/edit.html.erb",
     "app/views/big_cms/pages/index.html.erb",
     "app/views/big_cms/pages/new.html.erb",
     "app/views/big_cms/pages/show.css.erb",
     "app/views/big_cms/pages/show.html.erb",
+    "app/views/layouts/_big_admin_nav_listing.html.erb",
     "app/views/layouts/_big_cms.html.erb",
     "config/application.rb",
     "config/boot.rb",
