@@ -7,7 +7,7 @@ function pageHeight() {
  return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;} 
 
 function setSizes() {
-	$('#nav_listing').height(pageHeight() - $('#nav_listing').position().top - 20);
+	$('#nav_listing').height(pageHeight() - $('#nav_listing').position().top);
     $('#editor').height(pageHeight() - $('#editor').position().top - 20);
     $('#editor').width($('body').innerWidth() - $('#editor').position().left - 20);
 }
