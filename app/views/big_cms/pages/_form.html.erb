@@ -1,7 +1,12 @@
 <%= form_for(@page) do |f| %>
-  <div class="actions">
-    <%= f.submit :class => "button" %>
+
+<div class="actions">
+    <%= f.submit "Update", :class => "button", :id =>"update-page" %>
   </div>
+
+<div class="field">
+    <%= f.text_field :title %>
+  </div>  
 
   <% if @page.errors.any? %>
     <div id="error_explanation">
@@ -15,10 +20,8 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
+  
+
 
   <div id="version_history" <%= "style='display:none'" unless params[:version_history] %>>
     <%= render "big_cms/page_versions/history", :page => @page %>
