@@ -1,7 +1,6 @@
 <li class="pages">
-  <a class="show_hide" href="#"></a> <%= link_to "Pages", big_cms_pages_path() %>
+  <a class="show_hide" href="#"></a> <%= link_to "Pages", big_cms_pages_path() %><%= link_to "", new_big_cms_page_path(), :class =>"new" %>
   <ul class="sub-contents">
-    <li class="new"><%= link_to "+ Add New", new_big_cms_page_path() %></li>
     <% current_cms.pages.order(:title).each do |page| %>
       <li class="edit"><%= link_to page.title, edit_big_cms_page_path(:id => page.slug) %></li>
     <% end %>
