@@ -1,5 +1,5 @@
 <li class="components">
-  <%= link_to "Snippets", big_cms_components_path() %> <a class="show_hide" href="#"> [-]</a>
+  <a class="show_hide" href="#"></a> <%= link_to "Snippets", big_cms_components_path() %>
   <ul class="sub-contents">
     <li class="new"><%= link_to "+ Add New", new_big_cms_component_path() %></li>
     <% current_cms.components.order(:name).each do |component| %>

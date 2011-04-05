@@ -43,7 +43,12 @@ window.onload = function() {
 	    setSizes();
 	  }
 	});
-
+	
+	setTimeout(function() {
+	    $(".show_hide").trigger('click');
+		$("li.pages .show_hide").trigger('click');
+	},0);
+	
 
   $('form.edit_big_cms_layout, form.edit_big_cms_page, form.edit_big_cms_component, form.new_big_cms_layout, form.new_big_cms_page, form.new_big_cms_component').submit(function() { 
     var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
@@ -54,7 +59,7 @@ window.onload = function() {
     var page_id;
     if (page_id = $(this).attr("href").match(/pages\/(.+?)\/edit/) ) {
       var name = $(this).html();
-      var insert = $('<a href="#">&gt;&gt;</a>')
+      var insert = $('<a href="#" class="insert-code"></a>')
       insert.click(function() {insertPage(page_id[1], name)})
       $(this).after(insert);
     };
@@ -62,7 +67,7 @@ window.onload = function() {
 
   $('li.components ul li.edit a').each(function () {
     var name = $(this).html();
-    var insert = $('<a href="#">&gt;&gt;</a>')
+    var insert = $('<a href="#" class="insert-code"></a>')
     insert.click(function() {insertSnippet(name)})
     $(this).after(insert);
   });
@@ -70,31 +75,24 @@ window.onload = function() {
 $('li.cms_files ul li.insert a').each(function () {
     var href = $(this).attr("href");
     var name = $(this).html();
-    var insert = $('<a href="#">&gt;&gt;</a>')
+    var insert = $('<a href="#" class="insert-code"></a>')
     insert.click(function() {insertFile(href, name)})
     $(this).after(insert);
   });
 
 
-$("#main_nav li .show_hide").click(function(){
+$("#main_nav > li > .show_hide").click(function(){
 	$(this).parent().find('.sub-contents').toggle();
-	if ($(this).text() == " [-]")
-		$(this).text(" [+]");
+	if ($(this).hasClass('active-show_hide'))
+		$(this).removeClass('active-show_hide');
 	else
-		$(this).text(" [-]");
+		$(this).addClass('active-show_hide');
 });
 
 };
 
 $(window).resize(function() {
   	setSizes();
-});
-
-$("document").ready(function() {
-    setTimeout(function() {
-        $(".show_hide").trigger('click');
-		$("li.pages .show_hide").trigger('click');
-    },0);
 });
 
 
