@@ -82,12 +82,18 @@ $('li.cms_files ul li.insert a').each(function () {
   });
 
 
-$("#main_nav > li > .show_hide").click(function(){
-	$(this).parent().find('.sub-contents').toggle();
-	if ($(this).hasClass('active-show_hide'))
-		$(this).removeClass('active-show_hide');
-	else
-		$(this).addClass('active-show_hide');
+$("#main_nav > li").click(function(){
+	$(this).find('.sub-contents').toggle();
+	if ($(this).find('.show_hide').hasClass('active-show_hide')){
+		$(this).find('.show_hide').removeClass('active-show_hide');
+		$(this).css("background-color","#30689a");
+		$(this).find(".sub-contents").css("background-color","#1B4E7B");
+	}
+	else{
+		$(this).find('.show_hide').addClass('active-show_hide');
+		$(this).css("background-color","#1B4E7B");
+		$(this).find(".sub-contents").css("background-color","#30689a");
+	}
 });
 
 };
