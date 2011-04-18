@@ -49,6 +49,7 @@ window.onload = function() {
 		$("li.pages .show_hide").trigger('click');
 	},0);
 	
+	$("#nav-resize").height($("#nav").height());
 
   $('form.edit_big_cms_layout, form.edit_big_cms_page, form.edit_big_cms_component, form.new_big_cms_layout, form.new_big_cms_page, form.new_big_cms_component').submit(function() { 
     var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
@@ -64,6 +65,10 @@ window.onload = function() {
       $(this).after(insert);
     };
   });
+
+	$("#show-sites-dropdown-arrow").click(function(){
+		$("#sites-dropdown").toggle();
+	})
 
 
   $('li.components ul li.edit a').each(function () {
@@ -151,9 +156,13 @@ function insertPage(id, name) {
 	end
 %>
   <div id="body">
+	<div id="header">
+		<%= render "layouts/big_admin_header" %>
+	</div>
     <div id="nav">
       <%= render "layouts/big_admin_nav_listing" %>
 	</div><!-- #nav -->
+	<div id="nav-resize"></div>
 
     <div id="content">
       <%= yield %>

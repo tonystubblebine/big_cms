@@ -1,0 +1,13 @@
+<img id="logo" src="/images/logo.png" alt="Yak.ms" title="Yak.ms" />
+
+	<div class="current-site">
+		Hubnik <span> - </span><a href="#">hubnik.yakms.com</a><a href="#" id="show-sites-dropdown-arrow"></a>
+	</div>
+	<ul id="sites-dropdown">
+		<% current_user.sites.each do |site| %>
+		   <li class="site-from-dropdown"><%= link_to site.domain, "http://#{site.sub_domain}.yak.ms/content_manager" %></li>
+		 <% end %>
+	</ul>
+ 
+
+<%= link_to "Members", big_auth_roles_users_url(), :class=>"members" %>
