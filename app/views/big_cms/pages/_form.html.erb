@@ -1,10 +1,10 @@
 <%= form_for(@page) do |f| %>
 
-<div class="actions">
+<div class="actions" style="display:none">
     <%= f.submit "Update", :class => "button", :id =>"update-page" %>
   </div>
 
-<div class="field">
+<div class="field" style="display:none">
     <%= f.text_field :title %>
   </div>  
 
