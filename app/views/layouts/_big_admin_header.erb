@@ -1,12 +1,16 @@
 <img id="logo" src="/images/logo.png" alt="Yak.ms" title="Yak.ms" />
+<div class="user-settings">
+	<h5 class="user"><%= current_user.name %></h5>
+</div>
 <%= link_to "Members", big_auth_roles_users_url(), :class=>"members" %>
 	<div id="sites-dropdown-parent">
 		<div class="current-site">
-			Hubnik <span> - </span><a href="#">hubnik.yakms.com</a><a href="#" id="show-sites-dropdown-arrow"></a>
+			<%= current_site.sub_domain.capitalize %> <span> - </span><%= link_to "#{current_site.sub_domain}.yak.ms", "#{current_site.sub_domain}.yak.ms/content_manager"%><a href="#" id="show-sites-dropdown-arrow"></a>
 		</div>
 		<ul id="sites-dropdown">
 			<% current_user.sites.each do |site| %>
-			   <li class="site-from-dropdown"><%= "#{site.sub_domain}" %><%= link_to site.domain, "http://#{site.sub_domain}.yak.ms/content_manager" %></li>
-			 <% end %>
+			   
+			<li class="site-from-dropdown"><%= "#{site.sub_domain.capitalize}" %><span>- <span class="under"><%= "#{site.sub_domain}.yak.ms" %></span></span></li>
+			<% end %>
 		</ul>
 	</div>

@@ -74,10 +74,20 @@ window.onload = function() {
     };
   });
 
-	$("#show-sites-dropdown-arrow").click(function(){
-		$("#sites-dropdown").toggle();
-	})
+	$(".current-site").click(function() {
+			$("#sites-dropdown").slideDown('fast').show(); 
 
+			$("#sites-dropdown").hover(function() {
+			}, function(){
+				$("#sites-dropdown").slideUp('fast');
+			});
+		});
+
+	$("#sites-dropdown li").click(function() {
+		var url = $(this).find('span.under').text();
+		url = "http://" + url + "/content_manager/";
+		document.location.href = url;
+	})
 
   $('li.components ul li.edit a').each(function () {
     var name = $(this).html();
