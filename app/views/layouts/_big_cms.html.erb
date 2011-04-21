@@ -7,9 +7,10 @@ function pageHeight() {
  return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;} 
 
 function setSizes() {
-	$('#nav_listing').height(pageHeight() - $('#nav_listing').position().top);
-    $('#editor').height(pageHeight() - $('#editor').position().top - 30);
-    $('#editor').width($('body').innerWidth() - $('#editor').position().left - 20);
+    $('#editor').height(pageHeight() - $('#editor').position().top - 2);
+	$('#nav-resize').height($("#editor").height() + 2);
+	$('#nav_listing').height($("#editor").height() - 22);
+	$('#editor').width($('body').innerWidth() - $('#editor').position().left - 2);
 }
 </script> 
 <% if !(controller.controller_name == "cms_files" and controller.action_name == "new") %>
@@ -19,17 +20,20 @@ function setSizes() {
   <%= javascript_include_tag 'big_lib_rails' %>
   <%= javascript_include_tag 'ace/ace' %>
   <%= javascript_include_tag 'ace/mode-html' %>
+  <%= javascript_include_tag 'ace/theme-twilight' %>
+  <%= javascript_include_tag 'jquery.event.drag-2.0.min.js'%>
 <script>
 window.onload = function() {
   var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
   if (textarea.size() > 0) {
-    textarea.after('<div id="editor" style="display:none; border: 1px solid #ccc; height: 100%; width: 100%"></div>');
+    textarea.after('<div id="editor" style="display:none; height: 100%; width: 100%"></div>');
     var editor = $('#editor');
     textarea.hide();
     editor.append(textarea.html());
     editor.show();
 	setSizes();
     var ace_editor = ace.edit("editor");
+	ace_editor.setTheme("ace/theme/twilight");
     ace_editor.gotoLine(1);
     var HTMLMode = require("ace/mode/html").Mode;
     ace_editor.getSession().setMode(new HTMLMode());
@@ -37,6 +41,11 @@ window.onload = function() {
 	window.editor = ace_editor;
 	$("#main_nav li .show_hide").trigger('click');
   }
+
+	$("#nav .pages .sub-contents .edit a").bind('drag', function( event ){
+		// I'll finish this up Tuesday and throughout the rest of this week.
+		// see http://threedubmedia.com/demo/drag/
+	})
 
 	$( "#nav" ).resizable({
 	    resize: function(event, ui) {
@@ -65,6 +74,20 @@ window.onload = function() {
     };
   });
 
+	$(".current-site").click(function() {
+			$("#sites-dropdown").slideDown('fast').show(); 
+
+			$("#sites-dropdown").hover(function() {
+			}, function(){
+				$("#sites-dropdown").slideUp('fast');
+			});
+		});
+
+	$("#sites-dropdown li").click(function() {
+		var url = $(this).find('span.under').text();
+		url = "http://" + url + "/content_manager/";
+		document.location.href = url;
+	})
 
   $('li.components ul li.edit a').each(function () {
     var name = $(this).html();
@@ -138,10 +161,6 @@ function insertPage(id, name) {
     #body tr.odd {
       background-color: #eee;
     }
-    #content {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
     #content textarea {
       width: 100%;
     }
@@ -157,9 +176,13 @@ function insertPage(id, name) {
 	end
 %>
   <div id="body">
+	<div id="header">
+		<%= render "layouts/big_admin_header" %>
+	</div>
     <div id="nav">
       <%= render "layouts/big_admin_nav_listing" %>
 	</div><!-- #nav -->
+	<div id="nav-resize"></div>
 
     <div id="content">
       <%= yield %>

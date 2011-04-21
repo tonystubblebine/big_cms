@@ -1,5 +1,5 @@
 <li class="cms_files">
-  <a class="show_hide" href="#"></a> <%= link_to "Files", big_cms_cms_files_path() %><%= link_to "", new_big_cms_cms_file_path(), :class =>"new" %>
+  <a class="show_hide" href="#"></a> <%= link_to "Files", big_cms_cms_files_path(),  :class=>"folder-icon" %>
   <ul class="sub-contents">
     <% current_cms.files.order(:file_file_name).each do |file| %>
       <li class="insert"><%= link_to file.file_file_name, file.file.url %></li>
