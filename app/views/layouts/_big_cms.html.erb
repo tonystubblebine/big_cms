@@ -7,12 +7,15 @@ function pageHeight() {
  return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;} 
 
 function setSizes() {
-    $('#editor').height(pageHeight() - $('#editor').position().top - 2);
-	$('#nav-resize').height($("#editor").height() + 2);
-	$('#nav_listing').height($("#editor").height() - 22);
+    $('#editor').height(pageHeight() - $('#editor').position().top - 46);
+	$('#nav-resize').height($(window).height() - 54);
+	$('#nav_listing').height($("#nav-resize").height() - 24);
 	$('#editor').width($('body').innerWidth() - $('#editor').position().left - 2);
 	$('.ace_scroller').width($('#editor').width() - 55);
+	$('#nav').height($('#nav_listing').height() - 2);
+	$('#nav .sub-contents li a').not('.insertCode, #upload').width($("#nav").width() - 90);
 }
+
 </script> 
 <% if !(controller.controller_name == "cms_files" and controller.action_name == "new") %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" %>
@@ -24,7 +27,7 @@ function setSizes() {
   <%= javascript_include_tag 'ace/mode-html' %>
   <%= javascript_include_tag 'ace/theme-twilight' %>
   <%= javascript_include_tag 'jquery.event.drag-2.0.min.js'%>
-  <%= javascript_include_tag 'jqueryFileTree' %>
+  <%= javascript_include_tag 'jquery.hotkeys'%>
 <script>
 window.onload = function() {
   var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
@@ -42,20 +45,33 @@ window.onload = function() {
     ace_editor.getSession().setMode(new HTMLMode());
     ace_editor.renderer.setShowPrintMargin(false);
 	window.editor = ace_editor;
-	// if ($.cookie($(".pages .show_hide").next().text()) === "true")
-	//	alert("Yeah buddy");
   }
 
-	$("#nav .pages .sub-contents .edit a").bind('drag', function( event ){
-		// I'll finish this up Tuesday and throughout the rest of this week.
-		// see http://threedubmedia.com/demo/drag/
-	})
+
+	
 
 	$( "#nav" ).resizable({
 	    resize: function(event, ui) {
-	    setSizes();
+		setSizes();
+		
+		// still need to use these so the sidebar stays the same width upon refreshes.
+	    $.cookie("nav-width", $("#nav").width());
+		$.cookie("editor-width", $("#editor").width());
 	  }
 	});
+	
+	$( "#main_nav li .sub-contents a ").draggable({
+	  	opacity: 0.7,
+		containment: 'document',
+		cursor: 'move',
+		appendTo: 'body',
+		helper: "clone",
+		stop: function(event, ui) { return false; }
+	});
+	$( "#editor" ).droppable({drop: function(event, ui){
+	        alert("Yay");
+			return false;
+	    }});
 
 	
 	setTimeout(function() {
@@ -79,11 +95,15 @@ window.onload = function() {
     textarea.empty().append(window.editor.getSession().getValue());
   });
 
-  $('li.pages ul li.edit a').each(function () {
+	var pagesNext = $(".pages").next();
+	var filesNext = $(".cms_files").next();
+	var componentsNext = $(".components").next();
+
+ $(pagesNext + 'li.edit a').each(function () {
     var page_id;
     if (page_id = $(this).attr("href").match(/pages\/(.+?)\/edit/) ) {
       var name = $(this).html();
-      var insert = $('<a href="#" class="insert-code"></a>')
+      var insert = $('<a href="#" class="insertCode" title="Insert into editor"></a>')
       insert.click(function() {insertPage(page_id[1], name)})
       $(this).after(insert);
     };
@@ -91,7 +111,6 @@ window.onload = function() {
 
 	$(".current-site").click(function() {
 			$("#sites-dropdown").slideDown('fast').show(); 
-
 			$("#sites-dropdown").hover(function() {
 			}, function(){
 				$("#sites-dropdown").slideUp('fast');
@@ -104,41 +123,31 @@ window.onload = function() {
 		document.location.href = url;
 	})
 
-  $('li.components ul li.edit a').each(function () {
-    var name = $(this).html();
-    var insert = $('<a href="#" class="insert-code"></a>')
-    insert.click(function() {insertSnippet(name)})
-    $(this).after(insert);
-  });
+  	$(componentsNext + 'li.edit a').each(function () {
+	    var name = $(this).html();
+	    var insert = $('<a href="#" class="insertCode" title="Insert into editor"></a>')
+	    insert.click(function() {insertSnippet(name)})
+	    $(this).after(insert);
+	  });
 
-$('li.cms_files ul li.insert a').each(function () {
-    var href = $(this).attr("href");
-    var name = $(this).html();
-    var insert = $('<a href="#" class="insert-code"></a>')
-    insert.click(function() {insertFile(href, name)})
-    $(this).after(insert);
-  });
-
-  $(".sub-contents a").bind({
-	mousedown: function(){
-		$(this).css("cursor", "move");
-	},
-	mouseup: function(){
-		$(this).css("cursor", "pointer");
-		return false;
-	}
-  });
+	$(filesNext + 'li.insert a').each(function () {
+	    var href = $(this).attr("href");
+	    var name = $(this).html();
+	    var insert = $('<a href="#" class="insertCode" title="Insert into editor"></a>')
+	    insert.click(function() {insertFile(href, name)})
+	    $(this).after(insert);
+	  });
 
 
-$("#main_nav > li > .show_hide").click(function(){
-	$(this).parent().find('.sub-contents').toggle();
-	if ($(this).hasClass('active-show_hide')){
-		$.cookie($(this).next().text(), "true", { expires: 7 });
-		$(this).removeClass('active-show_hide');
+$("#main_nav > li").not('.folder-icon').click(function(){
+	$(this).next().toggle();
+	if ($(this).find(':first-child').hasClass('active-show_hide')){
+		$.cookie($(this).find(':first-child').next().text(), "true");
+		$(this).find(':first-child').removeClass('active-show_hide');
 	}
 	else{
-		$.cookie($(this).next().text(), "false", { expires: 7 });
-		$(this).addClass('active-show_hide');
+		$.cookie($(this).find(':first-child').next().text(), "false");
+		$(this).find(':first-child').addClass('active-show_hide');
 	}
 });
 

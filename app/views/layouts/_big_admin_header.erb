@@ -1,7 +1,8 @@
 <img id="logo" src="/images/logo.png" alt="Yak.ms" title="Yak.ms" />
-<div class="user-settings">
+<!-- ><div class="user-settings">
 	<h5 class="user"><%= current_user.name %></h5>
-</div>
+</div> -->
+<%= link_to "Logout", logout_path, :class => "user-settings" %>
 <%= link_to "Members", big_auth_roles_users_url(), :class=>"members" %>
 	<div id="sites-dropdown-parent">
 		<div class="current-site">
