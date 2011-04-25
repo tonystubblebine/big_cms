@@ -1,12 +1,12 @@
 <%= form_for(@page) do |f| %>
 
-<div class="actions" style="display:none">
-    <%= f.submit "Update", :class => "button", :id =>"update-page" %>
-  </div>
+<div class="field editing-title">
+    Editing: <%= f.text_field :title %>
+</div>
 
-<div class="field" style="display:none">
-    <%= f.text_field :title %>
-  </div>  
+<div class="actions">
+    <%= f.submit "Save", :class => "primary button", :id =>"update-page" %>
+</div>
 
   <% if @page.errors.any? %>
     <div id="error_explanation">
