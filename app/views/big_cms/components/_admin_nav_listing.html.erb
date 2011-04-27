@@ -2,6 +2,7 @@
   <a class="show_hide" href="#"></a> <%= link_to "Snippets", big_cms_components_path(),  :class=>"folder-icon" %>
 </li>
   <ul class="sub-contents">
+	<li class="new"><%= link_to "New Snippet", new_big_cms_component_path(), :class => "upload", :id => "new_snippet" %></li>
     <% current_cms.components.order(:name).each do |component| %>
       <li class="edit"><%= link_to component.name, edit_big_cms_component_path(component) %></li>
     <% end %>
