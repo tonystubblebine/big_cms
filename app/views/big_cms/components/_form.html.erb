@@ -1,6 +1,9 @@
 <%= form_for(@component) do |f| %>
   <div class="actions">
     <%= f.submit "Save"%>
+    Mode: 
+    <%= link_to "visual", "#visual", {:id => 'set-visual-mode-button'} %>
+    <%= link_to "source", "#source", {:id => 'set-source-mode-button'} %>
   </div>
   <% if @component.errors.any? %>
     <div id="error_explanation">

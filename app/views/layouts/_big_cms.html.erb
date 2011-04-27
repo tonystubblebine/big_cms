@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag "big_cms_admin" %>
 <%= stylesheet_link_tag "http://jquery-ui.googlecode.com/svn/tags/1.8.11/themes/base/jquery.ui.resizable.css" %> 
-
 <script>
 // embarassingly taken from about.com: http://javascript.about.com/library/blscreen2.htm
 function pageHeight() {
@@ -28,9 +27,18 @@ function setSizes() {
   <%= javascript_include_tag 'ace/theme-twilight' %>
   <%= javascript_include_tag 'jquery.event.drag-2.0.min.js'%>
   <%= javascript_include_tag 'jquery.hotkeys'%>
+  <%= stylesheet_link_tag "jquery.wysiwyg.css" %>
+  <%= javascript_include_tag 'jquery.wysiwyg.js' %>
 <script>
+function findMainTextArea() {
+  return $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
+}
+function syncAceEditor() {
+  var textarea = findMainTextArea();
+  textarea.empty().append(window.editor.getSession().getValue());
+}
 window.onload = function() {
-  var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
+  var textarea = findMainTextArea();
   if (textarea.size() > 0) {
     textarea.after('<div id="editor" style="display:none; height: 100%; width: 100%"></div>');
     var editor = $('#editor');
@@ -46,9 +54,6 @@ window.onload = function() {
     ace_editor.renderer.setShowPrintMargin(false);
     window.editor = ace_editor;
   }
-
-
-    
 
     $( "#nav" ).resizable({
         resize: function(event, ui) {
@@ -91,8 +96,7 @@ window.onload = function() {
     
 
   $('form.edit_big_cms_layout, form.edit_big_cms_page, form.edit_big_cms_component, form.new_big_cms_layout, form.new_big_cms_page, form.new_big_cms_component').submit(function() { 
-    var textarea = $('#big_cms_page_content, #big_cms_layout_content, #big_cms_component_content');
-    textarea.empty().append(window.editor.getSession().getValue());
+    syncAceEditor();
   });
 
     var pagesNext = $(".pages").next();
@@ -151,6 +155,13 @@ $("#main_nav > li").not('.folder-icon').click(function(){
     }
 });
 
+  $('#set-visual-mode-button').click(function(){
+    setVisualMode();
+  });
+
+  $('#set-source-mode-button').click(function(){
+    setSourceMode();
+  });
 };
 
 $(window).resize(function() {
@@ -174,6 +185,17 @@ function insertPage(id, name) {
   window.editor.insert("<a href='/pages/" + id +"'>" + name + "</a>");
 }
 
+function setVisualMode() {
+  $('#editor').hide();
+  syncAceEditor();
+  findMainTextArea().show().wysiwyg(); 
+}
+
+function setSourceMode() {
+  findMainTextArea().wysiwyg("destroy");
+  findMainTextArea().hide();
+  $('#editor').show();
+}
 </script>
 <% else %>
 <script>
