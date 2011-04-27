@@ -2,7 +2,7 @@
   <a class="show_hide" href="#"></a> <%= link_to "Files", big_cms_cms_files_path(),  :class=>"folder-icon" %>
 </li>
   <ul class="sub-contents">
-	<li class="new"><%= link_to "Upload", new_big_cms_cms_file_path(), :id => "upload" %></li>
+	<li class="new"><%= link_to "Upload File(s)", new_big_cms_cms_file_path(), :class => "upload" %></li>
     <% current_cms.files.order(:file_file_name).each do |file| %>
       <li class="insert"><%= link_to file.file_file_name, file.file.url %></li>
     <% end %>
