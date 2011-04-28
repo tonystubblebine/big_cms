@@ -1,10 +1,17 @@
 <%= form_for(@component) do |f| %>
-  <div class="actions">
-    <%= f.submit "Save"%>
-    Mode: 
-    <%= link_to "visual", "#visual", {:id => 'set-visual-mode-button'} %>
-    <%= link_to "source", "#source", {:id => 'set-source-mode-button'} %>
-  </div>
+
+<div class="field editing-title">
+    Editing: <%= f.text_field :name %>
+</div>
+
+<div class="actions">
+    <%= f.submit "Save", :class => "primary button", :id =>"update-page" %>
+    <div id="editor-mode">
+		Mode: 
+    	<%= link_to "Visual", "#visual", {:id => 'set-visual-mode-button'} %>
+	    <%= link_to "Source", "#source", {:id => 'set-source-mode-button'} %>
+	</div>
+ </div>
   <% if @component.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@component.errors.count, "error") %> prohibited this component from being saved:</h2>
@@ -17,10 +24,6 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
   <div class="field">
     <%= f.text_area :content %>
   </div>
