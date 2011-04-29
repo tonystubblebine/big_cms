@@ -1,15 +1,21 @@
 class CreateBigAuthTables < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
-      t.string :remember_token
+      t.integer :account_id
       # Any additional fields here
       
+      t.timestamps
+    end
+
+    create_table :accounts do |t|
+      t.string :remember_token
+
       t.timestamps
     end
     
     create_table :login_accounts do |t|
       t.string :type
-      t.integer :user_id
+      t.integer :account_id
       t.string :remote_account_id
       t.string :name
       t.string :login
@@ -19,13 +25,15 @@ class CreateBigAuthTables < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :login_accounts, :user_id
+    add_index :users, :account_id
+    add_index :login_accounts, :account_id
     add_index :login_accounts, :type
   end
 
   def self.down
+    remove_index :users, :account_id
+    remove_index :login_accounts, :account_id
     remove_index :login_accounts, :type
-    remove_index :login_accounts, :user_id
     drop_table :login_accounts
     drop_table :users
   end

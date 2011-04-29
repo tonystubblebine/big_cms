@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110312052232) do
+ActiveRecord::Schema.define(:version => 20110427185111) do
 
   create_table "accounts", :force => true do |t|
     t.string   "remember_token"
@@ -151,11 +151,22 @@ ActiveRecord::Schema.define(:version => 20110312052232) do
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
-  create_table "users", :force => true do |t|
-    t.integer  "account_id"
-    t.integer  "site_id"
+  create_table "sites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "content_manager_id"
+    t.string   "name"
+    t.string   "sub_domain"
+    t.string   "domain"
+    t.boolean  "deleted"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "site_id"
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"
