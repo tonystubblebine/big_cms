@@ -16,11 +16,9 @@ gem 'fog'
 if ENV['MY_BUNDLE_ENV'] == "dev"
   gem "big_library", :require => "big_library", :path => "../../../big_library"
   gem "big_auth", :require => "big_auth", :path => "../../../big_auth"
-  gem "big_site", :require => "big_site", :path => "../../../big_site"
 else
   gem "big_library", :require => "big_library", :git => "git://github.com/tonystubblebine/big_library.git"
   gem "big_auth", :require => "big_auth", :git => "git://github.com/tonystubblebine/big_auth.git"
-  gem "big_site", :require => "big_site", :git => "git://github.com/tonystubblebine/big_site.git"
 end
 # Use unicorn as the web server
 # gem 'unicorn'
