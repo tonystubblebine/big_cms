@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.27"
+  s.version = "0.0.28"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-04-25}
+  s.date = %q{2011-05-05}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -141,6 +141,7 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-twilight.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/theme-vibrant_ink.js",
     "lib/generators/big_cms/templates/assets/javascripts/ace/worker-javascript.js",
+    "lib/generators/big_cms/templates/assets/javascripts/jquery.wysiwyg.js",
     "lib/generators/big_cms/templates/assets/javascripts/plupload/gears_init.js",
     "lib/generators/big_cms/templates/assets/javascripts/plupload/jquery.plupload.queue.min.js",
     "lib/generators/big_cms/templates/assets/javascripts/plupload/jquery.ui.plupload.min.js",
@@ -155,8 +156,11 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.silverlight.min.js",
     "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.silverlight.xap",
     "lib/generators/big_cms/templates/assets/javascripts/rails.js",
+    "lib/generators/big_cms/templates/assets/jquery.wysiwyg.bg.png",
+    "lib/generators/big_cms/templates/assets/jquery.wysiwyg.gif",
     "lib/generators/big_cms/templates/assets/stylesheets/big_cms_admin.css",
     "lib/generators/big_cms/templates/assets/stylesheets/jquery.ui.plupload.css",
+    "lib/generators/big_cms/templates/assets/stylesheets/jquery.wysiwyg.css",
     "lib/generators/big_cms/templates/big_cms_initializer.rb",
     "lib/generators/big_cms/templates/condense_to_single_content_field_migration.rb",
     "lib/generators/big_cms/templates/create_cms_files_migration.rb",
@@ -188,19 +192,20 @@ Gem::Specification.new do |s|
     "test/rails_root/config/initializers/secret_token.rb",
     "test/rails_root/config/initializers/session_store.rb",
     "test/rails_root/config/routes.rb",
-    "test/rails_root/db/migrate/20101125054346_create_content_managers.rb",
-    "test/rails_root/db/migrate/20101125054348_create_pages.rb",
-    "test/rails_root/db/migrate/20101125054350_create_navigations.rb",
-    "test/rails_root/db/migrate/20101125054352_create_components.rb",
-    "test/rails_root/db/migrate/20101125054354_create_cms_files.rb",
-    "test/rails_root/db/migrate/20101125195736_add_versioning_to_pages.rb",
-    "test/rails_root/db/migrate/20101125195738_add_versioning_to_components.rb",
-    "test/rails_root/db/migrate/20101128230245_create_big_auth_tables.rb",
-    "test/rails_root/db/migrate/20110109055322_create_layouts.rb",
-    "test/rails_root/db/migrate/20110225021931_condense_to_single_content_field.rb",
-    "test/rails_root/db/migrate/20110312050718_create_roles.rb",
-    "test/rails_root/db/migrate/20110312050720_create_roles_users.rb",
-    "test/rails_root/db/migrate/20110312052232_create_big_auth_tables.rb",
+    "test/rails_root/db/migrate/20110427183631_create_roles.rb",
+    "test/rails_root/db/migrate/20110427183633_create_roles_users.rb",
+    "test/rails_root/db/migrate/20110427183635_create_big_auth_tables.rb",
+    "test/rails_root/db/migrate/20110427184755_create_content_managers.rb",
+    "test/rails_root/db/migrate/20110427184757_create_pages.rb",
+    "test/rails_root/db/migrate/20110427184759_create_navigations.rb",
+    "test/rails_root/db/migrate/20110427184801_create_components.rb",
+    "test/rails_root/db/migrate/20110427184803_create_cms_files.rb",
+    "test/rails_root/db/migrate/20110427184805_add_versioning_to_pages.rb",
+    "test/rails_root/db/migrate/20110427184807_add_versioning_to_components.rb",
+    "test/rails_root/db/migrate/20110427184809_create_layouts.rb",
+    "test/rails_root/db/migrate/20110427184811_condense_to_single_content_field.rb",
+    "test/rails_root/db/migrate/20110427185109_create_sites.rb",
+    "test/rails_root/db/migrate/20110427185111_add_site_id_to_users.rb",
     "test/rails_root/db/schema.rb",
     "test/rails_root/db/seeds.rb",
     "test/rails_root/test/functional/cms_files_controller_test.rb",
@@ -225,7 +230,6 @@ Gem::Specification.new do |s|
     "test/rails_root/test/unit/helpers/pages_helper_test.rb",
     "test/rails_root/test/unit/navigation_test.rb",
     "test/rails_root/test/unit/page_test.rb",
-    "test/rails_root/test/unit/site_test.rb",
     "test/test_helper.rb"
   ]
 
