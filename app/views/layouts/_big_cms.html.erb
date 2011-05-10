@@ -177,7 +177,7 @@ $(window).resize(function() {
 
 
 function insertSnippet(name) {
-  window.editor.insert("{{ " + name + " }}");
+  window.editor.insert('{{ "' + name + '" | snippet }}');
 }
 
 function insertFile(url, name) {
