@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.29"
+  s.version = "0.0.30"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
@@ -174,64 +174,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Rails engine for handling content management.}
-  s.test_files = [
-    "test/rails_root/app/controllers/application_controller.rb",
-    "test/rails_root/app/helpers/application_helper.rb",
-    "test/rails_root/app/models/user.rb",
-    "test/rails_root/config/application.rb",
-    "test/rails_root/config/boot.rb",
-    "test/rails_root/config/environment.rb",
-    "test/rails_root/config/environments/development.rb",
-    "test/rails_root/config/environments/production.rb",
-    "test/rails_root/config/environments/test.rb",
-    "test/rails_root/config/initializers/backtrace_silencers.rb",
-    "test/rails_root/config/initializers/big_auth.rb",
-    "test/rails_root/config/initializers/big_cms.rb",
-    "test/rails_root/config/initializers/inflections.rb",
-    "test/rails_root/config/initializers/mime_types.rb",
-    "test/rails_root/config/initializers/secret_token.rb",
-    "test/rails_root/config/initializers/session_store.rb",
-    "test/rails_root/config/routes.rb",
-    "test/rails_root/db/migrate/20110427183631_create_roles.rb",
-    "test/rails_root/db/migrate/20110427183633_create_roles_users.rb",
-    "test/rails_root/db/migrate/20110427183635_create_big_auth_tables.rb",
-    "test/rails_root/db/migrate/20110427184755_create_content_managers.rb",
-    "test/rails_root/db/migrate/20110427184757_create_pages.rb",
-    "test/rails_root/db/migrate/20110427184759_create_navigations.rb",
-    "test/rails_root/db/migrate/20110427184801_create_components.rb",
-    "test/rails_root/db/migrate/20110427184803_create_cms_files.rb",
-    "test/rails_root/db/migrate/20110427184805_add_versioning_to_pages.rb",
-    "test/rails_root/db/migrate/20110427184807_add_versioning_to_components.rb",
-    "test/rails_root/db/migrate/20110427184809_create_layouts.rb",
-    "test/rails_root/db/migrate/20110427184811_condense_to_single_content_field.rb",
-    "test/rails_root/db/migrate/20110427185109_create_sites.rb",
-    "test/rails_root/db/migrate/20110427185111_add_site_id_to_users.rb",
-    "test/rails_root/db/schema.rb",
-    "test/rails_root/db/seeds.rb",
-    "test/rails_root/test/functional/cms_files_controller_test.rb",
-    "test/rails_root/test/functional/components_controller_test.rb",
-    "test/rails_root/test/functional/content_managers_controller_test.rb",
-    "test/rails_root/test/functional/layouts_controller_test.rb",
-    "test/rails_root/test/functional/navigations_controller_test.rb",
-    "test/rails_root/test/functional/page_versions_controller_test.rb",
-    "test/rails_root/test/functional/pages_controller_test.rb",
-    "test/rails_root/test/performance/browsing_test.rb",
-    "test/rails_root/test/test_helper.rb",
-    "test/rails_root/test/unit/big_cms/layout_test.rb",
-    "test/rails_root/test/unit/cms_file_test.rb",
-    "test/rails_root/test/unit/component_test.rb",
-    "test/rails_root/test/unit/content_manager_test.rb",
-    "test/rails_root/test/unit/helpers/big_cms/layouts_helper_test.rb",
-    "test/rails_root/test/unit/helpers/big_cms/page_versions_helper_test.rb",
-    "test/rails_root/test/unit/helpers/cms_files_helper_test.rb",
-    "test/rails_root/test/unit/helpers/components_helper_test.rb",
-    "test/rails_root/test/unit/helpers/content_managers_helper_test.rb",
-    "test/rails_root/test/unit/helpers/navigations_helper_test.rb",
-    "test/rails_root/test/unit/helpers/pages_helper_test.rb",
-    "test/rails_root/test/unit/navigation_test.rb",
-    "test/rails_root/test/unit/page_test.rb",
-    "test/test_helper.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

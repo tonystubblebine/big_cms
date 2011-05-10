@@ -6,7 +6,8 @@ gem 'paperclip'
 gem 'liquid'
 gem 'aws-s3'
 gem 'mini_magick'
-gem 'carrierwave'
+# Use indrekj version until this pull is approved: https://github.com/jnicklas/carrierwave/pull/276
+gem 'carrierwave', :git => 'https://github.com/indrekj/carrierwave.git' 
 gem 'fog'
 
 # Work around for using different paths to a gem based on environment. This work around requires that you set an environment variable in your .bash_profile
