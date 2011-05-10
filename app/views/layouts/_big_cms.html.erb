@@ -41,7 +41,8 @@ function findMainTextArea() {
 }
 function syncAceEditor() {
   var textarea = findMainTextArea();
-  textarea.empty().append(window.editor.getSession().getValue());
+  //textarea.empty().append(window.editor.getSession().getValue());
+  textarea[0].value = window.editor.getSession().getValue();
 }
 window.onload = function() {
   var textarea = findMainTextArea();
