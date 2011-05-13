@@ -5,6 +5,7 @@
 </div>
 
 <div class="actions">
+	<a class="negative button" href="<%= request.url.chomp("edit")%>" data-confirm="Are you sure?" data-method="delete" rel="nofollow">delete</a>
     <%= f.submit "Save", :class => "primary button", :id =>"update-page" %>
     <div id="editor-mode">
 		Mode: 
