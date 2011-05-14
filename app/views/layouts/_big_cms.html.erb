@@ -42,6 +42,14 @@ function syncAceEditor() {
   //textarea.empty().append(window.editor.getSession().getValue());
   textarea[0].value = window.editor.getSession().getValue();
 }
+
+function syncVisualEditor() {
+	var visualContent = findMainTextArea().wysiwyg("getContent");
+	visualContent = new String(visualContent);
+	window.editor.getSession().setValue(visualContent);
+}
+
+
 window.onload = function() {
   var textarea = findMainTextArea();
   if (textarea.size() > 0) {
@@ -161,22 +169,10 @@ $("#main_nav > li").not('.folder-icon').click(function(){
 });
 
   $('#set-visual-mode-button').click(function(){
-	$.ajax({
-	  type: 'POST',
-	  url: "edit_big_cms_component",
-	  data: $("#editor"),
-	  success: alert("success!")
-	});
  	setVisualMode();
   });
 
   $('#set-source-mode-button').click(function(){
-	$.ajax({
-	  type: 'POST',
-	  url: "edit_big_cms_component",
-	  data: $(".wysiwyg body.wysiwyg"),
-	  success: alert("success!")
-	});
     setSourceMode();
   });
 };
@@ -191,15 +187,11 @@ function insertSnippet(name) {
 }
 
 function insertFile(url, name) {
-  if (url.match(/\.(jpg|jpeg|gif|png)$/i)) {
     window.editor.insert(url);
-  } else {
-    window.editor.insert("<a href='" + url +"'>" + name + "</a>");
-  }
 }
 
 function insertPage(id, name) {
-  window.editor.insert("<a href='/pages/" + id +"'>" + name + "</a>");
+  window.editor.insert("/pages/" + id);
 }
 
 function setVisualMode() {
@@ -209,6 +201,7 @@ function setVisualMode() {
 }
 
 function setSourceMode() {
+  syncVisualEditor()
   findMainTextArea().wysiwyg("destroy");
   findMainTextArea().hide();
   $('#editor').show();
