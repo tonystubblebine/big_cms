@@ -62,10 +62,9 @@ class BigCms::ComponentsController < BigCmsController
   # PUT /big_cms/components/1.xml
   def update
     @component = current_cms.components.find(params[:id])
-
     respond_to do |format|
       if @component.update_attributes(params[:big_cms_component])
-        format.html { redirect_to(@component, :notice => 'Component was successfully updated.') }
+        format.html { render :action => "edit" }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
