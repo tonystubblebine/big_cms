@@ -34,7 +34,8 @@ function setSizes() {
 }
 
 function setVisualSizes() {
-	$(".wysiwyg").width($('body').innerWidth() - $('.wysiwyg').position().left - 2);
+	$(".wysiwyg, .wysiwyg iframe").width($('body').innerWidth() - $('.wysiwyg').position().left);
+	$(".wysiwyg, .wysiwyg iframe").height((pageHeight() - $('.wysiwyg').position().top - 46));
 }
 
 </script> 
@@ -57,7 +58,6 @@ function findMainTextArea() {
 }
 function syncAceEditor() {
   var textarea = findMainTextArea();
-  //textarea.empty().append(window.editor.getSession().getValue());
   textarea[0].value = window.editor.getSession().getValue();
 }
 
@@ -68,24 +68,30 @@ function syncVisualEditor() {
 }
 
 
+function loadInSourceEditor () {
+	var textarea = findMainTextArea();
+	if (textarea.size() > 0) {
+		textarea.after('<div id="editor" style="display:none;"></div>');
+	    var editor = $('#editor');
+	    textarea.hide();
+	    editor.append(textarea.html());
+	    editor.show();
+	    setSizes();
+	    var ace_editor = ace.edit("editor");
+	    ace_editor.setTheme("ace/theme/twilight");
+	    ace_editor.gotoLine(1);
+	    var HTMLMode = require("ace/mode/html").Mode;
+	    ace_editor.getSession().setMode(new HTMLMode());
+	    ace_editor.renderer.setShowPrintMargin(false);
+	    window.editor = ace_editor;
+		setSizes();
+	}
+}
+
+
 window.onload = function() {
-  var textarea = findMainTextArea();
-  if (textarea.size() > 0) {
-    textarea.after('<div id="editor" style="display:none;"></div>');
-    var editor = $('#editor');
-    textarea.hide();
-    editor.append(textarea.html());
-    editor.show();
-    setSizes();
-    var ace_editor = ace.edit("editor");
-    ace_editor.setTheme("ace/theme/twilight");
-    ace_editor.gotoLine(1);
-    var HTMLMode = require("ace/mode/html").Mode;
-    ace_editor.getSession().setMode(new HTMLMode());
-    ace_editor.renderer.setShowPrintMargin(false);
-    window.editor = ace_editor;
-	setSizes();
-  }
+
+  loadInSourceEditor();
 
     $( "#nav" ).resizable({
         resize: function(event, ui) {
@@ -180,17 +186,24 @@ $("#main_nav > li").not('.folder-icon').click(function(){
 
   $('#set-visual-mode-button').click(function(){
  	setVisualMode();
+	setVisualSizes();
   });
 
   $('#set-source-mode-button').click(function(){
     setSourceMode();
+	setSizes();
   });
 
   setSizes();
 };
 
 $(window).resize(function() {
-    setSizes();
+    if ((window.location.toString().split("#")[1]) === "source") {
+		setSizes();				
+	}
+	else {
+		setVisualSizes();
+	}
 });
 
 
@@ -216,7 +229,9 @@ function setSourceMode() {
   syncVisualEditor()
   findMainTextArea().wysiwyg("destroy");
   findMainTextArea().hide();
-  $('#editor').show();
+  loadInSourceEditor();
+  // $('#editor').show();
+
 }
 </script>
 <% end %>
