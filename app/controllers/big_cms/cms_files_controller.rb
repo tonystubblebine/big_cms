@@ -47,6 +47,7 @@ class BigCms::CmsFilesController < BigCmsController
 
   # POST /big_cms/cms_files
   # POST /big_cms/cms_files.xml
+  # TODO: 2011-05-14 <tony@crowdvine.com> -- Because this will return either a cms_file or a page, it's not very restful.
   def create
     if params[:big_cms_cms_file]
       @cms_file = current_cms.files.new(params[:big_cms_cms_file]) 
@@ -55,8 +56,16 @@ class BigCms::CmsFilesController < BigCmsController
       @cms_file.file = params[:file]
     end
 
+    if md = @cms_file.file.filename.match(/(.+).(htm|html|css|js)$/i)
+      @page = current_cms.pages.new(:title => md[1], :content => @cms_file.file.read)
+      @page.content_type = (md[2] == "htm") ? "html" : md[2]
+    end
+      
     respond_to do |format|
-      if @cms_file.save
+      if @page and @page.save
+        format.html { redirect_to(@cms_file, :notice => 'File uploaded and converted to and editable page.') }
+        format.xml  { render :xml => @page, :status => :created, :location => @page }
+      elsif @cms_file.save
         format.html { redirect_to(@cms_file, :notice => 'File was successfully created.') }
         format.xml  { render :xml => @cms_file, :status => :created, :location => @cms_file }
       else
