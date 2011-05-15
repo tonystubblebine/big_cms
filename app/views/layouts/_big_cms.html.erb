@@ -68,7 +68,7 @@ function syncVisualEditor() {
 }
 
 
-function loadInSourceEditor () {
+function loadInNewSourceEditor () {
 	var textarea = findMainTextArea();
 	if (textarea.size() > 0) {
 		textarea.after('<div id="editor" style="display:none;"></div>');
@@ -91,7 +91,7 @@ function loadInSourceEditor () {
 
 window.onload = function() {
 
-  loadInSourceEditor();
+  loadInNewSourceEditor();
 
     $( "#nav" ).resizable({
         resize: function(event, ui) {
@@ -229,8 +229,7 @@ function setSourceMode() {
   syncVisualEditor()
   findMainTextArea().wysiwyg("destroy");
   findMainTextArea().hide();
-  loadInSourceEditor();
-  // $('#editor').show();
+  $('#editor').show();
 
 }
 </script>
