@@ -1,5 +1,22 @@
 <%= stylesheet_link_tag "big_cms_admin" %>
 <%= stylesheet_link_tag "http://jquery-ui.googlecode.com/svn/tags/1.8.11/themes/base/jquery.ui.resizable.css" %> 
+
+<style>
+    #body table {
+      width: 100%;
+    }
+    #body td {
+      text-align: center;
+      vertical-align: middle;
+    }
+    #body tr.odd {
+      background-color: #eee;
+    }
+    #content input[type="text"] {
+      width: 300px;
+    }
+</style>
+
 <script>
 // embarassingly taken from about.com: http://javascript.about.com/library/blscreen2.htm
 function pageHeight() {
@@ -7,8 +24,9 @@ function pageHeight() {
 
 function setSizes() {
     $('#editor').height(pageHeight() - $('#editor').position().top - 46);
-    $('#editor').width($('body').innerWidth() - $('#editor').position().left);
+	$('#editor').width($('body').innerWidth() - $('#editor').position().left);
     $('.ace_scroller').width($('#editor').width() - 65);
+	$('.ace_content').width($('.ace_scroller').width());
     $('#nav-resize').height($(window).height() - 54);
     $('#nav_listing').height($("#nav-resize").height() - 24);
     $('#nav').height($('#nav_listing').height() - 2);
@@ -53,7 +71,7 @@ function syncVisualEditor() {
 window.onload = function() {
   var textarea = findMainTextArea();
   if (textarea.size() > 0) {
-    textarea.after('<div id="editor" style="display:none; height: 100%; width: 100%"></div>');
+    textarea.after('<div id="editor" style="display:none;"></div>');
     var editor = $('#editor');
     textarea.hide();
     editor.append(textarea.html());
@@ -66,6 +84,7 @@ window.onload = function() {
     ace_editor.getSession().setMode(new HTMLMode());
     ace_editor.renderer.setShowPrintMargin(false);
     window.editor = ace_editor;
+	setSizes();
   }
 
     $( "#nav" ).resizable({
@@ -77,19 +96,6 @@ window.onload = function() {
         $.cookie("editor-width", $("#editor").width());
       }
     });
-    
-    $( "#main_nav li .sub-contents a ").draggable({
-        opacity: 0.7,
-        containment: 'document',
-        cursor: 'move',
-        appendTo: 'body',
-        helper: "clone",
-        stop: function(event, ui) { return false; }
-    });
-    $( "#editor" ).droppable({drop: function(event, ui){
-            alert("Yay");
-            return false;
-        }});
 
     
     setTimeout(function() {
@@ -155,6 +161,10 @@ window.onload = function() {
         $(this).after(insert);
       });
 
+	$("#update-page").click(function() {
+		$("#ajax-icon").css("visibility", "visible");
+	})
+
 
 $("#main_nav > li").not('.folder-icon').click(function(){
     $(this).next().toggle();
@@ -175,6 +185,8 @@ $("#main_nav > li").not('.folder-icon').click(function(){
   $('#set-source-mode-button').click(function(){
     setSourceMode();
   });
+
+  setSizes();
 };
 
 $(window).resize(function() {
@@ -207,31 +219,7 @@ function setSourceMode() {
   $('#editor').show();
 }
 </script>
-<% else %>
-<script>
-    window.onload = function() {
-        setSizes();
-    };
-</script>
 <% end %>
-  <style>
-    #body table {
-      width: 100%;
-    }
-    #body td {
-      text-align: center;
-      vertical-align: middle;
-    }
-    #body tr.odd {
-      background-color: #eee;
-    }
-    #content textarea {
-      width: 100%;
-    }
-    #content input[type="text"] {
-      width: 300px;
-    }
-  </style>
 
 <%
     def link_to_with_highlight(name, options = {}, html_options = {})
