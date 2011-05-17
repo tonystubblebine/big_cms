@@ -124,11 +124,7 @@ window.onload = function() {
     syncAceEditor();
   });
 
-    var pagesNext = $(".pages").next();
-    var filesNext = $(".cms_files").next();
-    var componentsNext = $(".components").next();
-
- $(pagesNext + 'li.edit a').each(function () {
+ $(".pages").next().find('li.edit a').each(function () {
     var page_id;
     if (page_id = $(this).attr("href").match(/pages\/(.+?)\/edit/) ) {
       var name = $(this).html();
@@ -152,14 +148,14 @@ window.onload = function() {
 		window.open(url, '_blank');
     })
 
-    $(componentsNext + 'li.edit a').each(function () {
+    $(".components").next().find('li.edit a').each(function () {
         var name = $(this).html();
         var insert = $('<a href="#" class="insertCode" title="Insert into editor"></a>')
         insert.click(function() {insertSnippet(name)})
         $(this).after(insert);
       });
 
-    $(filesNext + 'li.insert a').each(function () {
+    $(".cms_files").next().find('li.insert a').each(function () {
         var href = $(this).attr("href");
         var name = $(this).html();
         var insert = $('<a href="#" class="insertCode" title="Insert into editor"></a>')
