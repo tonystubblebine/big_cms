@@ -29,7 +29,7 @@ module BigCms
 
     # TODO: 2011-01-11 <tony+bigcms@tonystubblebine.com> -- Need consistency
     # with Navigation.slug. This one returns just the slug value, while
-    # Navigatin.slug prepends the nav.id
+    # Navigation.slug prepends the nav.id
     def slug
       # Perform transliteration to replace non-ascii characters with an ascii
       # character

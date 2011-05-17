@@ -57,8 +57,10 @@ class BigCms::CmsFilesController < BigCmsController
     end
 
     if md = @cms_file.file.filename.match(/(.+).(htm|html|css|js)$/i)
-      @page = current_cms.pages.new(:title => md[1], :content => @cms_file.file.read)
-      @page.content_type = (md[2] == "htm") ? "html" : md[2]
+      @title = md[1]
+      @content_type = md[2]
+      @page = current_cms.pages.new(:title => @title, :content => @cms_file.file.read)
+      @page.content_type = (@content_type == "htm") ? "html" : @content_type
     end
       
     respond_to do |format|
@@ -108,12 +110,14 @@ class BigCms::CmsFilesController < BigCmsController
 
   def autolink(name, path)
     (current_cms.pages + current_cms.components).each do |content|
-      # TODO: 2011-05-16 <tony@crowdvine.com> -- Needs to handle case.
-      content.content.gsub(/(src\s*=\s*['"]|url\s*\(|href\s*=\s*['"]) 
+      # TODO: 2011-05-16 <tony+bigcms@tonystubblebine.com> -- Needs to handle case and skip absolute links
+      # TODO: 2011-05-17 <tony+bigcms@tonystubblebine.com> -- Using gsub rather than gsub! in order to force content_changed?, which ends up getting used in the page versioning.
+      content.content = content.content.gsub(/(src\s*=\s*['"]|url\s*\(|href\s*=\s*['"]) 
                             [^'"\s\)]* 
                             #{name} 
                             \s* (["')])/x,
                             "\\1#{path}\\2")
+      content.save if content.content_changed?
     end
   end
 end
