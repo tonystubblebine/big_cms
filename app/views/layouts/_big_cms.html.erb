@@ -1,16 +1,32 @@
 <%= stylesheet_link_tag "big_cms_admin" %>
 <%= stylesheet_link_tag "http://jquery-ui.googlecode.com/svn/tags/1.8.11/themes/base/jquery.ui.resizable.css" %> 
+
+<style>
+    #body table {
+      width: 100%;
+    }
+    #body td {
+      text-align: center;
+      vertical-align: middle;
+    }
+    #body tr.odd {
+      background-color: #eee;
+    }
+    #content input[type="text"] {
+      width: 300px;
+    }
+</style>
+
 <script>
 // embarassingly taken from about.com: http://javascript.about.com/library/blscreen2.htm
 function pageHeight() {
  return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;} 
 
 function setSizes() {
-    if ($('#editor').size > 0) {
-      $('#editor').height(pageHeight() - $('#editor').position().top - 46);
-      $('#editor').width($('body').innerWidth() - $('#editor').position().left - 2);
-      $('.ace_scroller').width($('#editor').width() - 55);
-    }
+    $('#editor').height(pageHeight() - $('#editor').position().top - 46);
+	$('#editor').width($('body').innerWidth() - $('#editor').position().left);
+    $('.ace_scroller').width($('#editor').width() - 65);
+	$('.ace_content').width($('.ace_scroller').width());
     $('#nav-resize').height($(window).height() - 54);
     $('#nav_listing').height($("#nav-resize").height() - 24);
     $('#nav').height($('#nav_listing').height() - 2);
@@ -18,7 +34,8 @@ function setSizes() {
 }
 
 function setVisualSizes() {
-	$(".wysiwyg").width($('body').innerWidth() - $('.wysiwyg').position().left - 2);
+	$(".wysiwyg, .wysiwyg iframe").width($('body').innerWidth() - $('.wysiwyg').position().left);
+	$(".wysiwyg, .wysiwyg iframe").height((pageHeight() - $('.wysiwyg').position().top - 46));
 }
 
 </script> 
@@ -41,26 +58,40 @@ function findMainTextArea() {
 }
 function syncAceEditor() {
   var textarea = findMainTextArea();
-  //textarea.empty().append(window.editor.getSession().getValue());
   textarea[0].value = window.editor.getSession().getValue();
 }
+
+function syncVisualEditor() {
+	var visualContent = findMainTextArea().wysiwyg("getContent");
+	visualContent = new String(visualContent);
+	window.editor.getSession().setValue(visualContent);
+}
+
+
+function loadInNewSourceEditor () {
+	var textarea = findMainTextArea();
+	if (textarea.size() > 0) {
+		textarea.after('<div id="editor" style="display:none;"></div>');
+	    var editor = $('#editor');
+	    textarea.hide();
+	    editor.append(textarea.html());
+	    editor.show();
+	    setSizes();
+	    var ace_editor = ace.edit("editor");
+	    ace_editor.setTheme("ace/theme/twilight");
+	    ace_editor.gotoLine(1);
+	    var HTMLMode = require("ace/mode/html").Mode;
+	    ace_editor.getSession().setMode(new HTMLMode());
+	    ace_editor.renderer.setShowPrintMargin(false);
+	    window.editor = ace_editor;
+		setSizes();
+	}
+}
+
+
 window.onload = function() {
-  var textarea = findMainTextArea();
-  if (textarea.size() > 0) {
-    textarea.after('<div id="editor" style="display:none; height: 100%; width: 100%"></div>');
-    var editor = $('#editor');
-    textarea.hide();
-    editor.append(textarea.html());
-    editor.show();
-    setSizes();
-    var ace_editor = ace.edit("editor");
-    ace_editor.setTheme("ace/theme/twilight");
-    ace_editor.gotoLine(1);
-    var HTMLMode = require("ace/mode/html").Mode;
-    ace_editor.getSession().setMode(new HTMLMode());
-    ace_editor.renderer.setShowPrintMargin(false);
-    window.editor = ace_editor;
-  }
+
+  loadInNewSourceEditor();
 
     $( "#nav" ).resizable({
         resize: function(event, ui) {
@@ -71,19 +102,6 @@ window.onload = function() {
         $.cookie("editor-width", $("#editor").width());
       }
     });
-    
-    $( "#main_nav li .sub-contents a ").draggable({
-        opacity: 0.7,
-        containment: 'document',
-        cursor: 'move',
-        appendTo: 'body',
-        helper: "clone",
-        stop: function(event, ui) { return false; }
-    });
-    $( "#editor" ).droppable({drop: function(event, ui){
-            alert("Yay");
-            return false;
-        }});
 
     
     setTimeout(function() {
@@ -130,8 +148,8 @@ window.onload = function() {
 
     $("#sites-dropdown li").click(function() {
         var url = $(this).find('span.under').text();
-        url = "http://" + url + "/content_manager/";
-        document.location.href = url;
+        url = "http://" + url + "/";
+		window.open(url, '_blank');
     })
 
     $(componentsNext + 'li.edit a').each(function () {
@@ -149,6 +167,10 @@ window.onload = function() {
         $(this).after(insert);
       });
 
+	$("#update-page").click(function() {
+		$("#ajax-icon").css("visibility", "visible");
+	})
+
 
 $("#main_nav > li").not('.folder-icon').click(function(){
     $(this).next().toggle();
@@ -163,16 +185,25 @@ $("#main_nav > li").not('.folder-icon').click(function(){
 });
 
   $('#set-visual-mode-button').click(function(){
-    setVisualMode();
+ 	setVisualMode();
+	setVisualSizes();
   });
 
   $('#set-source-mode-button').click(function(){
     setSourceMode();
+	setSizes();
   });
+
+  setSizes();
 };
 
 $(window).resize(function() {
-    setSizes();
+    if ((window.location.toString().split("#")[1]) === "source") {
+		setSizes();				
+	}
+	else {
+		setVisualSizes();
+	}
 });
 
 
@@ -181,15 +212,11 @@ function insertSnippet(name) {
 }
 
 function insertFile(url, name) {
-  if (url.match(/\.(jpg|jpeg|gif|png)$/i)) {
-    window.editor.insert("<img src='" + url +"' " + "alt='" + name + "' />");
-  } else {
-    window.editor.insert("<a href='" + url +"'>" + name + "</a>");
-  }
+    window.editor.insert(url);
 }
 
 function insertPage(id, name) {
-  window.editor.insert("<a href='/pages/" + id +"'>" + name + "</a>");
+  window.editor.insert("/pages/" + id);
 }
 
 function setVisualMode() {
@@ -199,36 +226,14 @@ function setVisualMode() {
 }
 
 function setSourceMode() {
+  syncVisualEditor()
   findMainTextArea().wysiwyg("destroy");
   findMainTextArea().hide();
   $('#editor').show();
+
 }
 </script>
-<% else %>
-<script>
-    window.onload = function() {
-        setSizes();
-    };
-</script>
 <% end %>
-  <style>
-    #body table {
-      width: 100%;
-    }
-    #body td {
-      text-align: center;
-      vertical-align: middle;
-    }
-    #body tr.odd {
-      background-color: #eee;
-    }
-    #content textarea {
-      width: 100%;
-    }
-    #content input[type="text"] {
-      width: 300px;
-    }
-  </style>
 
 <%
     def link_to_with_highlight(name, options = {}, html_options = {})
