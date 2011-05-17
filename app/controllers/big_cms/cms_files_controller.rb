@@ -57,6 +57,7 @@ class BigCms::CmsFilesController < BigCmsController
 
     respond_to do |format|
       if @cms_file.save
+        autolink(@cms_file.file.filename, @cms_file.file.url)
         format.html { redirect_to(@cms_file, :notice => 'File was successfully created.') }
         format.xml  { render :xml => @cms_file, :status => :created, :location => @cms_file }
       else
@@ -91,6 +92,19 @@ class BigCms::CmsFilesController < BigCmsController
     respond_to do |format|
       format.html { redirect_to(big_cms_cms_files_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  protected
+
+  def autolink(name, path)
+    (current_cms.pages + current_cms.components).each do |content|
+      # TODO: 2011-05-16 <tony@crowdvine.com> -- Needs to handle case.
+      content.content.gsub(/(src\s*=\s*['"]|url\s*\(|href\s*=\s*['"]) 
+                            [^'"\s\)]* 
+                            #{name} 
+                            \s* (["')])/x,
+                            "\\1#{path}\\2")
     end
   end
 end
