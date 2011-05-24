@@ -39,6 +39,7 @@ class BigCMSGenerator < Rails::Generators::Base
     end
     copy_file 'assets/stylesheets/jquery.ui.plupload.css',  'public/stylesheets/jquery.ui.plupload.css'
     copy_file 'assets/javascripts/jquery.wysiwyg.js',  'public/javascripts/jquery.wysiwyg.js'
+    copy_file 'assets/javascripts/wysiwyg.link.js',  'public/javascripts/wysiwyg.link.js'
     copy_file 'assets/stylesheets/jquery.wysiwyg.css',  'public/stylesheets/jquery.wysiwyg.css'
     copy_file 'assets/jquery.wysiwyg.bg.png',  'public/images/jquery.wysiwyg.bg.png'
     copy_file 'assets/jquery.wysiwyg.gif',  'public/images/jquery.wysiwyg.gif'
