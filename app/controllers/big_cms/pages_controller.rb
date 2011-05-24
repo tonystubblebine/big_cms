@@ -38,6 +38,7 @@ class BigCms::PagesController < BigCmsController
       end
       format.xml  { render :xml => @page }
       format.css { render :layout => false }
+      format.js { render :layout => false }
     end
   end
 

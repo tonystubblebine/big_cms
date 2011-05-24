@@ -66,6 +66,11 @@ class BigCms::CmsFilesController < BigCmsController
     respond_to do |format|
       if @page and @page.save
         autolink_this(@page)
+        if @page.content_type.nil?
+          autolink_all(@cms_file.file.filename, big_cms_page_path(@page))
+        else
+          autolink_all(@cms_file.file.filename, big_cms_page_path(@page, :format => @content_type))
+        end
         format.html { redirect_to(@cms_file, :notice => 'File uploaded and converted to and editable page.') }
         format.xml  { render :xml => @page, :status => :created, :location => @page }
       elsif @cms_file.save
@@ -116,7 +121,7 @@ class BigCms::CmsFilesController < BigCmsController
   def autolink(content, name, path)
       # TODO: 2011-05-16 <tony+bigcms@tonystubblebine.com> -- Needs to handle case and skip absolute links
       # TODO: 2011-05-17 <tony+bigcms@tonystubblebine.com> -- Using gsub rather than gsub! in order to force content_changed?, which ends up getting used in the page versioning.
-      content.content = content.content.gsub(/(src\s*=\s*['"]|url\s*\(|href\s*=\s*['"]) 
+      content.content = content.content.gsub(/(src\s*=\s*['"]|url\s*\(\s*['"]?|href\s*=\s*['"]) 
                             [^'"\s\)]* 
                             #{name} 
                             \s* (["')])/x,
