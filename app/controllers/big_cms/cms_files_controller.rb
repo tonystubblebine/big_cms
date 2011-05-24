@@ -65,10 +65,11 @@ class BigCms::CmsFilesController < BigCmsController
       
     respond_to do |format|
       if @page and @page.save
+        autolink_this(@page)
         format.html { redirect_to(@cms_file, :notice => 'File uploaded and converted to and editable page.') }
         format.xml  { render :xml => @page, :status => :created, :location => @page }
       elsif @cms_file.save
-        autolink(@cms_file.file.filename, @cms_file.file.url)
+        autolink_all(@cms_file.file.filename, @cms_file.file.url)
         format.html { redirect_to(@cms_file, :notice => 'File was successfully created.') }
         format.xml  { render :xml => @cms_file, :status => :created, :location => @cms_file }
       else
@@ -108,8 +109,11 @@ class BigCms::CmsFilesController < BigCmsController
 
   protected
 
-  def autolink(name, path)
-    (current_cms.pages + current_cms.components).each do |content|
+  # TODO: 2011-05-24 <tony+bigcms@tonystubblebine.com> -- This entire
+  # autlinking approach has a huge potential for false positives that I think
+  # could be mostly eliminated by simply tracking if content has been human
+  # edited, and skipping it in that case. 
+  def autolink(content, name, path)
       # TODO: 2011-05-16 <tony+bigcms@tonystubblebine.com> -- Needs to handle case and skip absolute links
       # TODO: 2011-05-17 <tony+bigcms@tonystubblebine.com> -- Using gsub rather than gsub! in order to force content_changed?, which ends up getting used in the page versioning.
       content.content = content.content.gsub(/(src\s*=\s*['"]|url\s*\(|href\s*=\s*['"]) 
@@ -118,6 +122,25 @@ class BigCms::CmsFilesController < BigCmsController
                             \s* (["')])/x,
                             "\\1#{path}\\2")
       content.save if content.content_changed?
+  end
+
+  def autolink_this(content)
+    current_cms.pages.each do |page|
+      if page.content_type.nil?
+        autolink(content, page.title, big_cms_page_path(page))
+      else
+        autolink(content, page.title + "." + page.content_type, big_cms_page_path(page, :format => page.content_type))
+      end
+    end
+
+    current_cms.files.each do |file|
+     autolink(content, file.file_file_name, file.file.url)
+    end
+  end
+    
+  def autolink_all(name, path)
+    (current_cms.pages + current_cms.components).each do |content|
+      autolink(content, name, path)
     end
   end
 end

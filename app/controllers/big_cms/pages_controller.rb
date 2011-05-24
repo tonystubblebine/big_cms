@@ -19,6 +19,8 @@ class BigCms::PagesController < BigCmsController
   def show
     if params[:id] == "_home" and !current_cms.navigations.empty?
       @page = current_cms.navigations.first.pages.order(:created_at).first
+    elsif params[:id] == "_home" and current_cms.pages and @page = current_cms.pages.find_by_title("index")
+      # no op. @page is set.
     elsif params[:id] == "_home" and current_cms.pages
       @page = current_cms.pages.order(:created_at).first
     elsif params[:id].match(/\D/)
