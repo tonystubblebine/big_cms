@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{big_cms}
-  s.version = "0.0.32"
+  s.version = "0.0.33"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tony Stubblebine"]
-  s.date = %q{2011-05-17}
+  s.date = %q{2011-05-24}
   s.email = %q{tony+bigcms@tonystubblebine.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -156,6 +156,7 @@ Gem::Specification.new do |s|
     "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.silverlight.min.js",
     "lib/generators/big_cms/templates/assets/javascripts/plupload/plupload.silverlight.xap",
     "lib/generators/big_cms/templates/assets/javascripts/rails.js",
+    "lib/generators/big_cms/templates/assets/javascripts/wysiwyg.link.js",
     "lib/generators/big_cms/templates/assets/jquery.wysiwyg.bg.png",
     "lib/generators/big_cms/templates/assets/jquery.wysiwyg.gif",
     "lib/generators/big_cms/templates/assets/stylesheets/big_cms_admin.css",
