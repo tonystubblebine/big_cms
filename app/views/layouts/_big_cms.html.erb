@@ -184,7 +184,7 @@ $("#main_nav > li").not('.folder-icon').click(function(){
   $('#set-visual-mode-button').click(function(){
 	var current_url = String(window.location);
 	current_url = current_url.split("#");
-	if (current_url[1] === "visual") {
+	if (current_url[1] === "visual" || current_url[1] === "") {
 		return false;
 	}
 	
@@ -197,7 +197,7 @@ $("#main_nav > li").not('.folder-icon').click(function(){
   $('#set-source-mode-button').click(function(){
 	var current_url = String(window.location);
 	current_url = current_url.split("#");
-	if (current_url[1] === "source") {
+	if (current_url[1] === "source" || current_url[1] === "") {
 		return false;
 	}
 	
