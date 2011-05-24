@@ -181,13 +181,29 @@ $("#main_nav > li").not('.folder-icon').click(function(){
 });
 
   $('#set-visual-mode-button').click(function(){
- 	setVisualMode();
-	setVisualSizes();
+	var current_url = String(window.location);
+	current_url = current_url.split("#");
+	if (current_url[1] === "visual") {
+		return false;
+	}
+	
+	else {
+		setVisualMode();
+		setVisualSizes();	
+	}
   });
 
   $('#set-source-mode-button').click(function(){
-    setSourceMode();
-	setSizes();
+	var current_url = String(window.location);
+	current_url = current_url.split("#");
+	if (current_url[1] === "source") {
+		return false;
+	}
+	
+	else {
+		setSourceMode();
+		setSizes();
+	}
   });
 
   setSizes();
