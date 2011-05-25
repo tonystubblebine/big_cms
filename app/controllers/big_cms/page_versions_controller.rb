@@ -31,7 +31,7 @@ class BigCms::PageVersionsController < BigCmsController
   def new
     @version = @page.versions.new
 
-    respond_to do |format|
+    respond_to do |format|a
       format.html # new.html.erb
       format.xml  { render :xml => @version }
     end
