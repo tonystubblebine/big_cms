@@ -68,6 +68,21 @@ function syncVisualEditor() {
 	window.editor.getSession().setValue(visualContent);
 }
 
+function setSourceCookie () {
+	if($.cookie("visual-editor") === "true"){
+		$.cookie("visual-editor", "false");
+	}
+	$.cookie("source-editor", "true", {expires: 25200000});
+}
+
+
+function setVisualCookie () {
+	if($.cookie("source-editor") === "true"){
+		$.cookie("source-editor", "false");
+	}
+	$.cookie("visual-editor", "true", {expires: 25200000});
+}
+
 
 function loadInNewSourceEditor () {
 	var textarea = findMainTextArea();
@@ -87,12 +102,48 @@ function loadInNewSourceEditor () {
 	    window.editor = ace_editor;
 		setSizes();
 	}
+	setSourceCookie();
 }
 
 
 window.onload = function() {
+	var current_url = String(window.location);
+	var checkIfPage = current_url;
+	checkIfPage = checkIfPage.split("/");
+	current_url = current_url.split("#");
+	
+	if (checkIfPage[4] != "pages") {
+		if (current_url[1] === undefined) {
+			if($.cookie("source-editor") === "true"){
+				loadInNewSourceEditor();
+				setSourceCookie();
+			}
+			
+			if($.cookie("visual-editor") === "true"){
+				setVisualCookie();
+				loadInNewSourceEditor();
+				setVisualCookie();
+				setVisualMode();
+				setVisualSizes();
+			}
+		}
 
-  loadInNewSourceEditor();
+		if (current_url[1] === "source") {
+			loadInNewSourceEditor();
+			setSourceCookie();
+		}
+
+		if (current_url[1] === "visual") {
+			setVisualCookie();
+			loadInNewSourceEditor();
+			setVisualCookie();
+			setVisualMode();
+			setVisualSizes();
+		}
+	}
+	
+	else {loadInNewSourceEditor();}
+	
 
     $( "#nav" ).resizable({
         resize: function(event, ui) {
@@ -233,12 +284,14 @@ function insertPage(id, name) {
 }
 
 function setVisualMode() {
+  setVisualCookie();
   $('#editor').hide();
   syncAceEditor();
   findMainTextArea().show().wysiwyg(); 
 }
 
 function setSourceMode() {
+  setSourceCookie();
   syncVisualEditor()
   findMainTextArea().wysiwyg("destroy");
   findMainTextArea().hide();
