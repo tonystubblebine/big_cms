@@ -73,6 +73,8 @@ function setSourceCookie () {
 		$.cookie("visual-editor", "false");
 	}
 	$.cookie("source-editor", "true", {expires: 25200000});
+	$("#editor-mode #set-visual-mode-button").removeClass("active");
+	$("#editor-mode #set-source-mode-button").addClass("active");
 }
 
 
@@ -81,6 +83,8 @@ function setVisualCookie () {
 		$.cookie("source-editor", "false");
 	}
 	$.cookie("visual-editor", "true", {expires: 25200000});
+	$("#editor-mode #set-source-mode-button").removeClass("active");
+	$("#editor-mode #set-visual-mode-button").addClass("active");
 }
 
 function setActiveTab() {
