@@ -83,6 +83,20 @@ function setVisualCookie () {
 	$.cookie("visual-editor", "true", {expires: 25200000});
 }
 
+function setActiveTab() {
+	var current_url = String(window.location);
+		if (current_url[1] === "source" || $.cookie("source-editor") === "true") {
+			$("#editor-mode #set-visual-mode-button").removeClass("active");
+			$("#editor-mode #set-source-mode-button").addClass("active");
+		}
+		
+		else {
+			$("#editor-mode #set-source-mode-button").removeClass("active");
+			$("#editor-mode #set-visual-mode-button").addClass("active");
+		}
+		
+}
+
 
 function loadInNewSourceEditor () {
 	var textarea = findMainTextArea();
@@ -131,6 +145,7 @@ window.onload = function() {
 		if (current_url[1] === "source") {
 			loadInNewSourceEditor();
 			setSourceCookie();
+			setActiveTab();
 		}
 
 		if (current_url[1] === "visual") {
@@ -139,6 +154,7 @@ window.onload = function() {
 			setVisualCookie();
 			setVisualMode();
 			setVisualSizes();
+			setActiveTab();
 		}
 	}
 	
@@ -243,6 +259,8 @@ $("#main_nav > li").not('.folder-icon').click(function(){
 		setVisualMode();
 		setVisualSizes();	
 	}
+	
+	setActiveTab();
   });
 
   $('#set-source-mode-button').click(function(){
@@ -256,6 +274,7 @@ $("#main_nav > li").not('.folder-icon').click(function(){
 		setSourceMode();
 		setSizes();
 	}
+	setActiveTab();
   });
 
   setSizes();
