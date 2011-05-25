@@ -10,6 +10,10 @@
 	<img src="/images/ajax-loader.gif" alt="Yak is loading!" id="ajax-icon"/>
 </div>
 
+	<%= link_to "Preview site", "http://#{current_site.sub_domain}.yak.ms/", {:target => "_blank" }%>
+	
+	<%= link_to "Preview page", "http://#{current_site.sub_domain}.yak.ms#{big_cms_page_path(@page)}", {:target => "_blank" }%>
+
   <% if @page.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
