@@ -20,9 +20,14 @@
 
 $(function() {
 
+	// magic code: https://github.com/moxiecode/plupload/issues/275 - fixes issue in Chromium.
+
+	if (!window.BlobBuilder && window.WebKitBlobBuilder)
+	    window.BlobBuilder = window.WebKitBlobBuilder;
+
     $("#uploader").plupload({
         // General settings
-        runtimes : 'html5,flash,browserplus,silverlight,gears,html4',
+        runtimes : 'html5,browserplus,silverlight,gears,html4',
         max_file_size : '10mb',  
         url : "/big_cms/cms_files",  
         flash_swf_url: "/javascripts/plupload/plupload.flash.swf",  
