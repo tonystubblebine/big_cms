@@ -1,1 +1,6 @@
-<h1>Content Manager</h1>
+<div class="welcome-message">
+	<p>Welcome to <a href="http://yak.ms" title="YAK.ms" alt="YAK.ms">Yak</a>! Please select one of the options below, or utilize our asset manager to the left to get started.</p>
+	<%= link_to "Create a new page", "http://#{current_site.sub_domain}.yak.ms/big_cms/pages/new" %>
+	<%= link_to "Create a new snippet", "http://#{current_site.sub_domain}.yak.ms/big_cms/components/new" %>
+	<%= link_to "Upload files", "http://#{current_site.sub_domain}.yak.ms/big_cms/cms_files/new" %>
+</div>

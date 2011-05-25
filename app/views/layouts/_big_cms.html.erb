@@ -162,12 +162,16 @@ window.onload = function() {
 		}
 	}
 	
+	if (checkIfPage[checkIfPage.length - 1] === "content_manager"){
+		$('#nav-resize').height($(window).height() - 54);
+	}
+	
 	else {loadInNewSourceEditor();}
 	
 
     $( "#nav" ).resizable({
         resize: function(event, ui) {
-        setSizes();
+		setSizes();
         
         // still need to use these so the sidebar stays the same width upon refreshes.
         $.cookie("nav-width", $("#nav").width());
@@ -282,10 +286,23 @@ $("#main_nav > li").not('.folder-icon').click(function(){
   });
 
   setSizes();
+	var checkIfPage = String(window.location);
+	checkIfPage = checkIfPage.split("/");
+
+	if(checkIfPage[checkIfPage.length - 1] === "content_manager"){
+		alert("Hi");
+	}
+
+	if(checkIfPage[checkIfPage.length - 1] === "new"){
+		var checkIfPageContent = String("<!-- Insert a title in the box above, and put the rest of your content down here -->");
+		window.editor.getSession().setValue(checkIfPageContent);
+	}
+
 };
 
 $(window).resize(function() {
-    if ((window.location.toString().split("#")[1]) === "source") {
+	
+    if ((window.location.toString().split("#")[1]) === "source" || $.cookie("source-editor") === "true") {
 		setSizes();				
 	}
 	else {

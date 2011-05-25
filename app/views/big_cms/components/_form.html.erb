@@ -13,12 +13,13 @@
 	    <%= link_to "Source", "#source", {:id => 'set-source-mode-button'} %>
 	</div>
 	
+	<% if @component.name %>
 	<div id="preview">
 		<%= link_to "Preview site", "http://#{current_site.sub_domain}.yak.ms/", {:target => "_blank" }%>
 		
 		<%= link_to "Preview snippet", "http://#{current_site.sub_domain}.yak.ms#{big_cms_component_path(@component)}", {:target => "_blank" }%>
-		<!-- preview page -->
 	</div>
+	<% end %>
  </div>
   <% if @component.errors.any? %>
     <div id="error_explanation">

@@ -9,6 +9,7 @@
     <%= f.submit "Save", :class => "primary button", :id =>"update-page" %>
 	<img src="/images/ajax-loader.gif" alt="Yak is loading!" id="ajax-icon"/>
 </div>
+	<% if !@page %>
 	<div id="preview">
 		<%= link_to "Preview site", "http://#{current_site.sub_domain}.yak.ms/", {:target => "_blank" }%>
 	
@@ -16,6 +17,7 @@
 		
 		<%= link_to "Versions", "http://#{current_site.sub_domain}.yak.ms#{big_cms_page_path(@page)}/versions"%>
 	</div>
+	<% end %>
 
   <% if @page.errors.any? %>
     <div id="error_explanation">
