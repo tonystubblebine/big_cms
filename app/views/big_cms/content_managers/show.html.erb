@@ -1,6 +1,7 @@
 <div class="welcome-message">
-	<p>Welcome to <a href="http://yak.ms" title="YAK.ms" alt="YAK.ms">Yak</a>! Please select one of the options below, or utilize our asset manager to the left to get started.</p>
-	<%= link_to "Create a new page", "http://#{current_site.sub_domain}.yak.ms/big_cms/pages/new" %>
-	<%= link_to "Create a new snippet", "http://#{current_site.sub_domain}.yak.ms/big_cms/components/new" %>
-	<%= link_to "Upload files", "http://#{current_site.sub_domain}.yak.ms/big_cms/cms_files/new" %>
+	<p><a href="http://yak.ms" title="YAK.ms" id="yak-landing" alt="YAK.ms">Yak</a></p>
+	<%= link_to "New Page", "http://#{current_site.sub_domain}.yak.ms/big_cms/pages/new", {:class => "button"} %>
+	<%= link_to "New Snippet", "http://#{current_site.sub_domain}.yak.ms/big_cms/components/new", {:class => "button"} %>
+	<%= link_to "Upload File(s)", "http://#{current_site.sub_domain}.yak.ms/big_cms/cms_files/new", {:class => "button last"} %>
+	<p id="welcome-bottom">Or, utilize the asset manager to the left.</p>
 </div>
