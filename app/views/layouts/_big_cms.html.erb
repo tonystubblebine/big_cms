@@ -130,7 +130,7 @@ window.onload = function() {
 	checkIfPage = checkIfPage.split("/");
 	current_url = current_url.split("#");
 	
-	if (checkIfPage[4] != "pages") {
+	if (checkIfPage[4] != "pages" && checkIfPage[checkIfPage.length - 1] != "content_manager") {
 		if (current_url[1] === undefined) {
 			if($.cookie("source-editor") === "true"){
 				loadInNewSourceEditor();
@@ -289,14 +289,30 @@ $("#main_nav > li").not('.folder-icon').click(function(){
   var checkIfPage = String(window.location);
   checkIfPage = checkIfPage.split("/");
 
-  if(checkIfPage[checkIfPage.length - 1] === "content_manager"){
-	alert("Hi");
-  }
 
   if(checkIfPage[checkIfPage.length - 1] === "new"){
 	var checkIfPageContent = String("<!-- Insert a title in the box above, and put the rest of your content down here -->");
 	window.editor.getSession().setValue(checkIfPageContent);
   }
+
+
+  $("#new_big_cms_component, #new_big_cms_page, .edit_big_cms_page, .edit_big_cms_component").submit(function(){
+	if ($("#big_cms_page_title, #big_cms_component_name").val() === ""){
+		$("#ajax-icon").hide();
+		alert("Please fill in a title to create this.");
+		return false;
+	}
+	
+	else if ($("#editor").text() === "1"){
+		$("#ajax-icon").hide();
+		alert("Please fill in content to create this.");
+		return false;	
+	}
+	
+	else{return true;}
+
+  });
+
 
 };
 
