@@ -8,7 +8,8 @@
 	<a class="negative button primary" href="<%= request.url.chomp("edit")%>" data-confirm="Are you sure?" data-method="delete" rel="nofollow">delete</a>
     <%= f.submit "Save", :class => "primary button", :id =>"update-page" %>
 	<img src="/images/ajax-loader.gif" alt="Yak is loading!" id="ajax-icon"/>
-    <div id="editor-mode"> 
+    
+	<div id="editor-mode"> 
     	<%= link_to "Visual", "#visual", {:id => 'set-visual-mode-button'} %>
 	    <%= link_to "Source", "#source", {:id => 'set-source-mode-button'} %>
 	</div>

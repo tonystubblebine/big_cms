@@ -146,13 +146,13 @@ window.onload = function() {
 			}
 		}
 
-		if (current_url[1] === "source") {
+		else if (current_url[1] === "source") {
 			loadInNewSourceEditor();
 			setSourceCookie();
 			setActiveTab();
 		}
 
-		if (current_url[1] === "visual") {
+		else {
 			setVisualCookie();
 			loadInNewSourceEditor();
 			setVisualCookie();
@@ -162,7 +162,7 @@ window.onload = function() {
 		}
 	}
 	
-	if (checkIfPage[checkIfPage.length - 1] === "content_manager"){
+	else if (checkIfPage[checkIfPage.length - 1] === "content_manager"){
 		$('#nav-resize').height($(window).height() - 54);
 	}
 	
@@ -286,17 +286,17 @@ $("#main_nav > li").not('.folder-icon').click(function(){
   });
 
   setSizes();
-	var checkIfPage = String(window.location);
-	checkIfPage = checkIfPage.split("/");
+  var checkIfPage = String(window.location);
+  checkIfPage = checkIfPage.split("/");
 
-	if(checkIfPage[checkIfPage.length - 1] === "content_manager"){
-		alert("Hi");
-	}
+  if(checkIfPage[checkIfPage.length - 1] === "content_manager"){
+	alert("Hi");
+  }
 
-	if(checkIfPage[checkIfPage.length - 1] === "new"){
-		var checkIfPageContent = String("<!-- Insert a title in the box above, and put the rest of your content down here -->");
-		window.editor.getSession().setValue(checkIfPageContent);
-	}
+  if(checkIfPage[checkIfPage.length - 1] === "new"){
+	var checkIfPageContent = String("<!-- Insert a title in the box above, and put the rest of your content down here -->");
+	window.editor.getSession().setValue(checkIfPageContent);
+  }
 
 };
 

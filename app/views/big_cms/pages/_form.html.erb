@@ -9,7 +9,7 @@
     <%= f.submit "Save", :class => "primary button", :id =>"update-page" %>
 	<img src="/images/ajax-loader.gif" alt="Yak is loading!" id="ajax-icon"/>
 </div>
-	<% if !@page %>
+	<% if @page.title %>
 	<div id="preview">
 		<%= link_to "Preview site", "http://#{current_site.sub_domain}.yak.ms/", {:target => "_blank" }%>
 	
